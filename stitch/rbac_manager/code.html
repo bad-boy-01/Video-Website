@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Role-Based Access Control Manager</title>
+<!-- Tailwind CSS v3 with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Tailwind Configuration for purple/slate dark theme -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#8b5cf6', // purple-500
+              dark: '#7c3aed',    // purple-600
+              light: '#a78bfa',   // purple-400
+            },
+            slate: {
+              950: '#020617',
+              900: '#0f172a',
+              800: '#1e293b',
+              700: '#334155',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom styles for UI refinements -->
+<style data-purpose="scrollbar-styling">
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0f172a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #475569;
+    }
+  </style>
+<style data-purpose="toggle-switch">
+    /* Custom toggle switch style for Tailwind compatibility */
+    .switch-checkbox:checked + .switch-label {
+      background-color: #8b5cf6;
+    }
+    .switch-checkbox:checked + .switch-label::after {
+      transform: translateX(100%);
+      border-color: #8b5cf6;
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen font-sans">
+<!-- BEGIN: MainContainer -->
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10" data-purpose="dashboard-wrapper">
+<!-- BEGIN: HeaderSection -->
+<header class="mb-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+<div>
+<h1 class="text-3xl font-bold tracking-tight text-white">Role-Based Access Control Manager</h1>
+<p class="mt-2 text-slate-400">Define system permissions and manage role assignments across your platform.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="inline-flex items-center px-4 py-2 bg-slate-800 border border-slate-700 rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-slate-700 transition ease-in-out duration-150" type="button">
+          Discard Changes
+        </button>
+<button class="inline-flex items-center px-4 py-2 bg-brand border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-brand-dark focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-slate-900 transition ease-in-out duration-150" type="button">
+          Save Configuration
+        </button>
+</div>
+</header>
+<!-- END: HeaderSection -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- BEGIN: PermissionsTableSection -->
+<section class="lg:col-span-2 bg-slate-900 rounded-xl border border-slate-800 shadow-xl overflow-hidden" data-purpose="permissions-table-container">
+<div class="px-6 py-4 border-b border-slate-800 flex justify-between items-center bg-slate-900/50">
+<h2 class="text-lg font-semibold text-white">Global Permissions</h2>
+<span class="text-xs font-medium px-2.5 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">6 Permissions Active</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse" id="rbac-permission-table">
+<thead>
+<tr class="bg-slate-800/50">
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-400">Permission Name</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-400 text-center">User Role</th>
+<th class="px-6 py-4 text-xs font-semibold uppercase tracking-wider text-slate-400 text-center">Admin Role</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-800">
+<!-- Permission Row 1 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-medium text-slate-200">View Video</div>
+<div class="text-xs text-slate-500">Allows viewing public and premium video content.</div>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+</tr>
+<!-- Permission Row 2 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-medium text-slate-200">Upload Video</div>
+<div class="text-xs text-slate-500">Allows users to submit content for review.</div>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+</tr>
+<!-- Permission Row 3 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-medium text-slate-200">Manage Users</div>
+<div class="text-xs text-slate-500">Ability to ban, edit, or delete user accounts.</div>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+</tr>
+<!-- Permission Row 4 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-medium text-slate-200">Refund Coins</div>
+<div class="text-xs text-slate-500">Process currency refunds for internal marketplace.</div>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+</tr>
+<!-- Permission Row 5 -->
+<tr class="hover:bg-slate-800/30 transition-colors">
+<td class="px-6 py-4">
+<div class="font-medium text-slate-200">Access Analytics</div>
+<div class="text-xs text-slate-500">View site-wide performance and user growth charts.</div>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+<td class="px-6 py-4 text-center">
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer switch-checkbox" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-brand switch-label"></div>
+</label>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: PermissionsTableSection -->
+<!-- BEGIN: CustomRoleCreator -->
+<aside class="space-y-6">
+<section class="bg-slate-900 rounded-xl border border-slate-800 shadow-xl p-6" data-purpose="custom-role-creator">
+<h2 class="text-lg font-semibold text-white mb-4">Create Custom Role</h2>
+<form class="space-y-4">
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-1" for="role-name">Role Name</label>
+<input class="block w-full rounded-md bg-slate-800 border-slate-700 text-white focus:border-brand focus:ring-brand sm:text-sm placeholder:text-slate-600" id="role-name" name="role-name" placeholder="e.g. Moderator" type="text"/>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-1" for="role-description">Description</label>
+<textarea class="block w-full rounded-md bg-slate-800 border-slate-700 text-white focus:border-brand focus:ring-brand sm:text-sm placeholder:text-slate-600" id="role-description" placeholder="Briefly describe what this role can do..." rows="3"></textarea>
+</div>
+<div>
+<label class="block text-sm font-medium text-slate-400 mb-2">Base Permissions Template</label>
+<select class="block w-full rounded-md bg-slate-800 border-slate-700 text-slate-300 focus:border-brand focus:ring-brand sm:text-sm">
+<option>None (Empty)</option>
+<option>Based on User</option>
+<option>Based on Admin</option>
+</select>
+</div>
+<button class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-brand hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand focus:ring-offset-slate-950 transition duration-150" type="submit">
+              Generate Role
+            </button>
+</form>
+</section>
+<!-- BEGIN: InfoCard -->
+<section class="bg-slate-900/50 rounded-xl border border-slate-800/50 p-6">
+<div class="flex items-start">
+<div class="flex-shrink-0">
+<svg class="h-6 w-6 text-brand" fill="none" stroke="currentColor" stroke-width="1.5" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</div>
+<div class="ml-3">
+<h3 class="text-sm font-medium text-slate-200">Security Tip</h3>
+<div class="mt-2 text-sm text-slate-400">
+<p>Changes to permissions take effect immediately for new sessions. Existing users may need to re-login to update their access tokens.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: InfoCard -->
+</aside>
+<!-- END: CustomRoleCreator -->
+</div>
+</div>
+<!-- END: MainContainer -->
+<!-- BEGIN: InteractiveScripts -->
+<script data-purpose="toggle-handling">
+    // Minimal script to demonstrate interaction if needed
+    document.addEventListener('DOMContentLoaded', () => {
+      const switches = document.querySelectorAll('.switch-checkbox');
+      switches.forEach(sw => {
+        sw.addEventListener('change', (e) => {
+          const row = e.target.closest('tr');
+          const permissionName = row.querySelector('.font-medium').innerText;
+          console.log(`Permission updated: ${permissionName} is now ${e.target.checked ? 'Enabled' : 'Disabled'}`);
+        });
+      });
+    });
+  </script>
+<!-- END: InteractiveScripts -->
+</body></html>

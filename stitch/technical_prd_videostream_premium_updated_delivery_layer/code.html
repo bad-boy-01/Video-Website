@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Video Access Middleware Flow &amp; PRD</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-animations">
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        .animate-glow {
+            animation: pulse-glow 3s infinite ease-in-out;
+        }
+        .line-drawing {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 2s forwards ease-out;
+        }
+        @keyframes draw {
+            to { stroke-dashoffset: 0; }
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #0f0f15;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-[#0a0a0c] text-slate-200 font-sans min-h-screen p-4 md:p-8 flex flex-col items-center">
+<!-- BEGIN: Middleware Dashboard -->
+<main class="w-full max-w-6xl bg-[#121218] border border-slate-800 rounded-xl shadow-2xl overflow-hidden mb-8" data-purpose="middleware-container">
+<!-- BEGIN: Header Section -->
+<header class="border-b border-slate-800 p-6 flex justify-between items-center bg-[#16161f]">
+<div class="flex items-center space-x-3">
+<div class="w-3 h-3 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.6)]"></div>
+<h1 class="text-xl font-mono font-bold tracking-tight text-slate-100">
+                VideoStream <span class="text-purple-400">Middleware</span> :: checkAccess()
+            </h1>
+</div>
+<div class="flex space-x-2">
+<span class="px-3 py-1 bg-slate-800 rounded text-xs font-mono text-slate-400">v2.5.0-edge</span>
+<span class="px-3 py-1 bg-purple-900/30 text-purple-400 border border-purple-500/30 rounded text-xs font-mono">Active Monitoring</span>
+</div>
+</header>
+<!-- END: Header Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3">
+<!-- BEGIN: Flowchart Canvas -->
+<section class="lg:col-span-2 relative p-8 md:p-12 overflow-x-auto border-r border-slate-800" data-purpose="logic-visualizer">
+<div class="flex flex-col items-center space-y-12 min-w-[600px]">
+<!-- Start Node -->
+<div class="flex flex-col items-center">
+<div class="px-6 py-3 bg-slate-800 border border-slate-600 rounded-full text-sm font-mono font-semibold uppercase tracking-widest text-slate-300">
+                        START: Request Received
+                    </div>
+<div class="h-12 w-px bg-gradient-to-b from-slate-600 to-purple-500"></div>
+</div>
+<!-- Logic Block: Auth Check -->
+<div class="relative group" data-purpose="logic-node-auth">
+<div class="w-64 p-5 bg-[#1a1a24] border border-purple-500/50 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.1)] text-center transition-all hover:border-purple-400">
+<h3 class="text-xs text-purple-400 font-mono mb-2 uppercase">Step 01</h3>
+<p class="font-semibold">Check User Auth</p>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">verifyJWT(token)</p>
+</div>
+<div class="absolute top-1/2 -right-32 w-32 h-px bg-slate-700"></div>
+<div class="absolute -right-40 top-1/2 -translate-y-1/2 text-[10px] text-red-400 font-mono">FAIL</div>
+</div>
+<div class="h-12 w-px bg-purple-500"></div>
+<!-- Logic Block: Free Content -->
+<div class="relative group" data-purpose="logic-node-free">
+<div class="w-64 p-5 bg-[#1a1a24] border border-purple-500/50 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.1)] text-center transition-all hover:border-purple-400">
+<h3 class="text-xs text-purple-400 font-mono mb-2 uppercase">Step 02</h3>
+<p class="font-semibold">Is Video Free?</p>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">db.videos.find({id, type: 'free'})</p>
+</div>
+<div class="absolute top-1/2 -left-32 w-32 h-px bg-green-500/30"></div>
+<div class="absolute -left-40 top-1/2 -translate-y-1/2 text-[10px] text-green-400 font-mono">YES</div>
+</div>
+<div class="h-12 w-px bg-purple-500"></div>
+<!-- Logic Block: Purchase Record -->
+<div class="relative group" data-purpose="logic-node-purchase">
+<div class="w-64 p-5 bg-[#1a1a24] border border-purple-500/50 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.1)] text-center transition-all hover:border-purple-400">
+<h3 class="text-xs text-purple-400 font-mono mb-2 uppercase">Step 03</h3>
+<p class="font-semibold">Check Purchase Record</p>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">user.hasPurchased(video_id)</p>
+</div>
+<div class="absolute top-1/2 -left-32 w-32 h-px bg-green-500/30"></div>
+<div class="absolute -left-40 top-1/2 -translate-y-1/2 text-[10px] text-green-400 font-mono">YES</div>
+</div>
+<div class="h-12 w-px bg-purple-500"></div>
+<!-- Logic Block: Subscription -->
+<div class="relative group" data-purpose="logic-node-subscription">
+<div class="w-64 p-5 bg-[#1a1a24] border border-purple-500/50 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.1)] text-center transition-all hover:border-purple-400">
+<h3 class="text-xs text-purple-400 font-mono mb-2 uppercase">Step 04</h3>
+<p class="font-semibold">Active Subscription?</p>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">user.subscription.isValid()</p>
+</div>
+<div class="absolute top-1/2 -left-32 w-32 h-px bg-green-500/30"></div>
+<div class="absolute -left-40 top-1/2 -translate-y-1/2 text-[10px] text-green-400 font-mono">YES</div>
+</div>
+<!-- Final Outcomes -->
+<div class="flex justify-between w-full max-w-2xl pt-12 border-t border-slate-800">
+<div class="flex flex-col items-center" data-purpose="outcome-denied">
+<div class="w-40 p-4 bg-red-950/20 border border-red-900 rounded-lg text-center">
+<div class="w-8 h-8 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+<svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<p class="text-xs font-bold text-red-400">Access Denied</p>
+</div>
+</div>
+<div class="flex flex-col items-center" data-purpose="outcome-allowed">
+<div class="w-64 p-5 bg-purple-950/20 border border-purple-500 rounded-lg text-center shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+<div class="w-10 h-10 bg-purple-500/30 rounded-full flex items-center justify-center mx-auto mb-3 animate-glow">
+<svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<p class="text-sm font-bold text-slate-100 uppercase tracking-tighter">Allow HLS Stream</p>
+<p class="text-[9px] text-purple-400 mt-1 uppercase">Generating Signed URL (3m)</p>
+<div class="mt-3 px-2 py-1 bg-black/40 rounded text-[9px] font-mono text-slate-400 truncate">
+                                https://cf-stream.com/v/signed_...
+                            </div>
+</div>
+</div>
+</div>
+</div>
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20" data-purpose="visual-wiring">
+<path class="line-drawing" d="M 320 280 L 320 800" fill="none" stroke="#a855f7" stroke-width="2"></path>
+<path d="M 680 160 L 680 800" fill="none" stroke="#f43f5e" stroke-width="1"></path>
+</svg>
+</section>
+<!-- END: Flowchart Canvas -->
+<!-- BEGIN: PRD Specification Sidebar -->
+<aside class="bg-[#0f0f15] p-6 overflow-y-auto max-h-[850px] custom-scrollbar">
+<h2 class="text-xs font-mono font-bold text-slate-500 uppercase tracking-[0.2em] mb-6 border-b border-slate-800 pb-2">Technical Specification</h2>
+<div class="space-y-8">
+<!-- Video Delivery Layer -->
+<section>
+<h3 class="text-sm font-semibold text-purple-400 mb-3 flex items-center">
+<span class="w-2 h-2 bg-purple-500 rounded-full mr-2"></span> Video Delivery Layer
+                    </h3>
+<ul class="space-y-3 text-xs text-slate-400 font-mono leading-relaxed">
+<li class="pl-4 border-l border-slate-700">
+<strong class="text-slate-200">Infrastructure:</strong> Cloudflare Stream or AWS S3 + CloudFront CDN integration.
+                        </li>
+<li class="pl-4 border-l border-slate-700">
+<strong class="text-slate-200">Protocol:</strong> Mandatory <span class="text-purple-300">HLS (HTTP Live Streaming)</span>. Raw MP4 delivery is strictly prohibited to ensure adaptive bitrate and encryption.
+                        </li>
+<li class="pl-4 border-l border-slate-700">
+<strong class="text-slate-200">URL Generation:</strong> Server-side <span class="text-blue-400">Edge Functions</span> must generate short-lived signed URLs.
+                        </li>
+<li class="pl-4 border-l border-slate-700">
+<strong class="text-slate-200">TTL:</strong> Expiry set to 1-5 minutes to prevent URL sharing and session hijacking.
+                        </li>
+</ul>
+</section>
+<!-- Security Section -->
+<section>
+<h3 class="text-sm font-semibold text-slate-200 mb-3 flex items-center">
+<span class="w-2 h-2 bg-slate-500 rounded-full mr-2"></span> Security
+                    </h3>
+<ul class="space-y-2 text-xs text-slate-400 font-mono">
+<li class="flex items-start">
+<span class="text-purple-500 mr-2">»</span> Edge-level Access Control
+                        </li>
+<li class="flex items-start">
+<span class="text-purple-500 mr-2">»</span> Signed URL validation at CDN edge
+                        </li>
+<li class="flex items-start">
+<span class="text-purple-500 mr-2">»</span> JWT RS256 Signature Verification
+                        </li>
+<li class="flex items-start">
+<span class="text-purple-500 mr-2">»</span> Rate limiting per user IP (Redis)
+                        </li>
+</ul>
+</section>
+<!-- Database Section (Preserved) -->
+<section>
+<h3 class="text-sm font-semibold text-slate-200 mb-3 flex items-center">
+<span class="w-2 h-2 bg-slate-500 rounded-full mr-2"></span> Data Model
+                    </h3>
+<div class="bg-black/30 p-3 rounded border border-slate-800 text-[10px] text-slate-500 font-mono">
+<pre>Table: Permissions
+- user_id: UUID
+- content_id: UUID
+- access_type: ENUM
+- expires_at: TIMESTAMP</pre>
+</div>
+</section>
+</div>
+</aside>
+<!-- END: PRD Specification Sidebar -->
+</div>
+<!-- BEGIN: Footer Console -->
+<footer class="bg-[#0f0f15] border-t border-slate-800 p-4 font-mono text-[11px] text-slate-500 flex justify-between items-center">
+<div class="flex space-x-4">
+<span class="flex items-center"><span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span> Database: Connected</span>
+<span class="flex items-center"><span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span> Redis Cache: Hit</span>
+<span class="flex items-center"><span class="w-2 h-2 rounded-full bg-blue-500 mr-2"></span> Edge: Lambda@Edge Active</span>
+</div>
+<div>
+            Latency: <span class="text-purple-400">8ms (Edge Cached)</span>
+</div>
+</footer>
+<!-- END: Footer Console -->
+</main>
+<!-- END: Middleware Dashboard -->
+</body></html>

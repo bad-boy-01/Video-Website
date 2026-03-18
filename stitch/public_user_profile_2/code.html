@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark flex flex-col shrink-0 overflow-y-auto hidden md:flex">
+<div class="p-6 flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">play_circle</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary">VideoStream</h1>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-medium">Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">local_fire_department</span>
+<span class="font-medium">Trending</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">subscriptions</span>
+<span class="font-medium">Subscriptions</span>
+</a>
+<div class="pt-4 pb-2 px-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">Library</div>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">video_library</span>
+<span class="font-medium">Library</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-medium">History</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors" href="#">
+<span class="material-symbols-outlined">watch_later</span>
+<span class="font-medium">Watch Later</span>
+</a>
+</nav>
+<div class="p-4 mt-auto">
+<button class="w-full py-3 bg-primary hover:bg-primary/90 text-white rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">sensors</span>
+                    Go Live
+                </button>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-hidden relative">
+<!-- Header -->
+<header class="h-16 border-b border-slate-200 dark:border-primary/20 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full bg-slate-100 dark:bg-primary/10 border-none rounded-lg pl-10 pr-4 py-2 focus:ring-2 focus:ring-primary text-sm transition-all" placeholder="Search videos, creators, or tags..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-2 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined">add_box</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/40 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User profile avatar small" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCx_FzsxVBKI5KqN_rlsd7dLIVKOcC1pmtDv1_cWlFOgHoQ_kp1AaW8977-3putj5WzV-N1fTPzmcz-fT0GUoxsfYthKuyAoo6WbJZ7mDBiSYaRh5sWjGbjbaVGF2qOD0j6B-VfSs70sINSGIwQjalAppx1JPFLN1gj2HB41rPBSLysNZTXRi274Wp7tsfYKPYmzUmQ4tGaR1GUJveJM_6guOzc_gNteYMFjLid4T9skfnGoJ_LlxI9mmt-DnJgiNgOSxZGiFqsPJIW"/>
+</div>
+</div>
+</header>
+<div class="flex-1 overflow-y-auto scroll-smooth">
+<!-- Profile Header -->
+<div class="relative">
+<div class="h-48 w-full bg-gradient-to-r from-primary/40 to-primary/10 relative overflow-hidden">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.15) 1px, transparent 0); background-size: 24px 24px;"></div>
+</div>
+<div class="max-w-6xl mx-auto px-8 -mt-16 relative z-10">
+<div class="flex flex-col md:flex-row items-end gap-6 pb-8 border-b border-slate-200 dark:border-primary/20">
+<div class="relative group">
+<div class="w-32 h-32 rounded-2xl border-4 border-white dark:border-background-dark overflow-hidden bg-slate-200 dark:bg-slate-800 shadow-xl">
+<img class="w-full h-full object-cover" data-alt="AlexStreamer profile large avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBf7rm92g_INIUgKkS1cWePF1ev9owe_mIA0poP4wJJzvDmN4c7IaGnrMLrwcjNNnqHl9NLphx-0ERDsgzuPIGl6EjvEMuYP44d-bbDnJPvRQmVoNSv4EhaFwSnEBEwsRcKSJfZTvYyJ6Hvn1PrADxH3V-FUHn2VcP_7SKeJ3cvndpxp3gyrGhsmSrf_YtO04nq27wKANgvpYgq2fNajHKInhDkH6UKBjg91bQmTBdXaf92djfknOHnzo3TU5qX-pGrnwET0ixTf5sy"/>
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary text-white p-1 rounded-lg border-2 border-white dark:border-background-dark">
+<span class="material-symbols-outlined text-sm">verified</span>
+</div>
+</div>
+<div class="flex-1 mb-2">
+<div class="flex items-center gap-3 mb-1">
+<h2 class="text-3xl font-bold dark:text-white">AlexStreamer</h2>
+<span class="px-2 py-0.5 rounded bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-wider border border-primary/30">Premium Member</span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm mb-4">Joined 2 months ago • Digital enthusiast &amp; video curator</p>
+<div class="flex gap-6">
+<div class="text-center md:text-left">
+<span class="block text-xl font-bold dark:text-white">1.2k</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-tight">Followers</span>
+</div>
+<div class="text-center md:text-left">
+<span class="block text-xl font-bold dark:text-white">450</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-tight">Following</span>
+</div>
+<div class="text-center md:text-left">
+<span class="block text-xl font-bold dark:text-white">88</span>
+<span class="text-xs text-slate-500 dark:text-slate-400 uppercase tracking-tight">Videos</span>
+</div>
+</div>
+</div>
+<div class="flex gap-3 mb-2">
+<button class="px-8 py-2.5 bg-primary text-white font-bold rounded-xl hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20">Follow</button>
+<button class="p-2.5 bg-slate-100 dark:bg-primary/10 text-slate-600 dark:text-primary rounded-xl hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">share</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Content Navigation -->
+<div class="max-w-6xl mx-auto px-8 py-6">
+<div class="flex border-b border-slate-200 dark:border-primary/10 gap-8 mb-8 overflow-x-auto no-scrollbar">
+<a class="pb-4 border-b-2 border-primary text-primary font-bold whitespace-nowrap" href="#">Watchlist</a>
+<a class="pb-4 border-b-2 border-transparent text-slate-500 hover:text-primary transition-colors whitespace-nowrap" href="#">Favorites</a>
+<a class="pb-4 border-b-2 border-transparent text-slate-500 hover:text-primary transition-colors whitespace-nowrap" href="#">Recent Activity</a>
+<a class="pb-4 border-b-2 border-transparent text-slate-500 hover:text-primary transition-colors whitespace-nowrap" href="#">Reviews</a>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Column: Watchlist & Activity -->
+<div class="lg:col-span-8 space-y-12">
+<!-- Public Watchlist Grid -->
+<section>
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-xl font-bold dark:text-white">Public Watchlist</h3>
+<a class="text-primary text-sm font-medium hover:underline" href="#">View all</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<!-- Video Card 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-video rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 relative mb-3 shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Cyberpunk city landscape video thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXPtDnUzQk6Qqqee-5ilm9ImYgHwhYnErhrBlLCpuTo2mlhhKb4A98SbGM5U24DkHQaQeuCDk6cB5M-UiScF4GoQF0krg-dMS8jQM_zaaB1Yof3dUgVZmlZsYYzIn93c6UtlusmBWXX7ScGbbANlDjngNUVooo2Cj_vHH_Dt5thLyRD1KzzBT8tqJ5Z89QzIYCBm09P79QuNafsZ7qksD2lgaM1vvNnS4O5lqcUuCo2S2ArCE2gFB15HjGKD4-gNKx_Yp4I8UCDg-w"/>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/80 text-white text-[10px] font-bold rounded">12:45</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+</div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors line-clamp-1">Exploring the Future of Web3 Gaming</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">45k views • 2 days ago</p>
+</div>
+<!-- Video Card 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-video rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 relative mb-3 shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Retro computer setup video thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAS8qjNM_uoZppoAjf_VFpmjJl3_eKL7o1CnRc0nxuAW012m9SdH5BoS9txQz7jjixo5fnHbnxc8Mv7bLfuTzf_4huopE5Nj-4dM0Iz2uPn5j4k_i2x9gsZyxuw3I95WEtybcDooZZ9XTTwa0cXSt2Oxtx0DuvM0d08ai1ioQQzAm2JFFOafQMeGxo0rQRYaqVbIMGCpf_Ai3En4Jd3t2UUqfHZU39fxYNw3zg27uoBIa-EurVO03OxtZ8w4dZLuJ-spcJIzgOvh8Sb"/>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/80 text-white text-[10px] font-bold rounded">08:12</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+</div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors line-clamp-1">History of Video Encoding Formats</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">12k views • 1 week ago</p>
+</div>
+<!-- Video Card 3 -->
+<div class="group cursor-pointer">
+<div class="aspect-video rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 relative mb-3 shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Abstract global network data thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAdGrY5pyWXdVO2H1qSkx153HJNv1gwqXecai7KhxyzL2YRdMCa9oN7gQnxKgAmFwMkTN6ht_dpkjunLegNlKMEZ40GR-MHfCLatBgGsw4kfAkVxOT-FRZyEHwEi4dAg9syC99KHNmDpNsqYT6j8XOcbPH3Wo9GbtCxHbnaFraYJK-PhGdUozIobBqvbGeYWN9qNuMAEGMtFZdkV_5u3gJyGeLjTdpibmHr1t0UZ-C4LP8GvonrExB70eCn6tlAn7MjhCXUJz8Z3krw"/>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/80 text-white text-[10px] font-bold rounded">22:01</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+</div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors line-clamp-1">Neural Engine v2: Deep Dive Analysis</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">89k views • 3 days ago</p>
+</div>
+<!-- Video Card 4 -->
+<div class="group cursor-pointer">
+<div class="aspect-video rounded-xl overflow-hidden bg-slate-200 dark:bg-slate-800 relative mb-3 shadow-md">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Modern sleek technology laptop thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDPCxJxI8W4stJrZwMzB6BolKUKCXBs2LU6F5s8itOWrvEpygHCdU0pTS-B2EFu19uG8skbRs3g2JQDbD72rFBmihkpyQ6YSxPcfPWsWzX2_PwQE-njEYH6JwIFok3gZtM1mxhI7Z7KcpzZwfd-iakJeNhPWJzaZiSEmj9NqW9raUmZ4PWn0P5tCLSCFvz83EGNDxBMAUeDzVaOtz8v67_hAl-BmAxalD_PYt9T16dOrnWcz3M34rZEfcNZfm94TS2ihqM3LgtXlB7"/>
+<div class="absolute bottom-2 right-2 px-1.5 py-0.5 bg-black/80 text-white text-[10px] font-bold rounded">15:30</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+</div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 group-hover:text-primary transition-colors line-clamp-1">The Rise of Low-Latency Streaming</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">2.1k views • 1 month ago</p>
+</div>
+</div>
+</section>
+<!-- Recent Activity Feed -->
+<section>
+<h3 class="text-xl font-bold mb-6 dark:text-white">Recent Activity</h3>
+<div class="space-y-4">
+<div class="flex gap-4 p-4 rounded-xl bg-slate-100/50 dark:bg-primary/5 border border-slate-200 dark:border-primary/10 transition-all hover:border-primary/30">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">rate_review</span>
+</div>
+<div>
+<p class="text-sm dark:text-slate-200">Reviewed <span class="font-bold text-primary">Neural Engine v2</span></p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mt-1">"The best analysis I've seen so far. Great production quality!"</p>
+<span class="text-[10px] text-slate-400 uppercase tracking-widest block mt-2">2 hours ago</span>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-xl bg-slate-100/50 dark:bg-primary/5 border border-slate-200 dark:border-primary/10 transition-all hover:border-primary/30">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">favorite</span>
+</div>
+<div>
+<p class="text-sm dark:text-slate-200">Liked <span class="font-bold text-primary">Web3 Gaming Documentary</span></p>
+<span class="text-[10px] text-slate-400 uppercase tracking-widest block mt-2">1 day ago</span>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-xl bg-slate-100/50 dark:bg-primary/5 border border-slate-200 dark:border-primary/10 transition-all hover:border-primary/30">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<div>
+<p class="text-sm dark:text-slate-200">Started following <span class="font-bold text-primary">CreativeTech_TV</span></p>
+<span class="text-[10px] text-slate-400 uppercase tracking-widest block mt-2">3 days ago</span>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-xl bg-slate-100/50 dark:bg-primary/5 border border-slate-200 dark:border-primary/10 transition-all hover:border-primary/30">
+<div class="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center text-primary shrink-0">
+<span class="material-symbols-outlined">celebration</span>
+</div>
+<div>
+<p class="text-sm dark:text-slate-200">Earned <span class="font-bold text-primary">Early Adopter</span> badge</p>
+<span class="text-[10px] text-slate-400 uppercase tracking-widest block mt-2">2 months ago</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Badges & Stats -->
+<div class="lg:col-span-4 space-y-8">
+<!-- Collection Badges -->
+<section class="bg-slate-100 dark:bg-primary/5 rounded-2xl p-6 border border-slate-200 dark:border-primary/10">
+<h3 class="text-lg font-bold mb-6 flex items-center gap-2 dark:text-white">
+<span class="material-symbols-outlined text-primary">rewarded_ads</span>
+                                    Collection Badges
+                                </h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 text-center transition-transform hover:scale-105">
+<div class="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center text-white mb-2 shadow-inner">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter dark:text-white">Early Adopter</span>
+</div>
+<div class="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 text-center transition-transform hover:scale-105">
+<div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center text-white mb-2 shadow-inner">
+<span class="material-symbols-outlined">star</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter dark:text-white">Top Reviewer</span>
+</div>
+<div class="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 text-center transition-transform hover:scale-105">
+<div class="w-12 h-12 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center text-white mb-2 shadow-inner">
+<span class="material-symbols-outlined">monetization_on</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter dark:text-white">Coin Collector</span>
+</div>
+<div class="flex flex-col items-center p-3 rounded-xl bg-white dark:bg-background-dark/50 border border-slate-200 dark:border-primary/20 text-center transition-transform hover:scale-105 opacity-50 grayscale">
+<div class="w-12 h-12 rounded-full bg-slate-300 dark:bg-slate-700 flex items-center justify-center text-white mb-2 shadow-inner">
+<span class="material-symbols-outlined">lock</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-tighter dark:text-white">Master Curator</span>
+</div>
+</div>
+<button class="w-full mt-6 py-2 text-primary text-sm font-bold border border-primary/30 rounded-lg hover:bg-primary/10 transition-colors">Show All Badges</button>
+</section>
+<!-- About / Meta Info -->
+<section class="bg-slate-100 dark:bg-primary/5 rounded-2xl p-6 border border-slate-200 dark:border-primary/10">
+<h3 class="text-lg font-bold mb-4 dark:text-white">About Alex</h3>
+<p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed mb-6">
+                                    Passionate about high-fidelity streaming and emerging tech trends. Collecting the best visual experiences since 2024.
+                                </p>
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-primary text-lg">language</span>
+<span>alexstreamer.dev</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-primary text-lg">location_on</span>
+<span>San Francisco, CA</span>
+</div>
+<div class="flex items-center gap-3 text-sm text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined text-primary text-lg">calendar_month</span>
+<span>Member since Oct 2023</span>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<footer class="max-w-6xl mx-auto px-8 py-12 border-t border-slate-200 dark:border-primary/10 text-center">
+<p class="text-slate-500 dark:text-slate-500 text-sm">© 2024 VideoStream Inc. Built for creators.</p>
+</footer>
+</div>
+</main>
+</div>
+</body></html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Coin Shop - Purchase Virtual Credits</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 py-4 lg:px-40">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-4xl">toll</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">Coin Shop</h2>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-lg h-10 bg-primary/10 hover:bg-primary/20 text-primary px-4 transition-colors">
+<span class="material-symbols-outlined text-[20px] mr-2">history</span>
+<span class="text-sm font-bold">Orders</span>
+</button>
+</div>
+</header>
+<main class="flex-1 px-6 py-8 lg:px-40 max-w-[1200px] mx-auto w-full">
+<section class="mb-10">
+<div class="flex flex-col md:flex-row gap-6">
+<div class="flex flex-1 flex-col gap-2 rounded-xl p-8 bg-primary/10 border border-primary/20">
+<div class="flex items-center justify-between">
+<p class="text-primary/80 text-sm font-medium uppercase tracking-widest">Current Balance</p>
+<span class="material-symbols-outlined text-primary">account_balance_wallet</span>
+</div>
+<p class="text-4xl font-bold leading-tight">1,250 <span class="text-xl font-normal text-slate-400">Coins</span></p>
+</div>
+<div class="flex flex-col justify-center">
+<div class="bg-green-500/10 border border-green-500/20 rounded-lg p-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">verified</span>
+<p class="text-sm text-green-500 font-medium tracking-tight">Purchase Success! Your 500 Coins have been added.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="mb-12">
+<h2 class="text-2xl font-bold mb-6">Select a Package</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="group flex flex-col gap-4 p-6 bg-slate-800/40 border border-slate-700 rounded-xl hover:border-primary transition-all cursor-pointer">
+<div class="w-full aspect-square rounded-lg flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+<span class="material-symbols-outlined text-6xl text-primary group-hover:scale-110 transition-transform">monetization_on</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<p class="text-xl font-bold">100 Coins</p>
+<span class="text-xs px-2 py-1 bg-slate-700 rounded-full text-slate-300">Starter</span>
+</div>
+<p class="text-primary text-2xl font-bold">$5.00</p>
+<p class="text-slate-400 text-sm">Perfect for beginners</p>
+</div>
+<button class="w-full bg-slate-700 group-hover:bg-primary py-3 rounded-lg font-bold transition-colors">Select</button>
+</div>
+<div class="group flex flex-col gap-4 p-6 bg-slate-800/40 border-2 border-primary rounded-xl relative overflow-hidden cursor-pointer">
+<div class="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold px-3 py-1 rounded-bl-lg uppercase tracking-tighter">Best Value</div>
+<div class="w-full aspect-square rounded-lg flex items-center justify-center bg-gradient-to-br from-primary/30 to-primary/10">
+<span class="material-symbols-outlined text-7xl text-primary group-hover:scale-110 transition-transform">savings</span>
+</div>
+<div class="flex flex-col gap-1">
+<p class="text-xl font-bold">500 Coins</p>
+<p class="text-primary text-2xl font-bold">$20.00</p>
+<p class="text-slate-400 text-sm">Most popular choice</p>
+</div>
+<button class="w-full bg-primary py-3 rounded-lg font-bold shadow-lg shadow-primary/20">Select</button>
+</div>
+<div class="group flex flex-col gap-4 p-6 bg-slate-800/40 border border-slate-700 rounded-xl hover:border-primary transition-all cursor-pointer">
+<div class="w-full aspect-square rounded-lg flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+<span class="material-symbols-outlined text-8xl text-primary group-hover:scale-110 transition-transform">diamond</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between items-center">
+<p class="text-xl font-bold">1000 Coins</p>
+<span class="text-xs px-2 py-1 bg-primary/20 rounded-full text-primary">Premium</span>
+</div>
+<p class="text-primary text-2xl font-bold">$35.00</p>
+<p class="text-slate-400 text-sm">Elite high-roller bundle</p>
+</div>
+<button class="w-full bg-slate-700 group-hover:bg-primary py-3 rounded-lg font-bold transition-colors">Select</button>
+</div>
+</div>
+</section>
+<section class="max-w-[700px] mx-auto bg-slate-800/20 p-8 rounded-2xl border border-slate-700/50">
+<h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">payment</span>
+                        Payment Method
+                    </h2>
+<div class="space-y-4">
+<button class="w-full flex items-center justify-between p-5 bg-slate-800 border border-slate-700 rounded-xl hover:border-primary transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-2xl">credit_card</span>
+<div class="text-left">
+<p class="font-bold">Buy with Credit Card</p>
+<p class="text-xs text-slate-400">Visa, Mastercard, American Express</p>
+</div>
+</div>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-5 bg-slate-800 border border-slate-700 rounded-xl hover:border-primary transition-all">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-2xl text-blue-400">account_balance</span>
+<div class="text-left">
+<p class="font-bold">Pay with PayPal</p>
+<p class="text-xs text-slate-400">Fast and secure checkout</p>
+</div>
+</div>
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+<div class="mt-8 pt-8 border-t border-slate-700/50 flex flex-col items-center">
+<div class="flex gap-4 opacity-50 grayscale hover:grayscale-0 transition-all mb-4">
+<span class="material-symbols-outlined text-3xl">verified_user</span>
+<span class="material-symbols-outlined text-3xl">lock</span>
+<span class="material-symbols-outlined text-3xl">shield</span>
+</div>
+<p class="text-xs text-slate-500 text-center">Your transaction is secured with 256-bit SSL encryption. We do not store your full card details.</p>
+</div>
+</section>
+</main>
+<footer class="mt-auto py-10 px-6 lg:px-40 border-t border-slate-800/50">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 text-slate-400">
+<span class="material-symbols-outlined text-sm">info</span>
+<p class="text-sm italic">Purchased coins are non-refundable after use.</p>
+</div>
+<div class="flex gap-6 text-sm text-slate-400 font-medium">
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Action Hub | StreamFlow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .custom-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex min-h-screen">
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-64 border-r border-slate-200 dark:border-primary/20 bg-background-light dark:bg-background-dark z-50 hidden lg:flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary p-1.5 rounded-lg">
+<span class="material-symbols-outlined text-white">movie_filter</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">StreamFlow</h2>
+</div>
+<nav class="flex-1 px-4 py-2 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-medium">Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">bolt</span>
+<span class="font-medium">Action Movies</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">tv</span>
+<span class="font-medium">TV Shows</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-medium">My List</span>
+</a>
+</nav>
+<div class="p-4 border-t border-slate-200 dark:border-primary/20">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-primary/10 hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 lg:ml-64 flex flex-col min-h-screen">
+<!-- Header -->
+<header class="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-primary/20 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 py-3 flex items-center justify-between">
+<div class="flex items-center lg:hidden gap-3">
+<span class="material-symbols-outlined text-primary">menu</span>
+<h2 class="text-lg font-bold">StreamFlow</h2>
+</div>
+<div class="hidden md:flex flex-1 max-w-md mx-6">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full bg-slate-100 dark:bg-primary/5 border-none rounded-full py-2 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-slate-100" placeholder="Search for titles, genres, actors..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-primary/10 text-slate-600 dark:text-slate-400 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-primary rounded-full"></span>
+</button>
+<div class="flex items-center gap-2 bg-slate-100 dark:bg-primary/10 px-3 py-1.5 rounded-full">
+<span class="material-symbols-outlined text-primary text-xl">monetization_on</span>
+<span class="font-bold text-sm">2,450</span>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center border border-primary/30">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="p-6">
+<div class="relative w-full aspect-[21/9] min-h-[400px] rounded-xl overflow-hidden group">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Cinematic action movie hero banner with neon lights" style='background-image: linear-gradient(to right, rgba(25, 16, 34, 0.95) 0%, rgba(25, 16, 34, 0.4) 50%, rgba(25, 16, 34, 0) 100%), url("https://lh3.googleusercontent.com/aida-public/AB6AXuATPRh87tJfmIvEsrSVysTR0lqQhZzRCRr2kc0WQ65NhBh-1-A-6JoI2MUFCFPekDImy9zoRY6jBfSV_jTH3hJe0lWs2WoiHyRg8d87je_Wr3hjjD_cTCiiwB11lp3WykXoIh7xLUtAyUHEpZW0nQ4fBVF2M8VVFZY7DrwkMtqEKoBHG9SagCg9cqsOcBj-e_C6EiJ17Wi5JUeJ986LMLmzeAZ50lQ0ON4AkLOIJCGDtUoTQlAajlDnh8ByzPInc1i7DmSgreRNygnR");'></div>
+<div class="relative h-full flex flex-col justify-center px-12 max-w-2xl">
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-2 py-0.5 rounded">Trending Now</span>
+<span class="text-slate-300 text-sm font-medium">Action • 2h 45m • 2024</span>
+</div>
+<h1 class="text-4xl md:text-6xl font-black mb-4 leading-tight tracking-tight text-white">CHASE TO<br/>FREEDOM</h1>
+<p class="text-slate-300 text-lg mb-8 line-clamp-2">In a dystopian future, a rogue operative must protect a mysterious child while being hunted by an elite mercenary group through the neon-soaked streets of Neo-Tokyo.</p>
+<div class="flex items-center gap-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-bold flex items-center gap-2 transition-transform hover:scale-105">
+<span class="material-symbols-outlined">play_arrow</span>
+                            Watch Now
+                        </button>
+<button class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-3 rounded-lg font-bold flex items-center gap-2 transition-colors">
+<span class="material-symbols-outlined">add</span>
+                            My List
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Curated Rows -->
+<div class="space-y-12 pb-12">
+<!-- New in Action -->
+<section class="px-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold flex items-center gap-2">
+<span class="w-1 h-6 bg-primary rounded-full"></span>
+                        New in Action
+                    </h3>
+<a class="text-primary font-semibold text-sm hover:underline" href="#">View All</a>
+</div>
+<div class="flex gap-6 overflow-x-auto custom-scrollbar pb-4">
+<!-- Movie Card 1 -->
+<div class="flex-none w-64 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Action movie poster featuring an explosion" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAr7sWIETOpQNzCjAAIkuNhNPf23sidGRJHsdPZNkBDMArmhSnSgxPFKwDsCdQ0BVxI_5YnowUYltm86Msa7KyVc6PHVmrY7HqBVBfEKiMagr-45zQfPJEoctGaYTG24ENE_TlWcDXL30cPmjWGRwe_U0lUAcAvoStrvscq4fgKIPtqVhbnV8QCDC6iLPcRePsNqJYI7hF9OYyJJfznzBKAhse8wiMWxHQHyNDoNCuBlhwAcZNtphxr5qQF_17ApR-pLMxAwIW5ux3h");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded flex items-center gap-1 text-xs font-bold">
+<span class="material-symbols-outlined text-[14px] text-yellow-400 fill-1">star</span> 8.4
+                            </div>
+<div class="absolute bottom-3 left-3 bg-primary text-white px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">monetization_on</span> 150
+                            </div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 mb-1 group-hover:text-primary transition-colors">Extraction Point</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Survival, Thriller</p>
+</div>
+<!-- Movie Card 2 -->
+<div class="flex-none w-64 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Gritty urban action movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCmKbDyE4u8iHYIS94_RVgvnsr5TyhnLoe-aa-Wy2kjxGMM-yF4cpaxiswDJCaiwwbfsPXbSAm7rXVRQeYGuHV4vEo8SU7CMXlRx7QBA2aPREk_Cj694wt0AetkDfBLYUFkPcBqg60HHBJzJXnFY7uzXqHcS3RCUmvMrRcTM8VcDu5Sp1KHVffPz8gfqXN0kHZ0fqtdPUHn1BJKMf6qKObb56e4iz6Bn4-MHI64eQIQYL0dA9EktG1YNoGqUp0rD9lO7s9f_vay6xcB");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded flex items-center gap-1 text-xs font-bold">
+<span class="material-symbols-outlined text-[14px] text-yellow-400 fill-1">star</span> 7.9
+                            </div>
+<div class="absolute bottom-3 left-3 bg-primary text-white px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">monetization_on</span> 120
+                            </div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 mb-1 group-hover:text-primary transition-colors">Bullet Rain</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Heist, Action</p>
+</div>
+<!-- Movie Card 3 -->
+<div class="flex-none w-64 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Epic sci-fi action movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCUc2zePCniV7c4vChZoseBaHImU27DPa6_DzwGKXC6N0LpTwo3vrVXic0Z2m_l_h-s1ap30YykgP3cQWZ75_Nwb0AtpUYAm5wx9rbY_6MI3CLobf_1j-yrvlY9UKSmIFUOzQnqaPo1okX_VpqI_5UYOepDbaLje-IqjZOUQgFURaH8erJ6trc_5GkMXl60eoK9v0kh9hsP_lQEiXuRarM7f6BTezKoQIDJ_aHHrXGPsuBY1NLyC5VfI8LcKHgaVWj1mMpl7rzdmqZl");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded flex items-center gap-1 text-xs font-bold">
+<span class="material-symbols-outlined text-[14px] text-yellow-400 fill-1">star</span> 9.1
+                            </div>
+<div class="absolute bottom-3 left-3 bg-primary text-white px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">monetization_on</span> 180
+                            </div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 mb-1 group-hover:text-primary transition-colors">Galactic War</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Sci-Fi, Epic</p>
+</div>
+<!-- Movie Card 4 -->
+<div class="flex-none w-64 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Noir style action movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBI9o3aQpJWr60ieFZxqpEuJ72wBFvwg2b0S0d5QgUIrHIOEdh8FfivXy1CERtxGs3F_f5cCwjE6oNkv4aJftsrz2ALzdVKN7BrSSAWQpARN3R7aIkS0PUBg1oWitSjtx2cWSGg45JZ9oTVXAqi7DNucrGQBF27hP0tugLk9QUAdzIeTM50Hmw78xTUIL8sDYq8uJLCp8lPdAN11vxDtaq4BdeHHhmFyTnEFZ3GDY4GsjAusHtZI1a1LtefEzLKr-RHFW3d4Vit0sMF");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded flex items-center gap-1 text-xs font-bold">
+<span class="material-symbols-outlined text-[14px] text-yellow-400 fill-1">star</span> 8.2
+                            </div>
+<div class="absolute bottom-3 left-3 bg-primary text-white px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">monetization_on</span> 140
+                            </div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 mb-1 group-hover:text-primary transition-colors">Shadow Strike</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Spy, Martial Arts</p>
+</div>
+<!-- Movie Card 5 -->
+<div class="flex-none w-64 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Futuristic action movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDcefewl1gTgixMC4MlziBuYLfO9DPeXEHbmTX6S8yvQH-Cg3g3L6HbrHP0V_mkXGRjVCsCPfmszAXWUkxgzL9ObIcty46doxfm1h1AubAcq4pIJJjgjKSwJH0mzJ6MNJ-ooW7dg0N3ZEAXlmwKZXDlIPmb_15xAPODNwVnrA9k1Yj0n0yp9worLoIWo9KKuseB5YKwJlzZrLGWBsPNKvB05HqXP6qXhdf7sL29ASoIsV9vqckD91-0B7BaBhsvpLyayBi3fCNEfqag");'></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded flex items-center gap-1 text-xs font-bold">
+<span class="material-symbols-outlined text-[14px] text-yellow-400 fill-1">star</span> 7.5
+                            </div>
+<div class="absolute bottom-3 left-3 bg-primary text-white px-2 py-1 rounded text-xs font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">monetization_on</span> 100
+                            </div>
+</div>
+<h4 class="font-bold text-slate-900 dark:text-slate-100 mb-1 group-hover:text-primary transition-colors">Digital Frontier</h4>
+<p class="text-xs text-slate-500 dark:text-slate-400">Cyberpunk, Adventure</p>
+</div>
+</div>
+</section>
+<!-- Top Rated Section -->
+<section class="px-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold flex items-center gap-2">
+<span class="w-1 h-6 bg-primary rounded-full"></span>
+                        Top Rated Action
+                    </h3>
+<a class="text-primary font-semibold text-sm hover:underline" href="#">View All</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="bg-slate-100 dark:bg-primary/5 p-4 rounded-xl flex gap-4 group hover:bg-slate-200 dark:hover:bg-primary/10 transition-colors cursor-pointer">
+<div class="w-24 aspect-[2/3] rounded-lg overflow-hidden flex-none">
+<div class="w-full h-full bg-cover bg-center" data-alt="Classic action movie vintage poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC4TWWSyB8pUY-447K0rTnGcfGfg40zZB3Csc02aMaTayA92fQ5Ro9ujBIq3tkea9wVEmI0n58huocMBIHMk0tF3yTvs8ekMqeRPgA_aTgZgOSPp3aD5u4WXOEKkW83bQbE19DkIAhCo7TOkpAyethzPvxhPWRxrdzb58itr4W1QuzeIsJ3Y_j5-ak8mcn6seq0JB0lRmwN-U5FhvP80sb49CM__smFJjFEZdtdJ4egOnDzYHIyqKjZ4WYFmcgXvTNmj4V_LSsiNR_u");'></div>
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-primary text-[10px] font-bold tracking-widest uppercase mb-1">Masterpiece</span>
+<h4 class="font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">The Last Vanguard</h4>
+<div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+<span class="flex items-center gap-1 font-bold text-slate-900 dark:text-slate-100"><span class="material-symbols-outlined text-[16px] text-yellow-400 fill-1">star</span> 9.8</span>
+<span>2005</span>
+<span class="bg-primary/20 text-primary px-1.5 py-0.5 rounded font-bold">250 Coins</span>
+</div>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-primary/5 p-4 rounded-xl flex gap-4 group hover:bg-slate-200 dark:hover:bg-primary/10 transition-colors cursor-pointer">
+<div class="w-24 aspect-[2/3] rounded-lg overflow-hidden flex-none">
+<div class="w-full h-full bg-cover bg-center" data-alt="Dark gritty action movie still" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCmQpmnya51do0n4tQhlvnHRh9jklGOzwFjuXoS0gcesl8xqrmpIhrQ8M88h9NdtxYLHKBM0npsHQv2vGrVCv9gtSbjhLgvLzVtolR4nq_Qo8ShR-EMf_dDvChkigJHSx_THDkhodsbim6vO5wCR4U6VSLFxHjKJYSWO4GOVs4I4EXRfQN8DxV1JRy8fr8p1T8r-WxSLne2bm7Tx-wzSg1egHUP76iQXmDnQMcKD8Qk5gl8i-gqh84TunNOQZgImf0cyMVUF_f9MvUa");'></div>
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-primary text-[10px] font-bold tracking-widest uppercase mb-1">Fan Favorite</span>
+<h4 class="font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">Midnight City</h4>
+<div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+<span class="flex items-center gap-1 font-bold text-slate-900 dark:text-slate-100"><span class="material-symbols-outlined text-[16px] text-yellow-400 fill-1">star</span> 9.5</span>
+<span>2022</span>
+<span class="bg-primary/20 text-primary px-1.5 py-0.5 rounded font-bold">190 Coins</span>
+</div>
+</div>
+</div>
+<div class="bg-slate-100 dark:bg-primary/5 p-4 rounded-xl flex gap-4 group hover:bg-slate-200 dark:hover:bg-primary/10 transition-colors cursor-pointer">
+<div class="w-24 aspect-[2/3] rounded-lg overflow-hidden flex-none">
+<div class="w-full h-full bg-cover bg-center" data-alt="Sci-fi hero dramatic lighting" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCgtEBbG-yD56tZCwSF58E8MSwrDbrD-dz3k0BfgHc96mN7Z5J6j7ICKz5SVirzpj9F27v2ZCuUvBn4dUjFYGSIKCdMISh2Nz7gV826cGE14jolH8X-JYn4YegozRwXqYH6qjMU6KZWuhqmcFllE1MaWOEmrQwWTlHal_MfFgIJOzy9bZFILoKUJed4PUnDXQQz-Ugn48ZCNIVoj0ymXFNfG3x1rcvbtWLbHAkXsbs0OkDv0Vy1Vxis9gLJfpPWzc57Jmcp-2om5byU");'></div>
+</div>
+<div class="flex flex-col justify-center">
+<span class="text-primary text-[10px] font-bold tracking-widest uppercase mb-1">Modern Classic</span>
+<h4 class="font-bold text-lg leading-tight mb-2 group-hover:text-primary transition-colors">Neon Velocity</h4>
+<div class="flex items-center gap-3 text-xs text-slate-500 dark:text-slate-400">
+<span class="flex items-center gap-1 font-bold text-slate-900 dark:text-slate-100"><span class="material-symbols-outlined text-[16px] text-yellow-400 fill-1">star</span> 9.3</span>
+<span>2019</span>
+<span class="bg-primary/20 text-primary px-1.5 py-0.5 rounded font-bold">160 Coins</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Most Popular Row -->
+<section class="px-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="text-2xl font-bold flex items-center gap-2">
+<span class="w-1 h-6 bg-primary rounded-full"></span>
+                        Most Popular
+                    </h3>
+<div class="flex gap-2">
+<button class="p-2 rounded-full border border-slate-200 dark:border-primary/20 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-2 rounded-full border border-slate-200 dark:border-primary/20 hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<div class="flex gap-6 overflow-x-auto custom-scrollbar pb-4">
+<!-- Movie Card 6 -->
+<div class="flex-none w-48 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Action movie dramatic poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDnNu80EQk-sC1DTOCY8OECNugPADpRXd6Zzl3c80oGyUyWDn3-CgEXC7MQgO0xmTovkiAul37k71YploDP_aR1al5ewZKiRHsp7rVdZTribxzJTV9baHCXe7yw9vOoZHn1VDJxwSK1hZkI5rDuw2DB35v8thet449yV9mA3-VZkg2DmS20H9_o1i3TmnOgikndNHZtdLCvw9LDV7WyM-w4oMMhmIJWzWByo2q146AWXHvHCnOAQRJ_YJsCqPbFfCCnbNTgH9cr9se0");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<button class="w-full bg-primary text-white text-xs font-bold py-2 rounded-lg">Quick Buy</button>
+</div>
+<div class="absolute top-2 left-2 bg-black/60 backdrop-blur-md text-white text-[10px] px-2 py-0.5 rounded-full font-bold">#1 Trending</div>
+</div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-primary transition-colors">Steel Horizon</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="text-[11px] text-slate-500 dark:text-slate-400">Sci-Fi Action</span>
+<span class="text-[11px] font-bold text-primary">130 Coins</span>
+</div>
+</div>
+<!-- Movie Card 7 -->
+<div class="flex-none w-48 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="High stakes heist movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCYo7x9feGEXCng8tTJJZRMASrBuNUvwsPf1wJGdpAwp4bHx3detZljYI9Q8bMBDcycCE-CcvFk9xSnUne2PcZ2Re7Zk9Ah5I_R83G06xTpfs1mgg8FmtK8WuC2HQAhhLJ9l5m-q0UzNAB0DkG5whkfBdvidCrm1OYJoY2TOozdOB_VOQ_V1ieOuJ-tkuynUeAstVmWPysEOh7bopqbAVx6QRzkg8XXjSwsGp1vJEqICdu-egmEwwwatkEZi33tirddWQ-qkCTIW0gk");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<button class="w-full bg-primary text-white text-xs font-bold py-2 rounded-lg">Quick Buy</button>
+</div>
+</div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-primary transition-colors">Vortex Rider</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="text-[11px] text-slate-500 dark:text-slate-400">Racing Thriller</span>
+<span class="text-[11px] font-bold text-primary">110 Coins</span>
+</div>
+</div>
+<!-- Movie Card 8 -->
+<div class="flex-none w-48 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Martial arts action movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDdEFPf8WtAuhI5t5Juh5t-z0Cg5dOTy0Rsl8OOA9cPvxOrpRUMZNKau9U6ccVBTqy6EhdXIchmoANRGr1DOuf8qGkdeTfLSblvuf-XYX4kuTpA4vBdekHUVvY-NOzD7siqiGP7ANkAMsQmRfScoWHTDZoczht4wJZ39_oz8EDfRRpCcATLh2ZOhT3B6ZwljBLStb9o15tNYrHTuh7BbHGMZA5mkuMmDxXvKcMqtZeGC8vdvLWdVo7JIsibqXB86ajY9pgcqOPrhccz");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<button class="w-full bg-primary text-white text-xs font-bold py-2 rounded-lg">Quick Buy</button>
+</div>
+</div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-primary transition-colors">Infinite Edge</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="text-[11px] text-slate-500 dark:text-slate-400">Dystopian</span>
+<span class="text-[11px] font-bold text-primary">145 Coins</span>
+</div>
+</div>
+<!-- Movie Card 9 -->
+<div class="flex-none w-48 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Classic war movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCL-WBlEP6-00uztigoOV8AqojOU9QKYpqSVcU2jwPWgFRkmSCB9urlXoJh78dsmXrIZUuvnjDbnHnU-lZet2TP-TppV5EWW6uGEg_dHIZYPPnl76mgvlfj0OmOHKNqY5QqQdSqySpUl9viY9X1WYQujmUzTdETZlYGDDJtdHrH5W-R1nne7eqp2S_MaALnP9aXg73PLTXMKdT2kVK_RbSYQZXiUwG8tBkOqaX7vQJUWqm2ExJjwflv34K5yY6r8A-bTS0qcyYu3etE");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<button class="w-full bg-primary text-white text-xs font-bold py-2 rounded-lg">Quick Buy</button>
+</div>
+</div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-primary transition-colors">Iron Battalion</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="text-[11px] text-slate-500 dark:text-slate-400">War, Action</span>
+<span class="text-[11px] font-bold text-primary">120 Coins</span>
+</div>
+</div>
+<!-- Movie Card 10 -->
+<div class="flex-none w-48 group cursor-pointer">
+<div class="relative aspect-[2/3] rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-110" data-alt="Supernatural action movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDgFAdZAjwBBZnMw48-TuQ6SKR0XwM4IfE735GcJddy0ZqeBYnIV9epqw5gwMWqszu3QaekOtfhuZCWhTPYuEKgb80CjWCkCPg_9XPTOxtfuIHKDT2_XWM-uHVeeYWIFXZgGzC9Hro6CRUaDcBIgPuI4eO1XLx6xUDSK1YOhizjFqGCPb-1qYo0BoFDZPEZ1defCpIgw7WHP2UQujPhfWy4aTV_MxwTXwq_muT4OqGB3xvb_-SUek77klPKadbSVHYfYOM95hQteCRp");'></div>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-3">
+<button class="w-full bg-primary text-white text-xs font-bold py-2 rounded-lg">Quick Buy</button>
+</div>
+</div>
+<h4 class="font-bold text-sm text-slate-900 dark:text-slate-100 truncate group-hover:text-primary transition-colors">Shadow Realm</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="text-[11px] text-slate-500 dark:text-slate-400">Fantasy Action</span>
+<span class="text-[11px] font-bold text-primary">155 Coins</span>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer -->
+<footer class="mt-auto border-t border-slate-200 dark:border-primary/20 p-8 text-center text-slate-500 dark:text-slate-400">
+<div class="flex flex-wrap justify-center gap-8 mb-6 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Contact Support</a>
+<a class="hover:text-primary transition-colors" href="#">Redeem Coins</a>
+</div>
+<p class="text-xs">© 2024 StreamFlow Premium Entertainment. All rights reserved.</p>
+</footer>
+</main>
+</div>
+</body></html>

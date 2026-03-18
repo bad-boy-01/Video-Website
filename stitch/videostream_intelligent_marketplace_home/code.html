@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VidMarket - Intelligent Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#0f0913",
+                    },
+                    fontFamily: {
+                        "sans": ["Space Grotesk", "sans-serif"],
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.5rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .progress-gradient { background: linear-gradient(90deg, #8c25f4 0%, #b873ff 100%); }
+    </style>
+</head>
+<body class="bg-background-dark text-slate-100 min-h-screen">
+<div class="flex">
+<!-- Sidebar -->
+<aside class="w-64 h-screen sticky top-0 bg-background-dark/80 border-r border-slate-800 p-4 flex flex-col justify-between hidden md:flex backdrop-blur-md">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">play_circle</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-white">VidMarket</h2>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-primary/10 border border-primary/20">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<p class="text-[10px] text-slate-400 font-bold uppercase tracking-widest">My Balance</p>
+<p class="text-base font-bold text-white">$1,240.50</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-medium">Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-medium">Wishlist</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">subscriptions</span>
+<span class="font-medium">Subscription</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-400 hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-medium">Library</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<div class="p-4 rounded-xl bg-primary/20 border border-primary/30 flex flex-col gap-3">
+<p class="text-sm font-semibold text-white">Unlock Premium</p>
+<p class="text-xs text-slate-300">Get access to exclusive 4K content and offline viewing.</p>
+<button class="w-full py-2 bg-primary hover:bg-primary/90 rounded-lg text-xs font-bold transition-all text-white">Upgrade Plan</button>
+</div>
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-full bg-slate-800 bg-center bg-cover border border-slate-700" data-alt="User profile avatar circle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJs_c1aNRwiFyLWuLMTgiPCRPF3V8JrokvrBQ8OkqnvL5Gv7_x-7bAmQcIx795LqzaITMbBEhghG0F5qj3GI4eZ922zVGASLTOsqpJr_j2GlLK4vU_1q7THbyMNR6JAFS9vYg41_LSsx1o2XLbx5Oy9cFjGlwieMV9BOvm0aJNh5Ejh30p2XQL67RIqGIBE4kdOdYufzjfn9_uSyo87X-rbnRePrA8j1yPAidOcZvhRav1JTgCCqatFCbFq6JixL1peB6Q1youIXPz')"></div>
+<div class="flex flex-col">
+<p class="text-sm font-bold truncate text-white">Alex Morgan</p>
+<p class="text-[10px] text-slate-400 uppercase tracking-tighter">Pro Account</p>
+</div>
+<button class="ml-auto text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-h-screen bg-background-dark p-4 md:p-8 flex flex-col gap-10 overflow-x-hidden">
+<!-- Header & Search -->
+<header class="flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="relative flex-1 max-w-2xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-slate-900/50 border border-slate-800 rounded-xl shadow-sm focus:ring-2 focus:ring-primary/50 text-slate-100 placeholder:text-slate-500 outline-none" placeholder="Search for premium videos, creators, or genres..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 relative hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2.5 right-2.5 size-2 bg-primary rounded-full ring-2 ring-slate-900"></span>
+</button>
+<button class="p-3 bg-slate-900 border border-slate-800 rounded-xl text-slate-300 hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-full text-xs font-bold">
+<span>Action</span>
+<span class="material-symbols-outlined text-xs">close</span>
+</button>
+<button class="px-4 py-2 bg-slate-900 hover:bg-slate-800 rounded-full text-xs font-medium border border-slate-800 transition-colors">Drama</button>
+<button class="px-4 py-2 bg-slate-900 hover:bg-slate-800 rounded-full text-xs font-medium border border-slate-800 transition-colors">Tech</button>
+<button class="px-4 py-2 bg-slate-900 hover:bg-slate-800 rounded-full text-xs font-medium border border-slate-800 transition-colors">Comedy</button>
+<button class="px-4 py-2 bg-slate-900 hover:bg-slate-800 rounded-full text-xs font-medium border border-slate-800 transition-colors">Sci-Fi</button>
+<div class="ml-auto hidden lg:flex items-center gap-4 bg-slate-900/50 px-5 py-2 rounded-full border border-slate-800">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Price</p>
+<div class="w-24 h-1 bg-slate-800 rounded-full relative">
+<div class="absolute left-1/4 right-1/4 h-1 bg-primary rounded-full"></div>
+<div class="absolute left-1/4 top-1/2 -translate-y-1/2 size-2.5 bg-primary rounded-full border-2 border-slate-900 shadow-md"></div>
+<div class="absolute right-1/4 top-1/2 -translate-y-1/2 size-2.5 bg-primary rounded-full border-2 border-slate-900 shadow-md"></div>
+</div>
+<span class="text-[10px] font-bold text-white tracking-tighter">$20 - $80</span>
+</div>
+</div>
+</header>
+<!-- 1. Featured Section -->
+<section class="relative w-full h-[480px] rounded-3xl overflow-hidden shadow-2xl group">
+<div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-105" data-alt="Cinematic background showing a high-tech cityscape at night" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAA1wHU9NRnkGXLaKwGqT39tRrqomuUzlJz7Su5j3uzkhlqTCzrN3vimR0f0dwzRoEyMvZ8MEruQB_QuBuzmfZs6n287RrxTL5rIg6uDiDkq4OvBNbiZkXkZbb3NPO2o-XHsbI7TleO1088zOwJWm-UnVoJOZsnwO9E-zAT-2_-XAxy7GkYIXA4QvOuJNcjAYEHDxUUIsxKNJwoaUiOkkJIzgH8G0AKhtpwc29L0WYV_LKQFJUzJz0j2pxXajgzYvhNH8h81wrUc4C9')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-background-dark via-background-dark/60 to-transparent"></div>
+<div class="absolute inset-0 p-8 md:p-16 flex flex-col justify-center gap-5 max-w-2xl">
+<div class="flex items-center gap-2 bg-primary text-white px-3 py-1 rounded-lg w-fit text-[10px] font-bold uppercase tracking-[0.2em]">
+<span class="material-symbols-outlined text-xs fill-1">stars</span> Admin Pick
+                </div>
+<h1 class="text-5xl md:text-7xl font-black text-white leading-tight tracking-tighter">Beyond the <br/><span class="text-primary">Neural</span> Network</h1>
+<p class="text-lg text-slate-300 max-w-lg">Explore the ethics and potential of decentralized AI systems in our latest masterclass breakdown.</p>
+<div class="flex items-center gap-4 mt-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 transition-all active:scale-95 shadow-xl shadow-primary/40">
+<span class="material-symbols-outlined fill-1">play_arrow</span> Watch Now
+                    </button>
+<button class="bg-white/5 hover:bg-white/10 backdrop-blur-md text-white px-8 py-4 rounded-xl font-bold border border-white/20 transition-all">
+                        Unlock for $14.99
+                    </button>
+</div>
+</div>
+<!-- Pagination dots indicator -->
+<div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2">
+<div class="w-8 h-1.5 bg-primary rounded-full"></div>
+<div class="w-2 h-1.5 bg-white/30 rounded-full"></div>
+<div class="w-2 h-1.5 bg-white/30 rounded-full"></div>
+</div>
+</section>
+<!-- 2. Continue Watching (Personalized) -->
+<section class="flex flex-col gap-5">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">play_pause</span>
+<h3 class="text-xl font-bold">Continue Watching</h3>
+</div>
+<span class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Welcome back, Alex</span>
+</div>
+<div class="flex gap-6 overflow-x-auto no-scrollbar pb-2 -mx-2 px-2">
+<!-- Progress Video 1 -->
+<div class="flex-shrink-0 w-72 group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvpOMSVrYtDe-mX4wpJj_g_qF_SHKisaI7gMWxqJI1CDfI2AfimH55aOhG5Zdi7UX-qgbb7KtxnW0FDdCsTj2ZzCTJSwbIIgTIJOYuXZeos6CxQJI9ZhrYySDWYc1W468fleHhto7_YmuOnlvDV-Vzidn63SK_-5ThYKH2RWHHYXmqa6dwPsBLDCsMr9PRSyC7J3f1KwyGGLtgxcBsSfF2gHgB7PWArRpfCTfjYCXnmH_JcfUvKkofnMsHefaDwn9ThH4blafcBNId')"></div>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-4xl">play_circle</span>
+</div>
+<!-- Progress Bar Container -->
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+<div class="h-full w-[75%] progress-gradient"></div>
+</div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-0.5 rounded text-[10px] font-bold">12:15 left</div>
+</div>
+<h4 class="font-bold text-sm line-clamp-1 group-hover:text-primary transition-colors">Intro to Web3 with Rust</h4>
+<p class="text-[11px] text-slate-400 mt-1">Tech • Module 04</p>
+</div>
+<!-- Progress Video 2 -->
+<div class="flex-shrink-0 w-72 group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4BMUpnAWmYz70N-LezQ6oe-Mz6cKaYBQ6pOue3yxNFwkkunYMEQ8KSA3Yvh0aKnKhjr3KmENAACVSeo2GXLwutRFKfualTh96MUKitKwf00acUkqlMcP3f1e-TEZmlA4uTGIr00zTBi6GLDJ1NEk5W-Q_yV9DIalbvwewRCN19BMpDkg3o3ZsG0GER-18gwyoBPXOOJoLth3awx8nSoUMdxbkrsCRlUxzOUkE3ig8MIOqsGnnmSabvL1fciFUaHeSXb9yqZnGHCrS')"></div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+<div class="h-full w-[40%] progress-gradient"></div>
+</div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-0.5 rounded text-[10px] font-bold">32:40 left</div>
+</div>
+<h4 class="font-bold text-sm line-clamp-1 group-hover:text-primary transition-colors">Modern French Cuisine</h4>
+<p class="text-[11px] text-slate-400 mt-1">Lifestyle • Episode 2</p>
+</div>
+<!-- Progress Video 3 -->
+<div class="flex-shrink-0 w-72 group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKg2GIC-BX4oT0xy4cOy-zq84vhrcCGbsXrIFqUtCFmW3Cnoi3vxV6BYGrfKgqzuBYlOhBvJwX-pZHv0RmxebM0Puk17OadIvtQ-kBMIP5MBc-G6oPlhKMqa15frUWxGf7f2_PaX-mWAvzcYmyYqFEmAg5U8W1ko0rtT960GVOI2t2GmOnUahuLas6gy1Ie5Db8EbmkjU9wytZwJwta0TddvBOTkHrOWQOU_8K1Rxjo-J4QdwRcDETzlfteTogLOI8wTYR7Pe7Wbs-')"></div>
+<div class="absolute bottom-0 left-0 right-0 h-1 bg-white/20">
+<div class="h-full w-[90%] progress-gradient"></div>
+</div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-0.5 rounded text-[10px] font-bold">01:12 left</div>
+</div>
+<h4 class="font-bold text-sm line-clamp-1 group-hover:text-primary transition-colors">Alpine Descent: Drone Masters</h4>
+<p class="text-[11px] text-slate-400 mt-1">Action • Sports</p>
+</div>
+</div>
+</section>
+<!-- 3. Trending Now (By View Count) -->
+<section class="flex flex-col gap-5">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+<h3 class="text-xl font-bold">Trending Now</h3>
+</div>
+<a class="text-xs font-bold text-primary hover:text-primary/80 transition-colors uppercase tracking-widest" href="#">See all trends</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Trending Video 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-4 shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2BbPyChoi6K11C6fFBqQFxsA6Mv20ekCTL17DvSmFpQD1mvWI88hOuvL-bSvpA9hY97uNj-v4HdOyPAfXxLeLXvxh2O00mTHFgUU7UXAeh4myEki-uLWWE5ChoOibdMtUU0ODpOolI1VNx8TWLIeqATHzvc69AQAd1IyUJxjVkwC30BmI32RXwEtY3pbYz39An1970D1WHKY-9vqDtw6iQLTWeYicjT6n5Hxm__8zFYS8_2aMdA0bkihijvZk5ZSsJjolHVK7Dk4H')"></div>
+<div class="absolute top-4 right-4 bg-primary/90 backdrop-blur-md text-white px-2 py-1 rounded-lg text-xs font-black italic">TOP 1</div>
+<div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white px-2.5 py-1 rounded-lg text-xs font-bold">12:45</div>
+</div>
+<div class="flex gap-4 px-1">
+<div class="size-12 rounded-full border-2 border-primary/20 p-0.5 flex-shrink-0">
+<img alt="Creator" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTUjdkZ_rGjPYBHKJSPCojGassD_KmSRw9wrC-Sk8TclE0I-bRdbiQTlB-CYMf_HxzdfVaoA7owRh4g1HKxThDRdHxe_87ssCSl0nhc28JJDgjzzyVtom_N6evznHYzm2O-DAWeHy6dooT_dxvc0TGNDRECJZ5KdVTDvQo1CJLkhC2SBuaiyKYvW_0gpOb4dI_P0-fzncYmNrY6v-IarBLU7dH3fbVdZ0Rg7YKul4ITB0s-tpByLfgTeqaMuKsBhagWE4_mzLm2XfL"/>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="font-bold text-white group-hover:text-primary transition-colors leading-tight">Cyberpunk 2077: Phantom Liberty Visual Breakdown</h4>
+<div class="flex items-center gap-2">
+<p class="text-[11px] text-slate-400">Visual Effects Pro</p>
+<span class="material-symbols-outlined text-[14px] text-primary fill-1">verified</span>
+</div>
+<div class="flex items-center gap-3 mt-1">
+<p class="text-xs font-black text-white">1.2M views</p>
+<span class="size-1 bg-slate-700 rounded-full"></span>
+<p class="text-xs text-slate-500">2 days ago</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Trending Video 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-4 shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAshUFjtGJRDLzPdVZ57Oh9_j-N5SX5zUE1MtqqA7ZEFJKp1rzF07dGJiF2iqKrOmRPJuM-S0VzQ55mqY_F47rzbLFSIvzK9sJ0MDMVc_WPIgKEXGFABXKycLm2OcZRZInptlJObXY3asMjXhODuZFRBdjHGDDxPguByu5zFpQ6CqaZDd_nBYc6hpxtR55-8zNsnOG6IxAv9KN7CidSzQ1n1ylBCnpS5XQUyyHUYtYt2ci8XkIJXgIEkIE9pzxE-xIeWNDGh_zq9Tnl')"></div>
+<div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white px-2.5 py-1 rounded-lg text-xs font-bold">24:10</div>
+</div>
+<div class="flex gap-4 px-1">
+<div class="size-12 rounded-full border-2 border-primary/20 p-0.5 flex-shrink-0">
+<img alt="Creator" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9fwMPdOqGlUQBpR6h63gHdyi8udk9Yt3WwRtjpXrXMhe1LLnsbjECkfcRL0bGSVRHng3m9qR4qzDmy90zoVGFaAtjt9k6jZEXe7HVT23pyf8vfHgWxvAMGbWxHaN8Ml7r2S2isP7tPMEUiHiwos7mM_eCRqz98-96vU-jYtGgZMinWaerw54sKK29Hw5WVsegog9mL_u5CHjUTRL1PwDvJVgg-lBivWfl-3VP4GyctYRbhS6CUykkHVWP7MhjnlX9917BdPdNU3Hk"/>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="font-bold text-white group-hover:text-primary transition-colors leading-tight">Beyond the Moon: Mars Mission 2025 Deep Dive</h4>
+<p class="text-[11px] text-slate-400">Astro Explorer</p>
+<div class="flex items-center gap-3 mt-1">
+<p class="text-xs font-black text-white">850K views</p>
+<span class="size-1 bg-slate-700 rounded-full"></span>
+<p class="text-xs text-slate-500">1 week ago</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Trending Video 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-4 shadow-lg">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-700" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAryK5DFm7IydAM-ppAVmXrW0TpOEeU6d2zpDLAcr2hwJZJeOU9Az4vrhkk1gn5IzsKwfCNQimH5k9fzHJISzO1Vm9wlUNfdedr0v2D3Jpacs3MVcqLi-53yFbdJbz-tRfkLkKe7k-6VO_VlEUYAp5SVaOcIHPw5URPOhuXWtQyBiS3w1mKrzBbpINbWNO1o-jOljGEBybhePgdmyPCe-G5BOHq22_AK2bsxK9gObAKjlK3qyB0e_jQvebRnjZAfbkqlIMC281FwxQN')"></div>
+<div class="absolute bottom-4 left-4 bg-black/60 backdrop-blur-md text-white px-2.5 py-1 rounded-lg text-xs font-bold">18:05</div>
+</div>
+<div class="flex gap-4 px-1">
+<div class="size-12 rounded-full border-2 border-primary/20 p-0.5 flex-shrink-0">
+<img alt="Creator" class="w-full h-full object-cover rounded-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2_BjeDXMfSETcsywoXkhzF012hw55L_mdyg-S4R-K6J6JKViFxnW3jtesVAPKRbd-h5ro47rqPf00Lg4syQBJn5ah0T55bxP6n9q3_iT3lxFhMtVJT6OKIO1Eg3e7t-feXtZILrfq3_LdrN--yDnrdbh0N70yiW565vkLnDgIQ7kS80huYKmq-5jW-v2CTWVuRTP7qxcTeC0AGVumcvjiYVh4QAuGsSPcnlYa-OEFSqUOwZDHl_3g-CmfWBc6IHhAgjr3LXBszA83"/>
+</div>
+<div class="flex flex-col gap-1">
+<h4 class="font-bold text-white group-hover:text-primary transition-colors leading-tight">The Jazz History Project: EP 1 Remastered</h4>
+<p class="text-[11px] text-slate-400">Cultural Archives</p>
+<div class="flex items-center gap-3 mt-1">
+<p class="text-xs font-black text-white">420K views</p>
+<span class="size-1 bg-slate-700 rounded-full"></span>
+<p class="text-xs text-slate-500">3 days ago</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Uploads Grid (Mini) -->
+<section class="flex flex-col gap-5 pb-10">
+<div class="flex items-center justify-between px-2 border-t border-slate-800 pt-10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">new_releases</span>
+<h3 class="text-xl font-bold">Just Uploaded</h3>
+</div>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+<!-- Mini Item 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-2">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAckU6wbHlMNakSxgDfKtg0xwEsonRiWGd8DdFVNBSKIS7X24tl5v3L4NKtZ8iHrQ55JPfp7GbWhvWaKUYj2r1ExLiDlZt0QyTArg9_nk918Di_UmtN2a0m2YeEzBVVJ_YrVnWujeju0D2YCGebwN0j3TRveIDUhAxZWG3zwfYrY_ujss-PDhgPiHqkU2Y9kpc87xelyFnHG3jMgGXMgCScVPJmwR4y5AkeetZ9gV2lzpgeqLSCjBVXqtR9hqUU76CEUzNSTtCluPZS')"></div>
+<div class="absolute bottom-2 right-2 bg-primary px-1.5 py-0.5 rounded text-[9px] text-white font-bold">$2.50</div>
+</div>
+<h4 class="font-medium text-xs line-clamp-1 group-hover:text-primary transition-colors">Desk Setup Guide</h4>
+</div>
+<!-- Repeat small items... -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-xl overflow-hidden mb-2">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvpOMSVrYtDe-mX4wpJj_g_qF_SHKisaI7gMWxqJI1CDfI2AfimH55aOhG5Zdi7UX-qgbb7KtxnW0FDdCsTj2ZzCTJSwbIIgTIJOYuXZeos6CxQJI9ZhrYySDWYc1W468fleHhto7_YmuOnlvDV-Vzidn63SK_-5ThYKH2RWHHYXmqa6dwPsBLDCsMr9PRSyC7J3f1KwyGGLtgxcBsSfF2gHgB7PWArRpfCTfjYCXnmH_JcfUvKkofnMsHefaDwn9ThH4blafcBNId')"></div>
+<div class="absolute bottom-2 right-2 bg-primary px-1.5 py-0.5 rounded text-[9px] text-white font-bold">FREE</div>
+</div>
+<h4 class="font-medium text-xs line-clamp-1 group-hover:text-primary transition-colors">Vim Masterclass</h4>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

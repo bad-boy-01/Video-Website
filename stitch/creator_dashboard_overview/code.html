@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Creator Studio - Video Marketplace</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #473b54;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 flex-shrink-0 border-r border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark flex flex-col">
+<div class="p-6 flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-white">movie_filter</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-primary">Creator Studio</h1>
+</div>
+<nav class="flex-1 px-4 space-y-2 overflow-y-auto custom-scrollbar">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-semibold">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors cursor-pointer text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">video_library</span>
+<p class="text-sm font-medium">My Videos</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors cursor-pointer text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">payments</span>
+<p class="text-sm font-medium">Earnings</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors cursor-pointer text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">analytics</span>
+<p class="text-sm font-medium">Analytics</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors cursor-pointer text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">group</span>
+<p class="text-sm font-medium">Community</p>
+</div>
+<div class="pt-4 mt-4 border-t border-slate-200 dark:border-primary/10">
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors cursor-pointer text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">settings</span>
+<p class="text-sm font-medium">Settings</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-slate-100 dark:hover:bg-primary/5 transition-colors cursor-pointer text-slate-600 dark:text-slate-400">
+<span class="material-symbols-outlined">help</span>
+<p class="text-sm font-medium">Support</p>
+</div>
+</div>
+</nav>
+<div class="p-4">
+<div class="bg-primary/10 rounded-xl p-4 border border-primary/20">
+<p class="text-xs font-bold text-primary uppercase tracking-wider mb-2">Pro Plan</p>
+<p class="text-xs text-slate-500 dark:text-slate-400 mb-3">Upgrade for unlimited storage and 4K uploads.</p>
+<button class="w-full bg-primary hover:bg-primary/90 text-white text-xs font-bold py-2 rounded-lg transition-all">
+                        Upgrade Now
+                    </button>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-8 border-b border-slate-200 dark:border-primary/20 bg-white dark:bg-background-dark/50 backdrop-blur-md z-10">
+<div class="flex items-center flex-1 max-w-md">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-primary/5 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-slate-100 placeholder:text-slate-500" placeholder="Search analytics, videos..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 rounded-lg relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"></span>
+</button>
+<button class="p-2 text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined">chat_bubble</span>
+</button>
+<div class="h-8 w-px bg-slate-200 dark:bg-primary/20 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold leading-tight">Alex Rivera</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">Top Creator</p>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary/20 border-2 border-primary/40 overflow-hidden">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="User profile avatar illustration" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCRpTzv2M7Py0VzNsgTOLZUZjR06r9TL_Neg18_RcLR2__QYlShX-9JxUVwTAuzg5DD4qP0MAAOkYJFQxT37es_TdwHFNs7xd1aphX8D4MGoHL8wi9aE3sPlpMfpd1cSGpZHV7qOloqE1pN-T-VeGE-buc0eixUxKd-6Ea1masH_IjQL2vwrHyVjrVhSdzBelEw3yo9tmC7SxUtEI74LVjfmS6zdncid8vC-jOVfZD7IfysoZBJlp4I_baKWHuEBvfgd4byHisLpAMY"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard Content -->
+<div class="flex-1 overflow-y-auto p-8 custom-scrollbar">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Welcome Title -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h2 class="text-3xl font-black tracking-tight">Dashboard Overview</h2>
+<p class="text-slate-500 dark:text-slate-400">Welcome back, Alex. Here's a summary of your performance.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">cloud_upload</span>
+                            Upload New Video
+                        </button>
+</div>
+<!-- Stat Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 p-6 rounded-2xl flex flex-col gap-1">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">monetization_on</span>
+<span class="text-emerald-500 text-xs font-bold flex items-center">+12.5% <span class="material-symbols-outlined text-xs">trending_up</span></span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Earnings (Coins)</p>
+<p class="text-2xl font-bold tracking-tight">12,450 <span class="text-xs font-normal text-slate-400">COINS</span></p>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 p-6 rounded-2xl flex flex-col gap-1">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">visibility</span>
+<span class="text-emerald-500 text-xs font-bold flex items-center">+8.2% <span class="material-symbols-outlined text-xs">trending_up</span></span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Total Views</p>
+<p class="text-2xl font-bold tracking-tight">85.2K</p>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 p-6 rounded-2xl flex flex-col gap-1">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">person_add</span>
+<span class="text-rose-500 text-xs font-bold flex items-center">-2.1% <span class="material-symbols-outlined text-xs">trending_down</span></span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Subscribers</p>
+<p class="text-2xl font-bold tracking-tight">1,240</p>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 p-6 rounded-2xl flex flex-col gap-1">
+<div class="flex justify-between items-start mb-2">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">video_call</span>
+<span class="text-emerald-500 text-xs font-bold flex items-center">+1 <span class="material-symbols-outlined text-xs">trending_up</span></span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium">Videos Uploaded</p>
+<p class="text-2xl font-bold tracking-tight">42</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Earnings Chart -->
+<div class="lg:col-span-2 bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-2xl p-6">
+<div class="flex items-center justify-between mb-8">
+<div>
+<h3 class="text-lg font-bold">Coin Revenue</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400">Last 30 Days Growth</p>
+</div>
+<div class="flex items-center gap-2 text-xs font-bold px-3 py-1 bg-slate-100 dark:bg-primary/10 rounded-full text-slate-600 dark:text-primary">
+<span class="w-2 h-2 rounded-full bg-primary"></span>
+                                    Earnings per day
+                                </div>
+</div>
+<div class="h-[280px] w-full flex flex-col">
+<div class="flex-1 relative">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 300">
+<!-- Gradient Fill -->
+<defs>
+<lineargradient id="chartGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#8c25f4" stop-opacity="0.3"></stop>
+<stop offset="100%" stop-color="#8c25f4" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,250 C100,240 150,180 200,190 S300,100 400,120 S500,200 600,150 S750,50 850,80 S1000,20 1000,20 V300 H0 Z" fill="url(#chartGradient)"></path>
+<!-- Line -->
+<path d="M0,250 C100,240 150,180 200,190 S300,100 400,120 S500,200 600,150 S750,50 850,80 S1000,20 1000,20" fill="none" stroke="#8c25f4" stroke-linecap="round" stroke-width="4"></path>
+<!-- Grid Lines (Simplified) -->
+<line class="text-slate-200 dark:text-primary/10" stroke="currentColor" stroke-width="1" x1="0" x2="1000" y1="50" y2="50"></line>
+<line class="text-slate-200 dark:text-primary/10" stroke="currentColor" stroke-width="1" x1="0" x2="1000" y1="150" y2="150"></line>
+<line class="text-slate-200 dark:text-primary/10" stroke="currentColor" stroke-width="1" x1="0" x2="1000" y1="250" y2="250"></line>
+</svg>
+</div>
+<div class="flex justify-between mt-4 text-[11px] font-bold text-slate-400 uppercase tracking-widest">
+<span>Day 1</span>
+<span>Day 7</span>
+<span>Day 14</span>
+<span>Day 21</span>
+<span>Day 30</span>
+</div>
+</div>
+</div>
+<!-- Sidebar Info / Top Performance -->
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-2xl p-6">
+<h3 class="text-lg font-bold mb-6">Top Performing</h3>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-slate-200 dark:bg-primary/10 overflow-hidden flex-shrink-0">
+<div class="w-full h-full bg-gradient-to-br from-primary to-purple-800" data-alt="Abstract purple gradient pattern"></div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Cyberpunk City Tour 2024</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">12.4K views • 2.1K Coins</p>
+</div>
+<span class="material-symbols-outlined text-primary">arrow_forward_ios</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-slate-200 dark:bg-primary/10 overflow-hidden flex-shrink-0">
+<div class="w-full h-full bg-gradient-to-br from-indigo-600 to-primary" data-alt="Deep blue and purple gradient pattern"></div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Mastering Neumorphism UI</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">8.1K views • 1.5K Coins</p>
+</div>
+<span class="material-symbols-outlined text-primary">arrow_forward_ios</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-lg bg-slate-200 dark:bg-primary/10 overflow-hidden flex-shrink-0">
+<div class="w-full h-full bg-gradient-to-br from-purple-400 to-primary" data-alt="Light purple abstract aesthetic gradient"></div>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-sm font-bold truncate">Lo-fi Chill Coding Session</p>
+<p class="text-xs text-slate-500 dark:text-slate-400">5.9K views • 800 Coins</p>
+</div>
+<span class="material-symbols-outlined text-primary">arrow_forward_ios</span>
+</div>
+</div>
+<button class="w-full mt-8 py-3 rounded-xl border border-primary/30 text-primary text-sm font-bold hover:bg-primary/5 transition-colors">
+                                View Full Analytics
+                            </button>
+</div>
+</div>
+<!-- Latest Uploads Table -->
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-2xl overflow-hidden">
+<div class="p-6 border-b border-slate-200 dark:border-primary/10 flex items-center justify-between">
+<h3 class="text-lg font-bold">Latest Uploads</h3>
+<button class="text-sm text-primary font-bold hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-slate-50 dark:bg-primary/10 text-slate-500 dark:text-slate-400 uppercase text-[10px] font-black tracking-widest">
+<tr>
+<th class="px-6 py-4">Video Title</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4 text-right">Price (Coins)</th>
+<th class="px-6 py-4 text-right">Views</th>
+<th class="px-6 py-4 text-center">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-primary/10">
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-6 rounded bg-slate-200 dark:bg-primary/20" data-alt="Video thumbnail placeholder"></div>
+<span class="text-sm font-semibold">Cinematic Forest Drone Shot</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400 uppercase">Approved</span>
+</td>
+<td class="px-6 py-4 text-right text-sm font-medium">150</td>
+<td class="px-6 py-4 text-right text-sm font-medium">1,245</td>
+<td class="px-6 py-4 text-center">
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">more_horiz</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-6 rounded bg-slate-200 dark:bg-primary/20" data-alt="Video thumbnail placeholder"></div>
+<span class="text-sm font-semibold">Street Photography in Tokyo</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded text-[10px] font-bold bg-amber-100 text-amber-700 dark:bg-amber-500/20 dark:text-amber-400 uppercase">Pending</span>
+</td>
+<td class="px-6 py-4 text-right text-sm font-medium">200</td>
+<td class="px-6 py-4 text-right text-sm font-medium">0</td>
+<td class="px-6 py-4 text-center">
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">more_horiz</span></button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-6 rounded bg-slate-200 dark:bg-primary/20" data-alt="Video thumbnail placeholder"></div>
+<span class="text-sm font-semibold">Cooking Masterclass: Italian Pasta</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 rounded text-[10px] font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-400 uppercase">Approved</span>
+</td>
+<td class="px-6 py-4 text-right text-sm font-medium">350</td>
+<td class="px-6 py-4 text-right text-sm font-medium">4,890</td>
+<td class="px-6 py-4 text-center">
+<button class="text-slate-400 hover:text-primary"><span class="material-symbols-outlined text-sm">more_horiz</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Footer Spacer -->
+<div class="h-12"></div>
+</div>
+</main>
+</div>
+<!-- Floating Action Button (Mobile Only) -->
+<button class="lg:hidden fixed bottom-6 right-6 w-14 h-14 bg-primary text-white rounded-full flex items-center justify-center shadow-2xl shadow-primary/50 z-50">
+<span class="material-symbols-outlined">add</span>
+</button>
+</body></html>

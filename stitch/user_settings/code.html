@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StreamMarket Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header / Navigation -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 lg:px-40 py-4 bg-background-light dark:bg-background-dark">
+<div class="flex items-center gap-4">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">rocket_launch</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">StreamMarket</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4 lg:gap-8 items-center">
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-primary text-sm font-semibold border-b-2 border-primary pb-1" href="#">Profile</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Security</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Billing</a>
+<a class="text-slate-600 dark:text-slate-400 text-sm font-medium hover:text-primary transition-colors" href="#">Notifications</a>
+</nav>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/30" data-alt="User profile avatar close up portrait" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAT8eiMYL9w7aV92OZyAw6_VObAKopkLsS_HPwUixiZNpsIGFGppLibXpcC_jNkFSZ44H3FHq4p3xlQCNDrKBf5QACAJx09KdyybZdLEy6dwgQ5CE8wQVx124QWXMNA1onpn9xu1D8KmVN50ZwRQuKjWdUbiRSMBMi4FdxHvGF6Cg6qzBGxJIihudRgW_GxJPrQLG63v6DK9zetW-D1MSGv4DfBHE51QI6bPaABwkDLo1WjviJYbue3j7bWZBTQNtVkZzQruXBKt7C_");'>
+</div>
+</div>
+</header>
+<main class="flex-1 px-6 lg:px-40 py-10 max-w-[1200px] mx-auto w-full">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Sidebar Info -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<div class="flex flex-col items-center p-8 bg-primary/5 rounded-xl border border-primary/10">
+<div class="relative group">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-32 border-4 border-primary shadow-xl" data-alt="Large user profile avatar for settings" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDg2edoKWg0EkW0IZ8dreI96RT1G7xwptmDTMAHYQQeIkCb3_A9oicFJ7LjUrTxiQfMfvpdyy1qoTl9QsA9Kc0BzZX8WzTrElHqVXQrYGMHVTtoeqUVnhqW11z6AdbAkgpT8nozm3Y_xahiQUWJao983yjLG0lfU-ybHKFjoeyUg4aUepukWETFqnmm_mT-nIG3hAxhKJ7sQaasz_7NFLvDlZ_405ddawuYRWDJlMlALwn_kg61MUUrJz-6H1Dmccap-wkpKP6Lt-kb");'>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary text-white p-2 rounded-full shadow-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</button>
+</div>
+<div class="mt-4 text-center">
+<h3 class="text-2xl font-bold">Alex Rivers</h3>
+<p class="text-slate-500 dark:text-slate-400">Streamer &amp; Collector</p>
+<div class="mt-4 flex gap-2 justify-center">
+<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full uppercase">Pro Member</span>
+<span class="px-3 py-1 bg-green-500/20 text-green-500 text-xs font-bold rounded-full uppercase">Verified</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<p class="text-sm font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest px-2">Account Stats</p>
+<div class="p-4 bg-slate-100 dark:bg-slate-800/50 rounded-lg flex justify-between items-center">
+<span class="text-sm">Total Coin Purchases</span>
+<span class="font-bold text-primary">12,450 🪙</span>
+</div>
+<div class="p-4 bg-slate-100 dark:bg-slate-800/50 rounded-lg flex justify-between items-center">
+<span class="text-sm">Active Stream Subscriptions</span>
+<span class="font-bold text-primary">8</span>
+</div>
+</div>
+</div>
+<!-- Main Settings Content -->
+<div class="lg:col-span-8 space-y-12">
+<!-- Profile Section -->
+<section>
+<h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">person</span> Profile Information
+                        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-slate-600 dark:text-slate-400">Display Name</label>
+<input class="w-full rounded-lg bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100 p-4" type="text" value="Alex Rivers"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-sm font-medium text-slate-600 dark:text-slate-400">Email Address</label>
+<input class="w-full rounded-lg bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100 p-4" type="email" value="alex.rivers@example.com"/>
+</div>
+<div class="flex flex-col gap-2 md:col-span-2">
+<label class="text-sm font-medium text-slate-600 dark:text-slate-400">Bio</label>
+<textarea class="w-full rounded-lg bg-slate-100 dark:bg-slate-800 border-none focus:ring-2 focus:ring-primary text-slate-900 dark:text-slate-100 p-4" rows="3">Passionate about digital collectibles and supporting new talent in the streaming space.</textarea>
+</div>
+</div>
+<div class="mt-6">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-bold transition-all shadow-lg shadow-primary/20">Save Changes</button>
+</div>
+</section>
+<hr class="border-primary/10"/>
+<!-- Security Section -->
+<section>
+<h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">security</span> Security
+                        </h2>
+<div class="space-y-6">
+<div class="flex items-center justify-between p-4 bg-slate-100 dark:bg-slate-800 rounded-lg">
+<div class="flex items-center gap-4">
+<div class="size-10 bg-primary/20 rounded-full flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">authenticator</span>
+</div>
+<div>
+<p class="font-bold">Two-Factor Authentication</p>
+<p class="text-sm text-slate-500">Protect your account with an extra layer of security.</p>
+</div>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<button class="flex items-center justify-center gap-2 border border-primary/50 text-primary p-3 rounded-lg hover:bg-primary/5 transition-all">
+<span class="material-symbols-outlined">key</span> Change Password
+                                </button>
+<button class="flex items-center justify-center gap-2 border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-400 p-3 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 transition-all">
+<span class="material-symbols-outlined">devices</span> Manage Devices
+                                </button>
+</div>
+</div>
+</section>
+<hr class="border-primary/10"/>
+<!-- Billing Section -->
+<section>
+<h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">payments</span> Billing &amp; Payments
+                        </h2>
+<div class="space-y-4">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Saved Payment Methods</p>
+<div class="p-4 border border-primary bg-primary/5 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-12 bg-white rounded-lg flex items-center justify-center text-slate-900 border border-slate-200">
+<span class="material-symbols-outlined">credit_card</span>
+</div>
+<div>
+<p class="font-bold italic">VISA <span class="not-italic font-normal">•••• 4242</span></p>
+<p class="text-xs text-slate-500">Expires 12/26 • Default</p>
+</div>
+</div>
+<button class="text-slate-500 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="p-4 border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 rounded-xl flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="size-12 bg-white rounded-lg flex items-center justify-center text-slate-900 border border-slate-200">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div>
+<p class="font-bold">PayPal</p>
+<p class="text-xs text-slate-500">alex.rivers@example.com</p>
+</div>
+</div>
+<button class="text-slate-500 hover:text-red-500 transition-colors">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<button class="w-full flex items-center justify-center gap-2 border-2 border-dashed border-primary/30 text-primary p-4 rounded-xl hover:bg-primary/5 transition-all font-medium">
+<span class="material-symbols-outlined">add_circle</span> Add New Payment Method
+                            </button>
+</div>
+</section>
+<hr class="border-primary/10"/>
+<!-- Notifications Section -->
+<section>
+<h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">notifications_active</span> Notifications
+                        </h2>
+<div class="space-y-4 bg-slate-100 dark:bg-slate-800 rounded-xl p-6">
+<div class="flex items-center justify-between">
+<div>
+<p class="font-medium">Stream Alerts</p>
+<p class="text-xs text-slate-500">Notify me when my favorite streamers go live</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+<hr class="border-primary/10"/>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-medium">Marketplace Activity</p>
+<p class="text-xs text-slate-500">Price changes and bids on items you watch</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+<hr class="border-primary/10"/>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-medium">Email Newsletter</p>
+<p class="text-xs text-slate-500">Weekly digest of platform news and drops</p>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-300 dark:bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</div>
+</div>
+</div>
+</section>
+<div class="pt-8 flex flex-col items-center gap-4">
+<button class="text-red-500 hover:bg-red-500/10 px-6 py-2 rounded-lg text-sm font-bold transition-all border border-transparent hover:border-red-500/30">
+                            Delete Account
+                        </button>
+<p class="text-xs text-slate-500 text-center">Your data is secured by StreamMarket encryption protocols. <br/>Last login from London, UK - 2 hours ago.</p>
+</div>
+</div>
+</div>
+</main>
+<footer class="border-t border-primary/10 mt-20 py-8 px-6 lg:px-40 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
+<p>© 2024 StreamMarket Platform. All rights reserved.</p>
+<div class="flex gap-6">
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Help Center</a>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

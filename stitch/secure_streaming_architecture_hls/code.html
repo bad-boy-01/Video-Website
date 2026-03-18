@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Secure HLS Streaming Architecture</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              navy: '#0f172a',
+              purple: '#7c3aed',
+              lavender: '#a78bfa',
+              dark: '#1e1b4b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-animations">
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+    .animate-glow {
+      animation: pulse-glow 3s infinite ease-in-out;
+    }
+    .connector-line {
+      stroke-dasharray: 8;
+      animation: dash 20s linear infinite;
+    }
+    @keyframes dash {
+      to { stroke-dashoffset: -1000; }
+    }
+  </style>
+</head>
+<body class="bg-brand-navy text-white font-sans min-h-screen flex items-center justify-center p-8">
+<!-- BEGIN: DiagramContainer -->
+<main class="max-w-6xl w-full bg-brand-dark/50 border border-brand-purple/30 rounded-3xl p-12 shadow-2xl backdrop-blur-sm" data-purpose="architecture-diagram">
+<!-- BEGIN: Header -->
+<header class="text-center mb-16">
+<h1 class="text-4xl font-extrabold tracking-tight text-brand-lavender mb-2">Secure HLS Streaming Flow</h1>
+<p class="text-slate-400 uppercase tracking-widest text-sm font-semibold">Technical Architectural Visualization</p>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: ArchitectureGrid -->
+<div class="relative flex flex-col md:flex-row items-center justify-between gap-12">
+<!-- Flow Connecting SVG (Desktop) -->
+<svg class="absolute top-1/2 left-0 w-full h-2 hidden md:block -translate-y-1/2 -z-10" pointer-events="none">
+<line class="connector-line" stroke="url(#lineGradient)" stroke-width="4" x1="10%" x2="90%" y1="50%" y2="50%"></line>
+<defs>
+<lineargradient id="lineGradient" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#7c3aed"></stop>
+<stop offset="100%" stop-color="#a78bfa"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Component 1: Storage -->
+<section class="flex flex-col items-center w-full md:w-1/3" data-purpose="storage-node">
+<div class="w-24 h-24 bg-brand-purple/20 rounded-2xl border-2 border-brand-purple flex items-center justify-center mb-6 shadow-[0_0_30px_-5px_rgba(124,58,237,0.5)]">
+<svg class="w-12 h-12 text-brand-lavender" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold mb-2">Secure S3/Cloudflare</h3>
+<p class="text-xs text-brand-lavender font-mono mb-4 text-center">Video Fragments (.ts)</p>
+<!-- Security Label -->
+<div class="bg-red-500/10 border border-red-500/50 text-red-400 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+          No Direct MP4 Access
+        </div>
+</section>
+<!-- Component 2: Logic Layer -->
+<section class="flex flex-col items-center w-full md:w-1/3" data-purpose="edge-function-node">
+<div class="w-32 h-32 bg-brand-purple/40 rounded-full border-4 border-brand-lavender flex items-center justify-center mb-6 animate-glow shadow-[0_0_50px_-10px_rgba(167,139,250,0.6)]">
+<svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold mb-2">Signed URL Generator</h3>
+<p class="text-xs text-brand-lavender font-mono mb-4 text-center">Edge Function / Middleware</p>
+<!-- Security Label -->
+<div class="bg-brand-purple border border-brand-lavender text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider mb-2">
+          Anti-Hotlinking Tokens
+        </div>
+<div class="bg-green-500/10 border border-green-500/50 text-green-400 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-wider">
+          AES-128 Encryption
+        </div>
+</section>
+<!-- Component 3: User End -->
+<section class="flex flex-col items-center w-full md:w-1/3" data-purpose="player-node">
+<div class="w-24 h-24 bg-brand-purple/20 rounded-2xl border-2 border-brand-purple flex items-center justify-center mb-6 shadow-[0_0_30px_-5px_rgba(124,58,237,0.5)]">
+<svg class="w-12 h-12 text-brand-lavender" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+</svg>
+</div>
+<h3 class="text-xl font-bold mb-2">HLS Video Player</h3>
+<p class="text-xs text-brand-lavender font-mono mb-4 text-center">Master Playlist (.m3u8)</p>
+<!-- Status Indicator -->
+<div class="flex items-center gap-2 text-[10px] text-slate-400 font-bold uppercase">
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+          Secure Stream Active
+        </div>
+</section>
+</div>
+<!-- END: ArchitectureGrid -->
+<!-- BEGIN: FooterDetails -->
+<footer class="mt-16 pt-8 border-t border-brand-purple/20 flex flex-wrap justify-center gap-8">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-brand-purple rounded-sm"></div>
+<span class="text-xs text-slate-400">Request Validation</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-brand-lavender rounded-sm"></div>
+<span class="text-xs text-slate-400">Dynamic Key Exchange</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-green-500 rounded-sm"></div>
+<span class="text-xs text-slate-400">Client-Side Decryption</span>
+</div>
+</footer>
+<!-- END: FooterDetails -->
+</main>
+<!-- END: DiagramContainer -->
+</body></html>

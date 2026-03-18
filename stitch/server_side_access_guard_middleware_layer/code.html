@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Server-Side Access Guard Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-scrollbars">
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+  </style>
+<style data-purpose="glow-effects">
+    .glow-green { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); }
+    .glow-red { box-shadow: 0 0 15px rgba(239, 68, 68, 0.2); }
+    .node-connector { border-left: 2px dashed #475569; }
+  </style>
+</head>
+<body class="bg-[#0f172a] text-slate-200 font-sans min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="border-b border-slate-800 bg-[#0f172a]/80 backdrop-blur-md sticky top-0 z-50 p-4">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-blue-600 rounded-lg">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04a11.352 11.352 0 00-1.231 4.742c0 5.105 3.033 9.508 7.39 11.411a11.975 11.975 0 001.259.488c.11.037.222.072.335.105a11.975 11.975 0 001.259-.488c4.357-1.903 7.39-6.306 7.39-11.411a11.352 11.352 0 00-1.231-4.742z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight">Access Guard <span class="text-blue-500">Middleware Layer</span></h1>
+<p class="text-xs text-slate-400 uppercase tracking-widest">Architectural Visualization &amp; Real-time Monitor</p>
+</div>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+<span class="text-xs font-mono">NODE_SERVER: ACTIVE</span>
+</div>
+<div class="flex items-center gap-2 bg-slate-900 px-3 py-1 rounded-full border border-slate-800">
+<span class="w-2 h-2 rounded-full bg-blue-500"></span>
+<span class="text-xs font-mono">REGION: us-central1</span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="max-w-7xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- BEGIN: ArchitecturalDiagram -->
+<section class="lg:col-span-8 space-y-6" data-purpose="logic-flow-visualization">
+<div class="bg-slate-900/50 border border-slate-800 rounded-xl p-6">
+<h2 class="text-lg font-semibold mb-6 flex items-center gap-2">
+<svg class="h-5 w-5 text-blue-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM5.884 6.68a1 1 0 10-1.415-1.414l.707-.707a1 1 0 001.414 1.414l-.707.707zm1.414 8.486a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM10 8a2 2 0 100 4 2 2 0 000-4zM3 10a1 1 0 112 0 1 1 0 01-2 0zM19 10a1 1 0 11-2 0 1 1 0 012 0zM14.116 6.68l.707-.707a1 1 0 10-1.414-1.414l-.707.707a1 1 0 101.414 1.414zm-1.414 8.486l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zM9 17v1a1 1 0 102 0v-1a1 1 0 10-2 0z"></path>
+</svg>
+          Server-Side Processing Sequence
+        </h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+<!-- Step 1: Interception -->
+<div class="relative p-5 bg-slate-800/50 border border-slate-700 rounded-lg glow-green border-l-4 border-l-green-500">
+<span class="absolute -top-3 left-4 bg-green-600 text-[10px] font-bold px-2 py-0.5 rounded">01. INTERCEPTION</span>
+<div class="flex items-start gap-4">
+<div class="bg-green-500/10 p-2 rounded text-green-400">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-medium text-slate-100">Incoming Stream Request</h3>
+<p class="text-xs text-slate-400 mt-1">Traps all GET requests for .m3u8 and .ts segments via Express middleware.</p>
+</div>
+</div>
+</div>
+<!-- Step 2: Authorization -->
+<div class="relative p-5 bg-slate-800/50 border border-slate-700 rounded-lg border-l-4 border-l-blue-500">
+<span class="absolute -top-3 left-4 bg-blue-600 text-[10px] font-bold px-2 py-0.5 rounded">02. AUTH ENGINE</span>
+<div class="flex items-start gap-4">
+<div class="bg-blue-500/10 p-2 rounded text-blue-400">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-1.17-15.657a16.5 16.5 0 00-1.823 6.475C1.261 12.425 2 12.91 2 13V5a2 2 0 012-2h10a2 2 0 012 2v3.5m-7 8a4 4 0 01-.813-3.146" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-medium text-slate-100">Firebase Auth Check</h3>
+<p class="text-xs text-slate-400 mt-1">Validates Bearer Token and extracts Custom Claims from the JWT payload.</p>
+</div>
+</div>
+</div>
+<!-- Step 3: Entitlement -->
+<div class="relative p-5 bg-slate-800/50 border border-slate-700 rounded-lg border-l-4 border-l-indigo-500">
+<span class="absolute -top-3 left-4 bg-indigo-600 text-[10px] font-bold px-2 py-0.5 rounded">03. ENTITLEMENT</span>
+<div class="flex items-start gap-4">
+<div class="bg-indigo-500/10 p-2 rounded text-indigo-400">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-medium text-slate-100">Firestore Query</h3>
+<p class="text-xs text-slate-400 mt-1">Verifies <code>purchased_videos</code> array or <code>subscription_status</code>.</p>
+</div>
+</div>
+</div>
+<!-- Step 4: Decision -->
+<div class="relative p-5 bg-slate-900 border border-slate-700 rounded-lg border-l-4 border-l-amber-500 glow-red">
+<span class="absolute -top-3 left-4 bg-amber-600 text-[10px] font-bold px-2 py-0.5 rounded">04. DECISION LOGIC</span>
+<div class="flex items-start gap-4">
+<div class="bg-amber-500/10 p-2 rounded text-amber-400">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-medium text-slate-100">Access Resolution</h3>
+<div class="flex gap-2 mt-2">
+<span class="text-[10px] px-2 py-0.5 bg-green-900/40 text-green-400 border border-green-800 rounded">TRUE: Signed URL</span>
+<span class="text-[10px] px-2 py-0.5 bg-red-900/40 text-red-400 border border-red-800 rounded">FALSE: 403 Forbidden</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Secure Handshake Representation -->
+<div class="mt-10 border-t border-slate-800 pt-6">
+<div class="flex items-center justify-between p-4 bg-slate-950 rounded-lg border border-slate-800">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-slate-800 rounded">
+<span class="text-xs font-mono text-blue-400">App Server</span>
+</div>
+<div class="flex-grow border-t-2 border-dotted border-blue-500/50 relative px-10">
+<span class="absolute top-[-10px] left-1/2 -translate-x-1/2 bg-slate-950 text-[10px] text-blue-400 px-2 font-mono uppercase tracking-tighter">Secure Handshake (V4 Signing)</span>
+</div>
+<div class="p-2 bg-slate-800 rounded">
+<span class="text-xs font-mono text-blue-400">Cloud Storage</span>
+</div>
+</div>
+<div class="hidden md:block">
+<svg class="h-5 w-5 text-green-500" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" fill-rule="evenodd"></path>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- BEGIN: LogsSection -->
+<div class="bg-slate-900/50 border border-slate-800 rounded-xl p-4 overflow-hidden">
+<div class="flex justify-between items-center mb-4">
+<h3 class="text-xs font-bold uppercase tracking-widest text-slate-500">Live Traffic Logs</h3>
+<div class="flex gap-2">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+</div>
+</div>
+<div class="font-mono text-[11px] space-y-2 max-h-48 overflow-y-auto" data-purpose="real-time-logs">
+<div class="flex gap-4 text-green-400">
+<span>[14:22:01]</span>
+<span class="font-bold">AUTH_SUCCESS</span>
+<span>UID: v4r_89... | VideoID: lesson_04 | Status: GRANTED</span>
+</div>
+<div class="flex gap-4 text-red-400">
+<span>[14:22:05]</span>
+<span class="font-bold">ACCESS_DENIED</span>
+<span>UID: an0n_12... | VideoID: lesson_05 | Reason: NO_PURCHASE</span>
+</div>
+<div class="flex gap-4 text-slate-400">
+<span>[14:22:08]</span>
+<span class="font-bold">INTERCEPT</span>
+<span>GET /v1/stream/lesson_04/playlist.m3u8</span>
+</div>
+<div class="flex gap-4 text-green-400">
+<span>[14:22:10]</span>
+<span class="font-bold">TOKEN_REFRESH</span>
+<span>UID: user_k9... | Token: Valid until 15:22</span>
+</div>
+<div class="flex gap-4 text-amber-400">
+<span>[14:22:15]</span>
+<span class="font-bold">WARN</span>
+<span>Expired session attempted access on course_premium_01</span>
+</div>
+</div>
+</div>
+<!-- END: LogsSection -->
+</section>
+<!-- END: ArchitecturalDiagram -->
+<!-- BEGIN: CodeAndStats -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- Code Snippet -->
+<div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+<div class="bg-slate-800 px-4 py-2 flex justify-between items-center border-b border-slate-700">
+<span class="text-[10px] font-mono font-bold text-slate-300">middleware.js</span>
+<div class="flex gap-1.5">
+<div class="w-2 h-2 rounded-full bg-slate-600"></div>
+<div class="w-2 h-2 rounded-full bg-slate-600"></div>
+</div>
+</div>
+<div class="p-4 font-mono text-[11px] leading-relaxed text-blue-300">
+<pre><code><span class="text-pink-400">async function</span> <span class="text-yellow-300">checkAccess</span>(req, res) {
+  <span class="text-slate-500">// 1. Get Auth Context</span>
+  <span class="text-pink-400">const</span> user = req.user;
+  <span class="text-pink-400">const</span> { videoId } = req.params;
+
+  <span class="text-slate-500">// 2. Query Firestore Entitlements</span>
+  <span class="text-pink-400">const</span> hasAccess = <span class="text-pink-400">await</span> db
+    .<span class="text-yellow-300">collection</span>(<span class="text-green-300">'users'</span>)
+    .<span class="text-yellow-300">doc</span>(user.uid)
+    .<span class="text-yellow-300">checkEntitlement</span>(videoId);
+
+  <span class="text-slate-500">// 3. Decision Logic</span>
+  <span class="text-pink-400">if</span> (!hasAccess) {
+    <span class="text-pink-400">return</span> res.<span class="text-yellow-300">status</span>(<span class="text-blue-400">403</span>)
+      .<span class="text-yellow-300">json</span>({ error: <span class="text-green-300">'Forbidden'</span> });
+  }
+
+  <span class="text-slate-500">// 4. Generate Signed Handshake</span>
+  <span class="text-pink-400">const</span> url = <span class="text-pink-400">await</span> storage
+    .<span class="text-yellow-300">getSignedUrl</span>(videoId);
+    
+  res.<span class="text-yellow-300">redirect</span>(url);
+}</code></pre>
+</div>
+</div>
+<!-- Status Metrics -->
+<div class="space-y-4">
+<div class="bg-slate-900/50 border border-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-end mb-2">
+<h4 class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Request Velocity</h4>
+<span class="text-xl font-bold text-green-500">1.2k<span class="text-xs text-slate-600">/min</span></span>
+</div>
+<div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-green-500 h-full w-[65%]"></div>
+</div>
+</div>
+<div class="bg-slate-900/50 border border-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-end mb-2">
+<h4 class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Security Block Rate</h4>
+<span class="text-xl font-bold text-red-500">4.2%</span>
+</div>
+<div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[12%]"></div>
+</div>
+</div>
+<div class="bg-slate-900/50 border border-slate-800 p-4 rounded-xl">
+<div class="flex justify-between items-end mb-2">
+<h4 class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Auth Latency</h4>
+<span class="text-xl font-bold text-blue-500">42ms</span>
+</div>
+<div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-blue-500 h-full w-[28%]"></div>
+</div>
+</div>
+</div>
+<!-- Legend -->
+<div class="bg-blue-900/20 border border-blue-800/30 p-4 rounded-xl">
+<h4 class="text-[10px] font-bold text-blue-400 uppercase mb-3">System Health Keys</h4>
+<ul class="space-y-2">
+<li class="flex items-center gap-2 text-[11px]">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span>Validated Session (HLS Signed)</span>
+</li>
+<li class="flex items-center gap-2 text-[11px]">
+<span class="w-2 h-2 rounded-full bg-red-500"></span>
+<span>Invalid Auth (401/403)</span>
+</li>
+<li class="flex items-center gap-2 text-[11px]">
+<span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+<span>Firestore I/O Cycle</span>
+</li>
+</ul>
+</div>
+</aside>
+<!-- END: CodeAndStats -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="max-w-7xl mx-auto p-6 border-t border-slate-800 mt-12 mb-6">
+<div class="flex flex-col md:flex-row justify-between items-center text-[10px] text-slate-500 gap-4">
+<div class="flex gap-6">
+<span>© 2024 SECURITY_OPS_NODE</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-slate-700"></span> ENCRYPTION: AES-256-GCM</span>
+<span class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-slate-700"></span> MIDDLEWARE_VER: 2.4.1-stable</span>
+</div>
+<div class="flex gap-4 uppercase font-bold tracking-widest">
+<a class="hover:text-blue-400 transition-colors" href="#">Documentation</a>
+<a class="hover:text-blue-400 transition-colors" href="#">Audit Logs</a>
+<a class="hover:text-blue-400 transition-colors" href="#">API Status</a>
+</div>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>

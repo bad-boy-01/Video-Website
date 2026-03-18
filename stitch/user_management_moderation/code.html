@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin User Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: "Space Grotesk", sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar Navigation -->
+<aside class="w-64 border-r border-primary/10 bg-background-light dark:bg-background-dark flex flex-col shrink-0">
+<div class="p-6 border-b border-primary/10">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined text-3xl font-bold">shield_person</span>
+<h2 class="text-xl font-bold tracking-tight">Admin OS</h2>
+</div>
+</div>
+<nav class="flex-1 overflow-y-auto p-4 space-y-2">
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-primary/5 hover:text-primary rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium leading-normal">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 bg-primary/20 text-primary rounded-lg cursor-pointer">
+<span class="material-symbols-outlined font-fill">group</span>
+<span class="text-sm font-bold leading-normal">User Management</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-primary/5 hover:text-primary rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined">gavel</span>
+<span class="text-sm font-medium leading-normal">Moderation</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-primary/5 hover:text-primary rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined">confirmation_number</span>
+<span class="text-sm font-medium leading-normal">Support Tickets</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-primary/5 hover:text-primary rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined">payments</span>
+<span class="text-sm font-medium leading-normal">Financial Logs</span>
+</div>
+<div class="pt-4 border-t border-primary/10">
+<div class="flex items-center gap-3 px-3 py-2 text-slate-500 hover:bg-primary/5 hover:text-primary rounded-lg transition-colors cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium leading-normal">Settings</span>
+</div>
+</div>
+</nav>
+<div class="p-4 border-t border-primary/10">
+<div class="flex items-center gap-3 p-2">
+<div class="h-10 w-10 rounded-full bg-primary/30 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Admin user avatar profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8aVr4Dd1vW3yfLKx2Oxp8EtGANDIzk2BfVLOZDEX_RYMg4rO682LRQp45CjBzewI6Udl2kFAilYw-QCI49Fy5BLRFDZTSpaImrJXTpQ6yAccf7437TeJLZsL8LlCm2getMgJQkXkdN5I5zKZI_qTYGiE6qpy9bDnDD0yDgwL-8MiyO3X5YBX4KforJ8S8hsSOjKbNsiZhR0BMXktmowgdZvLOhY-tVqJoyv5VGojMk3Lm-jTc0WZaNf_LWkEeeSQYjC8xGTO-CEkC"/>
+</div>
+<div class="flex flex-col">
+<span class="text-sm font-bold">Alex Thorne</span>
+<span class="text-xs text-slate-500">Super Admin</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col overflow-hidden">
+<!-- Header -->
+<header class="h-16 border-b border-primary/10 flex items-center justify-between px-8 bg-background-light/50 dark:bg-background-dark/50 backdrop-blur-md">
+<div class="flex items-center gap-4 w-1/3">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xl">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-primary/5 border border-primary/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/40 text-sm" placeholder="Search by username, email or ID..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="px-4 py-2 bg-primary text-white rounded-lg text-sm font-bold hover:bg-primary/90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                        Create User
+                    </button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Page Title -->
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<h1 class="text-3xl font-black text-slate-900 dark:text-slate-100">User Management</h1>
+<p class="text-slate-500 mt-1">Manage and moderate all registered users and their balances</p>
+</div>
+<div class="flex gap-2">
+<button class="flex items-center gap-2 px-4 py-2 border border-primary/20 bg-primary/5 rounded-lg text-sm font-medium hover:bg-primary/10 transition-colors">
+<span class="material-symbols-outlined text-lg">download</span>
+                            Export CSV
+                        </button>
+</div>
+</div>
+<!-- Stats Overview -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="p-4 bg-primary/5 border border-primary/10 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="text-slate-500 text-sm font-medium">Total Users</span>
+<span class="material-symbols-outlined text-primary">groups</span>
+</div>
+<div class="text-2xl font-bold">12,842</div>
+<div class="text-xs text-green-500 mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span> +14% this month
+                        </div>
+</div>
+<div class="p-4 bg-primary/5 border border-primary/10 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="text-slate-500 text-sm font-medium">Active Now</span>
+<span class="material-symbols-outlined text-primary">bolt</span>
+</div>
+<div class="text-2xl font-bold">1,204</div>
+<div class="text-xs text-slate-500 mt-1">Real-time status</div>
+</div>
+<div class="p-4 bg-primary/5 border border-primary/10 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="text-slate-500 text-sm font-medium">Total Balance</span>
+<span class="material-symbols-outlined text-primary">monetization_on</span>
+</div>
+<div class="text-2xl font-bold">4.2M Coins</div>
+<div class="text-xs text-slate-500 mt-1">Across all users</div>
+</div>
+<div class="p-4 bg-primary/5 border border-primary/10 rounded-xl">
+<div class="flex items-center justify-between mb-2">
+<span class="text-slate-500 text-sm font-medium">Suspended</span>
+<span class="material-symbols-outlined text-red-500">block</span>
+</div>
+<div class="text-2xl font-bold text-red-500">42</div>
+<div class="text-xs text-slate-500 mt-1">Pending review</div>
+</div>
+</div>
+<!-- Filters -->
+<div class="flex flex-wrap gap-3 items-center">
+<button class="flex items-center gap-2 px-3 py-1.5 bg-primary text-white rounded-lg text-sm font-medium">
+                        All Users <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-primary/10 bg-primary/5 rounded-lg text-sm font-medium text-slate-500 hover:text-primary transition-colors">
+                        Active <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-primary/10 bg-primary/5 rounded-lg text-sm font-medium text-slate-500 hover:text-primary transition-colors">
+                        Suspended <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 border border-primary/10 bg-primary/5 rounded-lg text-sm font-medium text-slate-500 hover:text-primary transition-colors">
+                        Date Range <span class="material-symbols-outlined text-sm">calendar_month</span>
+</button>
+<div class="ml-auto flex items-center gap-2 text-sm text-slate-500 font-medium">
+                        Showing 1-10 of 12,842 users
+                    </div>
+</div>
+<!-- User Table -->
+<div class="bg-primary/5 border border-primary/10 rounded-xl overflow-hidden">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-primary/10 border-b border-primary/10">
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Username</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Email</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Joined Date</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Coin Balance</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500">Status</th>
+<th class="px-6 py-4 text-xs font-bold uppercase tracking-wider text-slate-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-primary/5">
+<!-- Row 1 -->
+<tr class="hover:bg-primary/10 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">EJ</div>
+<span class="font-bold text-sm">ethan_jones_99</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">ethan.jones@example.com</td>
+<td class="px-6 py-4 text-sm text-slate-400">Oct 24, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm">toll</span>
+<span class="font-bold text-sm">2,450</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-xs font-bold rounded-md">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors" title="Edit Balance">
+<span class="material-symbols-outlined text-xl">payments</span>
+</button>
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors" title="View Support Tickets">
+<span class="material-symbols-outlined text-xl">confirmation_number</span>
+</button>
+<button class="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg transition-colors" title="Suspend Account">
+<span class="material-symbols-outlined text-xl">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-primary/10 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">SM</div>
+<span class="font-bold text-sm">sarah_miller</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">s.miller@testmail.com</td>
+<td class="px-6 py-4 text-sm text-slate-400">Nov 12, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm">toll</span>
+<span class="font-bold text-sm">12,800</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-xs font-bold rounded-md">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-xl">payments</span>
+</button>
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg relative">
+<span class="material-symbols-outlined text-xl">confirmation_number</span>
+<span class="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
+</button>
+<button class="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg">
+<span class="material-symbols-outlined text-xl">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-primary/10 transition-colors group bg-red-500/5">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-lg bg-red-500/20 flex items-center justify-center font-bold text-red-500 text-xs">BT</div>
+<span class="font-bold text-sm">bad_tyler</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">tyler@disposable.net</td>
+<td class="px-6 py-4 text-sm text-slate-400">Dec 01, 2023</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm">toll</span>
+<span class="font-bold text-sm">0</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-red-500/10 text-red-500 text-xs font-bold rounded-md">Suspended</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-xl">payments</span>
+</button>
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-xl">confirmation_number</span>
+</button>
+<button class="p-2 bg-green-500/10 hover:bg-green-500/20 text-green-500 rounded-lg transition-colors" title="Unsuspend Account">
+<span class="material-symbols-outlined text-xl">lock_open</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-primary/10 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">MA</div>
+<span class="font-bold text-sm">mike_admin</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">mike@company.com</td>
+<td class="px-6 py-4 text-sm text-slate-400">Jan 15, 2024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm">toll</span>
+<span class="font-bold text-sm">50,000</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-blue-500/10 text-blue-500 text-xs font-bold rounded-md">Staff</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-xl">payments</span>
+</button>
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-xl">confirmation_number</span>
+</button>
+<button class="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg">
+<span class="material-symbols-outlined text-xl">block</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-primary/10 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="h-8 w-8 rounded-lg bg-primary/20 flex items-center justify-center font-bold text-primary text-xs">LP</div>
+<span class="font-bold text-sm">lisa_pro</span>
+</div>
+</td>
+<td class="px-6 py-4 text-sm text-slate-400">lisa.p@gmail.com</td>
+<td class="px-6 py-4 text-sm text-slate-400">Feb 02, 2024</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary text-sm">toll</span>
+<span class="font-bold text-sm">540</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="px-2 py-1 bg-green-500/10 text-green-500 text-xs font-bold rounded-md">Active</span>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-xl">payments</span>
+</button>
+<button class="p-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg">
+<span class="material-symbols-outlined text-xl">confirmation_number</span>
+</button>
+<button class="p-2 bg-red-500/10 hover:bg-red-500/20 text-red-500 rounded-lg">
+<span class="material-symbols-outlined text-xl">block</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="flex items-center justify-between border-t border-primary/10 pt-6">
+<button class="flex items-center gap-2 px-4 py-2 border border-primary/10 rounded-lg text-sm font-medium hover:bg-primary/5 transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-lg">chevron_left</span> Previous
+                    </button>
+<div class="flex items-center gap-2">
+<button class="h-10 w-10 flex items-center justify-center rounded-lg bg-primary text-white font-bold text-sm">1</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-primary/10 font-medium text-sm">2</button>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-primary/10 font-medium text-sm">3</button>
+<span class="text-slate-500">...</span>
+<button class="h-10 w-10 flex items-center justify-center rounded-lg hover:bg-primary/10 font-medium text-sm">128</button>
+</div>
+<button class="flex items-center gap-2 px-4 py-2 border border-primary/10 rounded-lg text-sm font-medium hover:bg-primary/5 transition-colors">
+                        Next <span class="material-symbols-outlined text-lg">chevron_right</span>
+</button>
+</div>
+</div>
+</main>
+</div>
+</body></html>

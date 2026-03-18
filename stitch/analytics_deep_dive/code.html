@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .chart-gradient-primary {
+            background: linear-gradient(180deg, rgba(140, 37, 244, 0.2) 0%, rgba(140, 37, 244, 0) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between border-b border-primary/10 bg-background-light/50 dark:bg-background-dark/50 backdrop-blur-md px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold tracking-tight">Vortex Analytics</h2>
+</div>
+<div class="hidden md:flex items-center bg-slate-200/50 dark:bg-primary/10 rounded-lg px-3 py-1.5 border border-transparent focus-within:border-primary/50 transition-all">
+<span class="material-symbols-outlined text-slate-500 dark:text-primary/70 text-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-64 placeholder:text-slate-500" placeholder="Search metrics, users, or reports..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 rounded-lg bg-slate-200/50 dark:bg-primary/10 text-slate-700 dark:text-primary hover:bg-primary/20 transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 size-2 bg-red-500 rounded-full border-2 border-background-dark"></span>
+</button>
+<button class="p-2 rounded-lg bg-slate-200/50 dark:bg-primary/10 text-slate-700 dark:text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-primary/10 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-slate-900 dark:text-white">Alex Rivera</p>
+<p class="text-[10px] text-slate-500 dark:text-primary/70 uppercase tracking-widest">Super Admin</p>
+</div>
+<div class="size-10 rounded-full bg-primary/20 border-2 border-primary overflow-hidden">
+<img class="size-full object-cover" data-alt="User profile avatar of the admin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcVOJnjJnaRXFVhtblBqz0RXIvm27dqvkpShX7F4kZQDPm9LO91nT1ScN9Vp-VuAhWsxZIAZck4rszdIL1X3EtDicrSvUOrQmTExeHF49D7qA-85lsHozKUs78ewXMP1o1u7r-cWqEy83Ug6jnAZQ3J8Ap8K7F_w-0j1i0yESfI3de_aywdIAItnvwoUqbMBSFyBLpVennIKbRGagr49rc7LjuRnjfYn2mffn05QSa60mHUCxB5Kf24W7BcmiBFkfGU5RRDqJ1pp50"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- Sidebar -->
+<aside class="w-64 border-r border-primary/10 p-6 hidden lg:flex flex-col gap-8">
+<nav class="flex flex-col gap-2">
+<p class="text-[10px] font-bold text-slate-400 dark:text-primary/40 uppercase tracking-[0.2em] mb-2 px-3">Main Navigation</p>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary text-white font-medium shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span> Dashboard
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-400 dark:hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">monetization_on</span> Revenue
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-400 dark:hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">group</span> User Growth
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-400 dark:hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">movie</span> Content Performance
+                    </a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg hover:bg-primary/10 text-slate-600 dark:text-slate-400 dark:hover:text-primary transition-all" href="#">
+<span class="material-symbols-outlined text-xl">account_balance_wallet</span> Economy Health
+                    </a>
+</nav>
+<div class="mt-auto">
+<div class="bg-primary/5 rounded-xl p-4 border border-primary/10">
+<p class="text-xs font-semibold text-primary mb-1">System Health</p>
+<div class="flex items-center justify-between mb-3">
+<span class="text-[10px] text-slate-500">Operational</span>
+<span class="size-2 bg-green-500 rounded-full"></span>
+</div>
+<div class="w-full bg-primary/20 h-1 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[92%]"></div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 p-6 lg:p-10 overflow-y-auto">
+<div class="max-w-7xl mx-auto space-y-8">
+<!-- Header Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div class="space-y-1">
+<h1 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white">Admin Deep-Dive</h1>
+<p class="text-slate-500 dark:text-slate-400">Real-time ecosystem analytics and coin circulation health.</p>
+</div>
+<!-- Date Range Picker Component -->
+<div class="flex items-center gap-2 bg-slate-200/50 dark:bg-primary/5 border border-primary/10 rounded-xl p-1.5">
+<button class="px-4 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-primary/10 transition-colors">7 Days</button>
+<button class="px-4 py-2 text-sm font-medium rounded-lg bg-primary text-white shadow-sm">30 Days</button>
+<button class="px-4 py-2 text-sm font-medium rounded-lg text-slate-600 dark:text-slate-300 hover:bg-primary/10 transition-colors">90 Days</button>
+<div class="w-[1px] h-6 bg-primary/20 mx-1"></div>
+<button class="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg text-primary bg-primary/10">
+<span class="material-symbols-outlined text-sm">calendar_month</span> Custom
+                            </button>
+</div>
+</div>
+<!-- Key Metrics Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6 relative overflow-hidden group">
+<div class="flex items-center justify-between relative z-10">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Total Revenue</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">payments</span>
+</div>
+<h3 class="text-2xl font-bold mt-4 text-slate-900 dark:text-white">4.2M <span class="text-sm font-normal text-slate-500">Coins</span></h3>
+<div class="flex items-center gap-1 mt-2 text-green-500 text-sm font-semibold">
+<span class="material-symbols-outlined text-sm">trending_up</span> +14.2%
+                            </div>
+<div class="absolute -right-4 -bottom-4 size-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all"></div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6 relative overflow-hidden group">
+<div class="flex items-center justify-between relative z-10">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Daily Active Users</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">person_celebrate</span>
+</div>
+<h3 class="text-2xl font-bold mt-4 text-slate-900 dark:text-white">842.5K</h3>
+<div class="flex items-center gap-1 mt-2 text-green-500 text-sm font-semibold">
+<span class="material-symbols-outlined text-sm">trending_up</span> +5.8%
+                            </div>
+<div class="absolute -right-4 -bottom-4 size-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all"></div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6 relative overflow-hidden group">
+<div class="flex items-center justify-between relative z-10">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">New Creators</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">video_camera_back</span>
+</div>
+<h3 class="text-2xl font-bold mt-4 text-slate-900 dark:text-white">12,402</h3>
+<div class="flex items-center gap-1 mt-2 text-red-400 text-sm font-semibold">
+<span class="material-symbols-outlined text-sm">trending_down</span> -2.4%
+                            </div>
+<div class="absolute -right-4 -bottom-4 size-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all"></div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6 relative overflow-hidden group border-b-primary/40 border-b-2">
+<div class="flex items-center justify-between relative z-10">
+<p class="text-sm font-medium text-slate-500 dark:text-slate-400">Circulation Velocity</p>
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">speed</span>
+</div>
+<h3 class="text-2xl font-bold mt-4 text-slate-900 dark:text-white">1.84x</h3>
+<div class="flex items-center gap-1 mt-2 text-green-500 text-sm font-semibold">
+<span class="material-symbols-outlined text-sm">trending_up</span> +0.12
+                            </div>
+</div>
+</div>
+<!-- Main Charts Grid -->
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-8">
+<!-- Revenue Growth Chart -->
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white">Revenue (Coins)</h4>
+<button class="text-slate-400 hover:text-primary transition-colors"><span class="material-symbols-outlined">more_horiz</span></button>
+</div>
+<div class="h-64 w-full relative">
+<!-- Mock Line Chart -->
+<svg class="w-full h-full" viewbox="0 0 400 150">
+<path class="text-primary" d="M0,130 Q50,110 100,120 T200,80 T300,90 T400,30" fill="none" stroke="currentColor" stroke-width="3"></path>
+<path class="fill-primary opacity-10" d="M0,130 Q50,110 100,120 T200,80 T300,90 T400,30 L400,150 L0,150 Z"></path>
+<!-- Grid lines -->
+<line class="text-slate-800/10" stroke="currentColor" stroke-dasharray="4" x1="0" x2="400" y1="0" y2="0"></line>
+<line class="text-slate-800/10" stroke="currentColor" stroke-dasharray="4" x1="0" x2="400" y1="50" y2="50"></line>
+<line class="text-slate-800/10" stroke="currentColor" stroke-dasharray="4" x1="0" x2="400" y1="100" y2="100"></line>
+<line class="text-slate-800/10" stroke="currentColor" stroke-dasharray="4" x1="0" x2="400" y1="150" y2="150"></line>
+</svg>
+<div class="flex justify-between mt-4 text-[10px] font-medium text-slate-500 uppercase tracking-widest">
+<span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+</div>
+</div>
+</div>
+<!-- User Growth Chart -->
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white">User Growth</h4>
+<div class="flex items-center gap-2">
+<span class="size-2 rounded-full bg-primary"></span>
+<span class="text-[10px] font-bold text-slate-500 uppercase">New Registrations</span>
+</div>
+</div>
+<div class="h-64 w-full relative">
+<!-- Mock Multi-Line Chart -->
+<svg class="w-full h-full" viewbox="0 0 400 150">
+<path class="text-primary" d="M0,140 C50,140 80,60 150,60 C220,60 250,110 320,110 C390,110 400,20 400,20" fill="none" stroke="currentColor" stroke-width="3"></path>
+<circle class="fill-white stroke-primary stroke-2" cx="150" cy="60" r="4"></circle>
+<circle class="fill-white stroke-primary stroke-2" cx="400" cy="20" r="4"></circle>
+<!-- Area highlight -->
+<line class="text-slate-800/20" stroke="currentColor" x1="0" x2="400" y1="150" y2="150"></line>
+</svg>
+<div class="flex justify-between mt-4 text-[10px] font-medium text-slate-500 uppercase tracking-widest">
+<span>Oct 01</span><span>Oct 10</span><span>Oct 20</span><span>Oct 30</span>
+</div>
+</div>
+</div>
+<!-- Popular Video Categories Bar Chart -->
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6 flex flex-col gap-6">
+<div class="flex items-center justify-between">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white">Video Categories</h4>
+<p class="text-xs text-primary font-bold">Top 5 Trending</p>
+</div>
+<div class="space-y-4">
+<!-- Bar 1 -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-slate-700 dark:text-slate-300">Gaming</span>
+<span class="text-primary">85%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-primary/10 h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[85%] rounded-full"></div>
+</div>
+</div>
+<!-- Bar 2 -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-slate-700 dark:text-slate-300">Entertainment</span>
+<span class="text-primary">72%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-primary/10 h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[72%] rounded-full"></div>
+</div>
+</div>
+<!-- Bar 3 -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-slate-700 dark:text-slate-300">Education</span>
+<span class="text-primary">54%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-primary/10 h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[54%] rounded-full opacity-80"></div>
+</div>
+</div>
+<!-- Bar 4 -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-slate-700 dark:text-slate-300">Lifestyle</span>
+<span class="text-primary">48%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-primary/10 h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[48%] rounded-full opacity-60"></div>
+</div>
+</div>
+<!-- Bar 5 -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium">
+<span class="text-slate-700 dark:text-slate-300">Tech &amp; Gadgets</span>
+<span class="text-primary">31%</span>
+</div>
+<div class="w-full bg-slate-200 dark:bg-primary/10 h-3 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[31%] rounded-full opacity-40"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Coin Economy Health Metric -->
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6 flex flex-col gap-6">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white">Coin Economy Health</h4>
+<div class="flex-1 flex flex-col justify-center items-center gap-6">
+<!-- Radial Gauge -->
+<div class="relative size-48 flex items-center justify-center">
+<svg class="size-full -rotate-90" viewbox="0 0 100 100">
+<circle class="text-slate-200 dark:text-primary/10" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary" cx="50" cy="50" fill="none" r="45" stroke="currentColor" stroke-dasharray="210 283" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="text-3xl font-bold text-slate-900 dark:text-white">74%</span>
+<span class="text-[10px] font-bold text-primary uppercase tracking-widest">Efficiency</span>
+</div>
+</div>
+<div class="w-full grid grid-cols-2 gap-4">
+<div class="bg-primary/5 rounded-xl p-4 border border-primary/10">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter mb-1">Total in Circulation</p>
+<p class="text-lg font-bold text-slate-900 dark:text-white">2.1B</p>
+</div>
+<div class="bg-green-500/5 rounded-xl p-4 border border-green-500/10">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-tighter mb-1">Spent (Burn Rate)</p>
+<p class="text-lg font-bold text-green-500">1.5B</p>
+</div>
+</div>
+<p class="text-xs text-center text-slate-500 italic">"Circulation vs Spent ratio is within optimal healthy range (0.7 - 0.85)."</p>
+</div>
+</div>
+</div>
+<!-- Bottom Transactions List -->
+<div class="bg-white dark:bg-primary/5 border border-primary/10 rounded-2xl p-6">
+<div class="flex items-center justify-between mb-6">
+<h4 class="text-lg font-bold text-slate-900 dark:text-white">Large Economy Events</h4>
+<button class="text-primary text-sm font-bold hover:underline">View All Records</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-primary/10">
+<th class="pb-3 px-2">Timestamp</th>
+<th class="pb-3 px-2">Entity</th>
+<th class="pb-3 px-2">Type</th>
+<th class="pb-3 px-2">Amount</th>
+<th class="pb-3 px-2">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-primary/5">
+<tr class="group hover:bg-primary/5 transition-colors">
+<td class="py-4 px-2 text-sm text-slate-500">Oct 24, 14:20:01</td>
+<td class="py-4 px-2 flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-primary/20 overflow-hidden">
+<img class="size-full object-cover" data-alt="Avatar of a creator involved in a transaction" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkjb6WcNSMinPrI2H8hfiCT_qWoFuB1sh5mLKGF4H6MEet2r5yHSPVNJ2BCyDafMG_v5iAGwoHuU15Ri44x6SwlNTtpkiAVhggAgRTKbzCI1gVtIxgGWRqkzHbuGKapdljRN75EGItJ8dYFebs8hPwotTMwONR1sTeXEa7CqCMYryxz5b3shFrQMG4QBI4FJaxcJ6xCQSKFVaaiaGr0UHYCbLNZxjGewlHy38vOY1D6a3O1W7rMgJVF9q9Bs9BkbcGGbU3gdZApNEV"/>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">Neo_Visuals</span>
+</td>
+<td class="py-4 px-2 text-sm">Reward Payout</td>
+<td class="py-4 px-2 text-sm font-bold text-primary">+12,500 <span class="text-[10px] font-normal text-slate-400">VRTX</span></td>
+<td class="py-4 px-2"><span class="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded uppercase">Completed</span></td>
+</tr>
+<tr class="group hover:bg-primary/5 transition-colors">
+<td class="py-4 px-2 text-sm text-slate-500">Oct 24, 13:45:12</td>
+<td class="py-4 px-2 flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-primary/20 overflow-hidden">
+<img class="size-full object-cover" data-alt="Avatar of a user involved in a transaction" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpRam0AK6qv8mtOO8IxiJpG_LyZpJksRhF3n3LHr-bN3duxwVagRczb1RXUy19mnADgZJK3Cj-yo4usxAYAmyPHZh088_WwKYUGvCc65WcF1nCYR2k4LHF63cZ8F_qAxFuA-k_fQLkCbWX0zjGjpv7o8sUkt6pLxH3NWxDAftI1e0ei30BVPZAxhvMSpruMGf4oporzLNcij3VCnvg1tvmHLypW2-9uVu2erH01oKYycWC7mkiYXutvRnHeFk1GVxxK-TgElznlP7I"/>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">Global_Ads_Corp</span>
+</td>
+<td class="py-4 px-2 text-sm">Ad Purchase</td>
+<td class="py-4 px-2 text-sm font-bold text-red-400">-45,000 <span class="text-[10px] font-normal text-slate-400">VRTX</span></td>
+<td class="py-4 px-2"><span class="px-2 py-1 bg-green-500/10 text-green-500 text-[10px] font-bold rounded uppercase">Completed</span></td>
+</tr>
+<tr class="group hover:bg-primary/5 transition-colors">
+<td class="py-4 px-2 text-sm text-slate-500">Oct 24, 12:10:55</td>
+<td class="py-4 px-2 flex items-center gap-3">
+<div class="size-8 rounded-full bg-slate-200 dark:bg-primary/20 overflow-hidden">
+<img class="size-full object-cover" data-alt="Avatar of a digital artist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCvnxys-YDqwzsClNrRAiq4XAzE8kK5sEljBUe1P87MZdQFpMXp8gvhwHPV07G8azDAMEwNC1Z5cKftVZy4ATtRjb3sr-dRZ98MnzJU90VKNCS6R1SZ70R5NlBII5vkWExJ5djMWAQzS16oibUbStk1UVTnv3XKQuX39RZsgOEipHqgYKvdv-Mj-Q-PHW_Hn9ybmaJWpOXCPpSL4wvkRoJf9MvSUQ_ev83jBLG-QCUYKxTxgKqxoT23nnT8oinfKcjx7zuHnANQUNm"/>
+</div>
+<span class="text-sm font-bold text-slate-900 dark:text-white">SarahStudio</span>
+</td>
+<td class="py-4 px-2 text-sm">Asset Minting</td>
+<td class="py-4 px-2 text-sm font-bold text-primary">+8,200 <span class="text-[10px] font-normal text-slate-400">VRTX</span></td>
+<td class="py-4 px-2"><span class="px-2 py-1 bg-yellow-500/10 text-yellow-500 text-[10px] font-bold rounded uppercase">Pending</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</body></html>

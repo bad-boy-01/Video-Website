@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Access Denied - VideoStream</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- BEGIN: Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#6D28D9', // Deep Purple
+              light: '#8B5CF6',
+              dark: '#4C1D95',
+              surface: '#1E1B4B' // Very Dark Purple/Blue for backgrounds
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- END: Tailwind Configuration -->
+<!-- BEGIN: Custom Styles -->
+<style data-purpose="background-effects">.video-blur-bg {
+    background-image: linear-gradient(rgba(30, 27, 75, 0.8), rgba(30, 27, 75, 0.95)), url(https://lh3.googleusercontent.com/aida-public/AB6AXuCUfKsCaen60r-cOsgpROfo09D81mhGEdx7JXg7siUcpfO8LKQt36uRlajnX9C2Y5G3lCfBv44AjzD8dzes0zUMVHeU849R3JbadHiKiUcj9S-BmYSVVXpOvZBud_XSyN0OAn8UNQ23BlXF03bCXmHZU9U78uVEPdzezRp1r3WakKcOT5IIRrIW8JY8n-gUldv3FPZQmO3JjKFdYeBwkDlmNexKC8ACsZb8DmOJRbzSNURewtgTd6p544FQKRhl-A43hh_H56OsCZ4V);
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    transform: scale(1.1);
+    /* Prevent white edges from blur */
+    }
+.content-overlay {
+    background: radial-gradient(circle at center, rgba(109, 40, 217, 0.1) 0%, rgba(30, 27, 75, 0.9) 100%)
+    }
+.glass-morphism {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1)
+    }</style>
+<!-- END: Custom Styles -->
+</head>
+<body class="bg-brand-surface text-white min-h-screen flex items-center justify-center overflow-hidden font-sans">
+<!-- BEGIN: Background Layer -->
+<div class="fixed inset-0 z-0">
+<div class="video-blur-bg absolute inset-0"></div>
+<div class="content-overlay absolute inset-0"></div>
+</div>
+<!-- END: Background Layer -->
+<!-- BEGIN: Main Access Modal -->
+<main class="relative z-10 w-full max-w-lg p-6 md:p-8 text-center" data-purpose="access-control-container">
+<!-- Lock Icon and Header -->
+<div class="mb-8 flex flex-col items-center">
+<div class="w-20 h-20 bg-brand rounded-full flex items-center justify-center mb-6 shadow-lg shadow-brand/30 animate-pulse" data-purpose="status-icon">
+<svg class="h-10 w-10 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-2">Access Required</h1>
+<p class="text-brand-light font-medium text-lg">This video is part of our Premium Collection</p>
+</div>
+<!-- Purchase Options Card -->
+<div class="glass-morphism rounded-3xl p-8 space-y-6 shadow-2xl" data-purpose="purchase-options">
+<!-- Option 1: Unlock with Coins -->
+<button class="w-full group bg-white hover:bg-gray-100 text-brand-dark font-bold py-4 px-6 rounded-2xl transition-all duration-200 flex items-center justify-between transform hover:scale-[1.02]" id="btn-unlock-coins">
+<div class="flex items-center">
+<svg class="h-6 w-6 mr-3 text-yellow-500" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.363.242.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
+<path clip-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.184c-.622.117-1.195.342-1.676.662C6.602 13.234 6 14.009 6 15c0 .99.602 1.765 1.324 2.246A4.535 4.535 0 009 17.908V19a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 17.766 14 16.991 14 16c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 13.092v-1.184c.622-.117 1.195-.342 1.676-.662C13.398 10.766 14 9.991 14 9c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 6.092V5z" fill-rule="evenodd"></path>
+</svg>
+<span class="text-lg">Unlock with 50 Coins</span>
+</div>
+<span class="bg-brand-dark/10 p-1 px-3 rounded-full text-sm">One-time</span>
+</button>
+<div class="flex items-center justify-center space-x-4">
+<div class="h-px bg-white/20 flex-grow"></div>
+<span class="text-white/40 text-sm font-bold uppercase tracking-widest">or</span>
+<div class="h-px bg-white/20 flex-grow"></div>
+</div>
+<!-- Option 2: Subscription -->
+<button class="w-full bg-brand hover:bg-brand-light text-white font-bold py-5 px-6 rounded-2xl transition-all duration-200 shadow-xl shadow-brand/20 flex flex-col items-center transform hover:scale-[1.02]" id="btn-subscribe-pro">
+<span class="text-xl">Get Pro Subscription</span>
+<span class="text-white/80 text-sm font-normal mt-1">Unlock everything for $4.99/week</span>
+</button>
+</div>
+<!-- Refresh/Status Button -->
+<div class="mt-10" data-purpose="refresh-action">
+<button class="inline-flex items-center text-white/60 hover:text-white transition-colors duration-200 text-sm font-medium" id="btn-refresh-status">
+<svg class="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+        Check Access Status
+      </button>
+</div>
+</main>
+<!-- END: Main Access Modal -->
+<!-- BEGIN: Interactive Feedback -->
+<script data-purpose="ui-interactivity">
+    const refreshBtn = document.getElementById('btn-refresh-status');
+    
+    refreshBtn.addEventListener('click', () => {
+      // Add a spinning animation to the icon on click
+      const icon = refreshBtn.querySelector('svg');
+      icon.classList.add('animate-spin');
+      
+      // Simulate checking status
+      setTimeout(() => {
+        icon.classList.remove('animate-spin');
+        console.log('Access status re-validated');
+      }, 1000);
+    });
+
+    // Simple interaction loggers for demo purposes
+    document.getElementById('btn-unlock-coins').addEventListener('click', () => {
+      console.log('Initiating coin purchase flow...');
+    });
+
+    document.getElementById('btn-subscribe-pro').addEventListener('click', () => {
+      console.log('Initiating subscription checkout...');
+    });
+  </script>
+<!-- END: Interactive Feedback -->
+</body></html>

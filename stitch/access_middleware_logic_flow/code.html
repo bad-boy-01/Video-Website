@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Video Access Middleware Flow</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-animations">
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+    .animate-glow {
+      animation: pulse-glow 3s infinite ease-in-out;
+    }
+    .line-drawing {
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 2s forwards ease-out;
+    }
+    @keyframes draw {
+      to { stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a0c] text-slate-200 font-sans min-h-screen flex items-center justify-center p-8">
+<!-- BEGIN: Middleware Dashboard -->
+<main class="w-full max-w-5xl bg-[#121218] border border-slate-800 rounded-xl shadow-2xl overflow-hidden" data-purpose="middleware-container">
+<!-- BEGIN: Header Section -->
+<header class="border-b border-slate-800 p-6 flex justify-between items-center bg-[#16161f]">
+<div class="flex items-center space-x-3">
+<div class="w-3 h-3 rounded-full bg-purple-500 shadow-[0_0_8px_rgba(168,85,247,0.6)]"></div>
+<h1 class="text-xl font-mono font-bold tracking-tight text-slate-100">
+          VideoStream <span class="text-purple-400">Middleware</span> :: checkAccess()
+        </h1>
+</div>
+<div class="flex space-x-2">
+<span class="px-3 py-1 bg-slate-800 rounded text-xs font-mono text-slate-400">v2.4.0-stable</span>
+<span class="px-3 py-1 bg-purple-900/30 text-purple-400 border border-purple-500/30 rounded text-xs font-mono">Active Monitoring</span>
+</div>
+</header>
+<!-- END: Header Section -->
+<!-- BEGIN: Flowchart Canvas -->
+<section class="relative p-12 overflow-x-auto" data-purpose="logic-visualizer">
+<div class="flex flex-col items-center space-y-12 min-w-[800px]">
+<!-- Start Node -->
+<div class="flex flex-col items-center">
+<div class="px-6 py-3 bg-slate-800 border border-slate-600 rounded-full text-sm font-mono font-semibold uppercase tracking-widest text-slate-300">
+            START: Request Received
+          </div>
+<div class="h-12 w-px bg-gradient-to-b from-slate-600 to-purple-500"></div>
+</div>
+<!-- Logic Block: Auth Check -->
+<div class="relative group" data-purpose="logic-node-auth">
+<div class="w-64 p-5 bg-[#1a1a24] border border-purple-500/50 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.1)] text-center transition-all hover:border-purple-400">
+<h3 class="text-xs text-purple-400 font-mono mb-2 uppercase">Step 01</h3>
+<p class="font-semibold">Check User Auth</p>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">verifyJWT(token)</p>
+</div>
+<!-- Branching lines -->
+<div class="absolute top-1/2 -right-32 w-32 h-px bg-slate-700"></div>
+<div class="absolute -right-40 top-1/2 -translate-y-1/2 text-[10px] text-red-400 font-mono">FAIL</div>
+</div>
+<div class="h-12 w-px bg-purple-500"></div>
+<!-- Logic Block: Free Content -->
+<div class="relative group" data-purpose="logic-node-free">
+<div class="w-64 p-5 bg-[#1a1a24] border border-purple-500/50 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.1)] text-center transition-all hover:border-purple-400">
+<h3 class="text-xs text-purple-400 font-mono mb-2 uppercase">Step 02</h3>
+<p class="font-semibold">Is Video Free?</p>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">db.videos.find({id, type: 'free'})</p>
+</div>
+<!-- Branching lines to success -->
+<div class="absolute top-1/2 -left-32 w-32 h-px bg-green-500/30"></div>
+<div class="absolute -left-40 top-1/2 -translate-y-1/2 text-[10px] text-green-400 font-mono">YES</div>
+</div>
+<div class="h-12 w-px bg-purple-500"></div>
+<!-- Logic Block: Purchase Record -->
+<div class="relative group" data-purpose="logic-node-purchase">
+<div class="w-64 p-5 bg-[#1a1a24] border border-purple-500/50 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.1)] text-center transition-all hover:border-purple-400">
+<h3 class="text-xs text-purple-400 font-mono mb-2 uppercase">Step 03</h3>
+<p class="font-semibold">Check Purchase Record</p>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">user.hasPurchased(video_id)</p>
+</div>
+<!-- Branching lines to success -->
+<div class="absolute top-1/2 -left-32 w-32 h-px bg-green-500/30"></div>
+<div class="absolute -left-40 top-1/2 -translate-y-1/2 text-[10px] text-green-400 font-mono">YES</div>
+</div>
+<div class="h-12 w-px bg-purple-500"></div>
+<!-- Logic Block: Subscription -->
+<div class="relative group" data-purpose="logic-node-subscription">
+<div class="w-64 p-5 bg-[#1a1a24] border border-purple-500/50 rounded-lg shadow-[0_0_15px_rgba(168,85,247,0.1)] text-center transition-all hover:border-purple-400">
+<h3 class="text-xs text-purple-400 font-mono mb-2 uppercase">Step 04</h3>
+<p class="font-semibold">Active Subscription?</p>
+<p class="text-[10px] text-slate-500 mt-2 font-mono">user.subscription.isValid()</p>
+</div>
+<!-- Branching lines to success -->
+<div class="absolute top-1/2 -left-32 w-32 h-px bg-green-500/30"></div>
+<div class="absolute -left-40 top-1/2 -translate-y-1/2 text-[10px] text-green-400 font-mono">YES</div>
+</div>
+<!-- Final Outcomes -->
+<div class="flex justify-between w-full max-w-3xl pt-12 border-t border-slate-800">
+<!-- Access Denied -->
+<div class="flex flex-col items-center" data-purpose="outcome-denied">
+<div class="w-48 p-6 bg-red-950/20 border border-red-900 rounded-lg text-center">
+<div class="w-10 h-10 bg-red-900/30 rounded-full flex items-center justify-center mx-auto mb-3">
+<svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<p class="text-sm font-bold text-red-400">Access Denied</p>
+<p class="text-[10px] text-red-400/60 mt-1 uppercase tracking-wider">Purchase Prompt Triggered</p>
+</div>
+</div>
+<!-- Access Granted -->
+<div class="flex flex-col items-center" data-purpose="outcome-allowed">
+<div class="w-64 p-6 bg-purple-950/20 border border-purple-500 rounded-lg text-center shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+<div class="w-10 h-10 bg-purple-500/30 rounded-full flex items-center justify-center mx-auto mb-3 animate-glow">
+<svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<p class="text-sm font-bold text-slate-100">Allow Stream</p>
+<p class="text-[10px] text-purple-400 mt-1 uppercase tracking-wider">Generate Signed URL</p>
+<div class="mt-3 px-2 py-1 bg-black/40 rounded text-[9px] font-mono text-slate-400 truncate">
+                https://cdn.stream.v/s/exp=1692...
+              </div>
+</div>
+</div>
+</div>
+</div>
+<!-- Connecting Lines (Visual Decor) -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20" data-purpose="visual-wiring">
+<!-- Success Path (Vertical Left) -->
+<path class="line-drawing" d="M 320 280 L 320 800" fill="none" stroke="#a855f7" stroke-width="2"></path>
+<!-- Failure Path (Vertical Right) -->
+<path d="M 680 160 L 680 800" fill="none" stroke="#f43f5e" stroke-width="1"></path>
+</svg>
+</section>
+<!-- END: Flowchart Canvas -->
+<!-- BEGIN: Footer Console -->
+<footer class="bg-[#0f0f15] border-t border-slate-800 p-4 font-mono text-[11px] text-slate-500 flex justify-between items-center">
+<div class="flex space-x-4">
+<span class="flex items-center"><span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span> Database: Connected</span>
+<span class="flex items-center"><span class="w-2 h-2 rounded-full bg-green-500 mr-2"></span> Redis Cache: Hit</span>
+</div>
+<div>
+        Latency: <span class="text-purple-400">12ms</span>
+</div>
+</footer>
+<!-- END: Footer Console -->
+</main>
+<!-- END: Middleware Dashboard -->
+</body></html>

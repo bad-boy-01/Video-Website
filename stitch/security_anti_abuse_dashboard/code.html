@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-slate-950" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sentinel Guard | Anti-Abuse Dashboard</title>
+<!-- Tailwind CSS CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Tailwind Configuration -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              purple: '#8B5CF6',
+              deepPurple: '#1E1B4B',
+              alertRed: '#EF4444',
+              surface: '#0F172A',
+              border: '#334155'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for UI Enhancements -->
+<style data-purpose="custom-animations">
+    @keyframes pulse-red {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .animate-pulse-red {
+      animation: pulse-red 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .gradient-border {
+      border: 1px solid transparent;
+      background: linear-gradient(#0F172A, #0F172A) padding-box,
+                  linear-gradient(to right, #8B5CF6, #EF4444) border-box;
+    }
+  </style>
+</head>
+<body class="h-full text-slate-200 font-sans selection:bg-brand-purple/30">
+<!-- BEGIN: Navigation -->
+<nav class="sticky top-0 z-50 border-b border-brand-border bg-slate-950/80 backdrop-blur-md" data-purpose="main-nav">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-brand-purple rounded-lg flex items-center justify-center shadow-[0_0_15px_rgba(139,92,246,0.5)]">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04zM12 10a2 2 0 100-4 2 2 0 000 4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<span class="text-xl font-bold tracking-tight text-white">SENTINEL<span class="text-brand-purple">GUARD</span></span>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="flex h-2 w-2 rounded-full bg-green-500"></span>
+<span class="text-xs font-medium uppercase tracking-wider text-slate-400">Live Monitoring</span>
+</div>
+<button class="bg-brand-deepPurple border border-brand-purple/50 px-4 py-2 rounded-md text-sm hover:bg-brand-purple/20 transition-colors">
+            System Export
+          </button>
+</div>
+</div>
+</div>
+</nav>
+<!-- END: Navigation -->
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- BEGIN: System Health & Summary -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8" data-purpose="system-health-overview">
+<!-- WAF Status -->
+<div class="bg-brand-surface p-5 rounded-xl border border-brand-border flex items-center justify-between">
+<div>
+<p class="text-slate-400 text-xs font-semibold uppercase">WAF Layer</p>
+<p class="text-2xl font-bold mt-1">Active</p>
+</div>
+<div class="p-3 bg-green-500/10 rounded-full">
+<svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Rate Limiting Status -->
+<div class="bg-brand-surface p-5 rounded-xl border border-brand-border flex items-center justify-between">
+<div>
+<p class="text-slate-400 text-xs font-semibold uppercase">Rate Limiting</p>
+<p class="text-2xl font-bold mt-1">Throttling</p>
+</div>
+<div class="p-3 bg-brand-purple/10 rounded-full">
+<svg class="w-6 h-6 text-brand-purple" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Blocked Requests 24h -->
+<div class="bg-brand-surface p-5 rounded-xl border border-brand-border flex items-center justify-between">
+<div>
+<p class="text-slate-400 text-xs font-semibold uppercase">Blocks (24h)</p>
+<p class="text-2xl font-bold mt-1">12,402</p>
+</div>
+<div class="p-3 bg-brand-alertRed/10 rounded-full">
+<svg class="w-6 h-6 text-brand-alertRed" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Anomaly Score -->
+<div class="gradient-border p-5 rounded-xl flex items-center justify-between">
+<div>
+<p class="text-slate-400 text-xs font-semibold uppercase">Global Threat Level</p>
+<p class="text-2xl font-bold mt-1 text-brand-alertRed">High</p>
+</div>
+<div class="animate-pulse-red">
+<div class="w-4 h-4 rounded-full bg-brand-alertRed shadow-[0_0_10px_#EF4444]"></div>
+</div>
+</div>
+</section>
+<!-- END: System Health & Summary -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- BEGIN: Anomaly Detection Section -->
+<section class="lg:col-span-2 space-y-8" data-purpose="anomaly-detection-monitoring">
+<div class="bg-brand-surface border border-brand-border rounded-2xl overflow-hidden">
+<div class="p-6 border-b border-brand-border flex items-center justify-between">
+<h2 class="text-lg font-bold flex items-center gap-2">
+<span class="w-2 h-5 bg-brand-purple rounded"></span>
+              Real-time Anomaly Detection
+            </h2>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-brand-deepPurple text-[10px] rounded text-brand-purple border border-brand-purple/30">API: V3-PROD</span>
+</div>
+</div>
+<!-- Mock Chart Area -->
+<div class="p-6">
+<div class="h-64 w-full bg-slate-900/50 rounded-lg flex items-end p-4 gap-1 overflow-hidden relative" id="anomaly-chart">
+<!-- Background Grid -->
+<div class="absolute inset-0 grid grid-rows-4 px-4 pointer-events-none">
+<div class="border-b border-slate-800/50"></div>
+<div class="border-b border-slate-800/50"></div>
+<div class="border-b border-slate-800/50"></div>
+<div></div>
+</div>
+<!-- Simulated Data Bars (static for layout) -->
+<div class="flex-1 bg-brand-purple/20 h-1/2 rounded-t-sm"></div>
+<div class="flex-1 bg-brand-purple/20 h-2/3 rounded-t-sm"></div>
+<div class="flex-1 bg-brand-purple/20 h-1/3 rounded-t-sm"></div>
+<div class="flex-1 bg-brand-purple/20 h-1/2 rounded-t-sm"></div>
+<div class="flex-1 bg-brand-alertRed h-full rounded-t-sm shadow-[0_0_15px_rgba(239,68,68,0.4)]"></div>
+<div class="flex-1 bg-brand-purple/20 h-3/4 rounded-t-sm"></div>
+<div class="flex-1 bg-brand-purple/20 h-1/2 rounded-t-sm"></div>
+<div class="flex-1 bg-brand-purple/20 h-2/3 rounded-t-sm"></div>
+<div class="flex-1 bg-brand-alertRed h-5/6 rounded-t-sm shadow-[0_0_15px_rgba(239,68,68,0.4)]"></div>
+<div class="flex-1 bg-brand-purple/20 h-1/2 rounded-t-sm"></div>
+</div>
+<div class="flex justify-between mt-4 text-[10px] text-slate-500 font-mono">
+<span>12:00 PM</span>
+<span>12:15 PM</span>
+<span>12:30 PM (Current Incident)</span>
+<span>12:45 PM</span>
+</div>
+</div>
+<div class="p-6 bg-slate-900/30">
+<h3 class="text-sm font-semibold mb-4 text-slate-400 uppercase tracking-widest">Active Alerts</h3>
+<div class="space-y-4">
+<!-- Alert 1 -->
+<div class="flex items-center justify-between p-4 bg-brand-alertRed/5 border border-brand-alertRed/20 rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-brand-alertRed/20 flex items-center justify-center text-brand-alertRed">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h4 class="font-bold text-white">Rapid-Fire Preview Request</h4>
+<p class="text-sm text-slate-400">Endpoint: <code class="text-brand-purple">/api/v1/preview</code> • Frequency: 450 req/sec</p>
+</div>
+</div>
+<button class="px-4 py-2 bg-brand-alertRed text-white text-xs font-bold rounded-lg hover:bg-red-600 transition-colors uppercase tracking-tighter">Hard Block</button>
+</div>
+<!-- Alert 2 -->
+<div class="flex items-center justify-between p-4 bg-brand-purple/5 border border-brand-purple/20 rounded-lg">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-brand-purple/20 flex items-center justify-center text-brand-purple">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div>
+<h4 class="font-bold text-white">Potential Wallet Manipulation</h4>
+<p class="text-sm text-slate-400">Origin: <span class="font-mono">AS24940 (Hetzner)</span> • Pattern: Non-linear balance increments</p>
+</div>
+</div>
+<button class="px-4 py-2 border border-brand-purple text-brand-purple text-xs font-bold rounded-lg hover:bg-brand-purple/10 transition-colors uppercase tracking-tighter">Investigate</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Anomaly Detection Section -->
+<!-- BEGIN: Sidebar Logs -->
+<aside class="space-y-8" data-purpose="security-logs">
+<!-- Blocked IPs -->
+<div class="bg-brand-surface border border-brand-border rounded-2xl overflow-hidden h-fit">
+<div class="p-5 border-b border-brand-border flex items-center justify-between">
+<h2 class="font-bold text-sm uppercase tracking-widest text-slate-400">Blocked IPs</h2>
+<span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400 font-mono">Real-time</span>
+</div>
+<div class="p-4 space-y-3">
+<div class="group flex items-center justify-between text-xs hover:bg-slate-900/50 p-2 rounded transition-colors">
+<div>
+<p class="font-mono text-white">45.22.192.12</p>
+<p class="text-slate-500">RU • Data Center</p>
+</div>
+<span class="text-brand-alertRed font-semibold">Botnet Behavior</span>
+</div>
+<div class="group flex items-center justify-between text-xs hover:bg-slate-900/50 p-2 rounded transition-colors">
+<div>
+<p class="font-mono text-white">103.4.22.189</p>
+<p class="text-slate-500">IN • Residential Proxy</p>
+</div>
+<span class="text-brand-alertRed font-semibold">Credential Stuffing</span>
+</div>
+<div class="group flex items-center justify-between text-xs hover:bg-slate-900/50 p-2 rounded transition-colors">
+<div>
+<p class="font-mono text-white">194.50.16.2</p>
+<p class="text-slate-500">DE • VPN</p>
+</div>
+<span class="text-brand-alertRed font-semibold">Scraper Pattern</span>
+</div>
+<div class="group flex items-center justify-between text-xs hover:bg-slate-900/50 p-2 rounded transition-colors border-t border-brand-border pt-3">
+<button class="w-full text-center text-brand-purple hover:underline font-bold uppercase tracking-tighter">View Full Blacklist</button>
+</div>
+</div>
+</div>
+<!-- Flagged Users -->
+<div class="bg-brand-surface border border-brand-border rounded-2xl overflow-hidden h-fit">
+<div class="p-5 border-b border-brand-border">
+<h2 class="font-bold text-sm uppercase tracking-widest text-slate-400">Flagged Accounts</h2>
+</div>
+<div class="divide-y divide-brand-border">
+<!-- User 1 -->
+<div class="p-4 flex gap-4 hover:bg-slate-900/50 transition-colors">
+<div class="w-10 h-10 rounded-full bg-slate-800 flex-shrink-0 flex items-center justify-center font-bold text-brand-purple border border-brand-purple/20">JS</div>
+<div>
+<p class="text-sm font-bold text-white leading-none">John_Silver_99</p>
+<p class="text-[10px] text-slate-500 mt-1">ID: #44921-X</p>
+<div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500/10 text-yellow-500 border border-yellow-500/30">
+                  Token Farming
+                </div>
+</div>
+</div>
+<!-- User 2 -->
+<div class="p-4 flex gap-4 hover:bg-slate-900/50 transition-colors">
+<div class="w-10 h-10 rounded-full bg-slate-800 flex-shrink-0 flex items-center justify-center font-bold text-brand-purple border border-brand-purple/20">WA</div>
+<div>
+<p class="text-sm font-bold text-white leading-none">Whale_Alpha</p>
+<p class="text-[10px] text-slate-500 mt-1">ID: #12093-K</p>
+<div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-brand-alertRed/10 text-brand-alertRed border border-brand-alertRed/30">
+                  Wallet Injection Attempt
+                </div>
+</div>
+</div>
+<!-- User 3 -->
+<div class="p-4 flex gap-4 hover:bg-slate-900/50 transition-colors">
+<div class="w-10 h-10 rounded-full bg-slate-800 flex-shrink-0 flex items-center justify-center font-bold text-brand-purple border border-brand-purple/20">TV</div>
+<div>
+<p class="text-sm font-bold text-white leading-none">Turbo_Viper</p>
+<p class="text-[10px] text-slate-500 mt-1">ID: #99021-V</p>
+<div class="mt-2 inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-yellow-500/10 text-yellow-500 border border-yellow-500/30">
+                  Rapid Sub-Cycling
+                </div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: Sidebar Logs -->
+</div>
+</main>
+<!-- BEGIN: Footer Branding -->
+<footer class="mt-12 border-t border-brand-border py-8 text-center" data-purpose="dashboard-footer">
+<p class="text-slate-500 text-xs font-mono uppercase tracking-[0.2em]">
+      Node-04 Active • SSL Secured • Encrypted Telemetry • © 2023 Sentinel Guard Systems
+    </p>
+</footer>
+<!-- END: Footer Branding -->
+<!-- BEGIN: Logic/Interactivity -->
+<script data-purpose="chart-animation">
+    // Simple script to slightly vary the chart heights for a "live" feel
+    const chartBars = document.querySelectorAll('#anomaly-chart div[class*="flex-1"]');
+    setInterval(() => {
+      chartBars.forEach(bar => {
+        if (!bar.classList.contains('bg-brand-alertRed')) {
+          const currentHeight = bar.style.height || "50%";
+          const randomVariation = (Math.random() * 10 - 5);
+          const newHeight = Math.min(Math.max(parseInt(currentHeight) + randomVariation, 10), 90);
+          bar.style.height = `${newHeight}%`;
+          bar.style.transition = "height 1.5s ease-in-out";
+        }
+      });
+    }, 2000);
+  </script>
+<!-- END: Logic/Interactivity -->
+</body></html>

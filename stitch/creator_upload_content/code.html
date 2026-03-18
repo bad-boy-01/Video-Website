@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Space Grotesk', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3c2a4d; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex items-center justify-center p-4 md:p-8">
+<div class="max-w-5xl w-full bg-slate-50 dark:bg-[#23182d] border border-slate-200 dark:border-primary/20 shadow-2xl rounded-xl overflow-hidden flex flex-col h-[921px]">
+<!-- Header -->
+<header class="flex items-center justify-between px-8 py-5 border-b border-slate-200 dark:border-primary/10">
+<div class="flex items-center gap-3">
+<div class="bg-primary p-2 rounded-lg">
+<span class="material-symbols-outlined text-white">movie_edit</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tight">Upload Content</h1>
+<p class="text-sm text-slate-500 dark:text-slate-400">Ready to share your masterpiece?</p>
+</div>
+</div>
+<button class="p-2 hover:bg-slate-200 dark:hover:bg-primary/20 rounded-full transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</header>
+<!-- Main Content Area (Scrollable) -->
+<div class="flex-1 overflow-y-auto custom-scrollbar p-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<!-- Left Column: Media & Upload -->
+<div class="lg:col-span-7 space-y-8">
+<!-- Video Upload Zone -->
+<section>
+<label class="block text-sm font-semibold mb-3 uppercase tracking-wider text-primary">1. Video File</label>
+<div class="group relative flex flex-col items-center justify-center border-2 border-dashed border-slate-300 dark:border-primary/30 rounded-xl p-12 bg-slate-100 dark:bg-primary/5 hover:border-primary transition-all cursor-pointer">
+<div class="size-16 rounded-full bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl">cloud_upload</span>
+</div>
+<h3 class="text-lg font-bold mb-1">Drag &amp; drop video files</h3>
+<p class="text-sm text-slate-500 dark:text-slate-400 mb-6 text-center">MP4, MOV, or AVI up to 2GB. <br/>High resolution recommended.</p>
+<button class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg font-bold transition-colors shadow-lg shadow-primary/20">
+                                Select File
+                            </button>
+</div>
+</section>
+<!-- Thumbnail Upload -->
+<section>
+<label class="block text-sm font-semibold mb-3 uppercase tracking-wider text-primary">2. Thumbnail</label>
+<div class="grid grid-cols-3 gap-4">
+<div class="col-span-2 relative aspect-video bg-slate-200 dark:bg-primary/10 rounded-lg border border-slate-300 dark:border-primary/20 flex flex-col items-center justify-center overflow-hidden group">
+<span class="material-symbols-outlined text-4xl text-slate-400 dark:text-slate-600">image</span>
+<p class="text-xs text-slate-500 mt-2 font-medium">Custom Cover Image</p>
+<div class="absolute inset-0 bg-primary/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<button class="bg-white text-primary px-4 py-2 rounded-lg font-bold text-xs uppercase">Change</button>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<div class="h-1/2 bg-slate-200 dark:bg-primary/5 rounded-lg border border-slate-300 dark:border-primary/20 flex items-center justify-center text-[10px] text-slate-400">Auto-gen 1</div>
+<div class="h-1/2 bg-slate-200 dark:bg-primary/5 rounded-lg border border-slate-300 dark:border-primary/20 flex items-center justify-center text-[10px] text-slate-400">Auto-gen 2</div>
+</div>
+</div>
+</section>
+<!-- Advanced Toggle Section -->
+<section class="bg-slate-100 dark:bg-primary/5 p-6 rounded-xl border border-slate-200 dark:border-primary/10">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">settings</span>
+                                Advanced Settings
+                            </h3>
+<div class="w-10 h-5 bg-primary rounded-full relative cursor-pointer">
+<div class="absolute right-0.5 top-0.5 size-4 bg-white rounded-full"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium">Allow Comments</span>
+<input checked="" class="rounded border-primary text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium">Auto-HD Upscaling</span>
+<input class="rounded border-primary text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium">Make Public</span>
+<input checked="" class="rounded border-primary text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-medium">Show in Search</span>
+<input checked="" class="rounded border-primary text-primary focus:ring-primary bg-transparent" type="checkbox"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Details & Pricing -->
+<div class="lg:col-span-5 space-y-6">
+<!-- Video Metadata -->
+<section class="space-y-5">
+<label class="block text-sm font-semibold uppercase tracking-wider text-primary">3. Metadata Details</label>
+<div class="space-y-1.5">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 ml-1">Title</span>
+<input class="w-full bg-slate-100 dark:bg-background-dark border border-slate-300 dark:border-primary/20 rounded-lg p-3 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" placeholder="e.g. My Cinematic Masterpiece" type="text"/>
+</div>
+<div class="space-y-1.5">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 ml-1">Category</span>
+<div class="relative">
+<select class="w-full appearance-none bg-slate-100 dark:bg-background-dark border border-slate-300 dark:border-primary/20 rounded-lg p-3 focus:ring-2 focus:ring-primary outline-none pr-10">
+<option>Entertainment</option>
+<option>Education</option>
+<option>Gaming</option>
+<option>Technology</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-3 pointer-events-none text-slate-400">expand_more</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 ml-1">Description</span>
+<textarea class="w-full bg-slate-100 dark:bg-background-dark border border-slate-300 dark:border-primary/20 rounded-lg p-3 focus:ring-2 focus:ring-primary outline-none resize-none" placeholder="Tell viewers about your video..." rows="4"></textarea>
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="bg-primary/10 dark:bg-primary/5 p-6 rounded-xl border border-primary/20">
+<label class="block text-sm font-semibold uppercase tracking-wider text-primary mb-4">4. Monetization</label>
+<div class="flex items-center gap-4">
+<div class="flex-1 space-y-1.5">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 ml-1">Price in Coins</span>
+<div class="relative">
+<input class="w-full bg-slate-50 dark:bg-background-dark border border-slate-300 dark:border-primary/20 rounded-lg p-3 pl-10 focus:ring-2 focus:ring-primary outline-none" type="number" value="0"/>
+<span class="material-symbols-outlined absolute left-3 top-3 text-amber-500">monetization_on</span>
+</div>
+</div>
+<div class="pt-6">
+<p class="text-[10px] text-slate-500 italic max-w-[120px]">Keep at 0 for free content available to all.</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<footer class="px-8 py-5 border-t border-slate-200 dark:border-primary/10 bg-slate-50 dark:bg-background-dark flex items-center justify-between">
+<div class="flex items-center gap-2 text-xs text-slate-500">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+                Uploaded files are scanned for safety.
+            </div>
+<div class="flex items-center gap-3">
+<button class="px-6 py-2.5 rounded-lg border border-slate-300 dark:border-primary/30 font-bold hover:bg-slate-200 dark:hover:bg-primary/10 transition-colors">
+                    Save Draft
+                </button>
+<button class="px-8 py-2.5 rounded-lg bg-primary hover:bg-primary/90 text-white font-bold transition-all shadow-lg shadow-primary/30 flex items-center gap-2">
+                    Submit for Approval
+                    <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</footer>
+</div>
+</body></html>

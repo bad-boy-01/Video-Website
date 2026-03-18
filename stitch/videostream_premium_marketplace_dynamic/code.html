@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Video Marketplace - Home</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex">
+<!-- Sidebar -->
+<aside class="w-64 h-screen sticky top-0 bg-white dark:bg-background-dark/50 border-r border-slate-200 dark:border-slate-800 p-4 flex flex-col justify-between hidden md:flex">
+<div class="flex flex-col gap-6">
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 bg-primary rounded-xl flex items-center justify-center text-white">
+<span class="material-symbols-outlined">play_circle</span>
+</div>
+<h2 class="text-xl font-bold tracking-tight text-primary">VidMarket</h2>
+</div>
+<div class="flex items-center gap-3 p-3 rounded-xl bg-primary/10 border border-primary/20">
+<div class="size-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+</div>
+<div class="flex flex-col">
+<p class="text-xs text-slate-500 dark:text-slate-400 font-medium uppercase tracking-wider">My Wallet</p>
+<p class="text-base font-bold text-slate-900 dark:text-slate-100">$1,240.50</p>
+</div>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary text-white shadow-lg shadow-primary/20" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-medium">Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">favorite</span>
+<span class="font-medium">Wishlist</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">subscriptions</span>
+<span class="font-medium">Subscription</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-medium">Library</span>
+</a>
+</nav>
+</div>
+<div class="flex flex-col gap-4">
+<div class="p-4 rounded-xl bg-slate-900 text-white dark:bg-primary/20 flex flex-col gap-3">
+<p class="text-sm font-semibold">Unlock Premium Features</p>
+<p class="text-xs opacity-70">Get access to exclusive 4K content and offline viewing.</p>
+<button class="w-full py-2 bg-primary hover:bg-primary/90 rounded-lg text-xs font-bold transition-all">Upgrade Plan</button>
+</div>
+<div class="flex items-center gap-3 px-2">
+<div class="size-10 rounded-full bg-slate-200 dark:bg-slate-800 bg-center bg-cover" data-alt="User profile avatar circle" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJs_c1aNRwiFyLWuLMTgiPCRPF3V8JrokvrBQ8OkqnvL5Gv7_x-7bAmQcIx795LqzaITMbBEhghG0F5qj3GI4eZ922zVGASLTOsqpJr_j2GlLK4vU_1q7THbyMNR6JAFS9vYg41_LSsx1o2XLbx5Oy9cFjGlwieMV9BOvm0aJNh5Ejh30p2XQL67RIqGIBE4kdOdYufzjfn9_uSyo87X-rbnRePrA8j1yPAidOcZvhRav1JTgCCqatFCbFq6JixL1peB6Q1youIXPz')"></div>
+<div class="flex flex-col">
+<p class="text-sm font-bold truncate">Alex Morgan</p>
+<p class="text-xs text-slate-500">Pro Account</p>
+</div>
+<button class="ml-auto text-slate-400 hover:text-primary">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 min-h-screen bg-background-light dark:bg-background-dark p-4 md:p-8 flex flex-col gap-8 overflow-x-hidden">
+<!-- Header & Filters -->
+<header class="flex flex-col gap-6">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="relative flex-1 max-w-2xl">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl shadow-sm focus:ring-2 focus:ring-primary/50 text-slate-900 dark:text-slate-100 placeholder:text-slate-400" placeholder="Search for premium videos, creators, or genres..." type="text"/>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm text-slate-600 dark:text-slate-300 relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-primary rounded-full"></span>
+</button>
+<button class="p-3 bg-white dark:bg-slate-800 rounded-xl shadow-sm text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</div>
+<div class="flex flex-wrap items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary/10 text-primary border border-primary/20 rounded-full text-sm font-semibold">
+<span>Action</span>
+<span class="material-symbols-outlined text-sm">close</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full text-sm font-medium border border-slate-200 dark:border-slate-700 transition-colors">Drama</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full text-sm font-medium border border-slate-200 dark:border-slate-700 transition-colors">Tech</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full text-sm font-medium border border-slate-200 dark:border-slate-700 transition-colors">Comedy</button>
+<button class="flex items-center gap-2 px-4 py-2 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-full text-sm font-medium border border-slate-200 dark:border-slate-700 transition-colors">Sci-Fi</button>
+<div class="ml-auto flex items-center gap-4 bg-white dark:bg-slate-800 px-6 py-2 rounded-full border border-slate-200 dark:border-slate-700">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-tight">Price Range</p>
+<div class="w-32 h-1 bg-slate-200 dark:bg-slate-700 rounded-full relative">
+<div class="absolute left-1/4 right-1/4 h-1 bg-primary rounded-full"></div>
+<div class="absolute left-1/4 top-1/2 -translate-y-1/2 size-3 bg-primary rounded-full border-2 border-white dark:border-slate-800 shadow-md cursor-pointer"></div>
+<div class="absolute right-1/4 top-1/2 -translate-y-1/2 size-3 bg-primary rounded-full border-2 border-white dark:border-slate-800 shadow-md cursor-pointer"></div>
+</div>
+<span class="text-xs font-bold text-slate-900 dark:text-slate-100">$20 - $80</span>
+</div>
+</div>
+</header>
+<!-- Hero Featured Section -->
+<section class="relative w-full h-[450px] rounded-3xl overflow-hidden shadow-2xl">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Cinematic background showing a high-tech cityscape at night" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAA1wHU9NRnkGXLaKwGqT39tRrqomuUzlJz7Su5j3uzkhlqTCzrN3vimR0f0dwzRoEyMvZ8MEruQB_QuBuzmfZs6n287RrxTL5rIg6uDiDkq4OvBNbiZkXkZbb3NPO2o-XHsbI7TleO1088zOwJWm-UnVoJOZsnwO9E-zAT-2_-XAxy7GkYIXA4QvOuJNcjAYEHDxUUIsxKNJwoaUiOkkJIzgH8G0AKhtpwc29L0WYV_LKQFJUzJz0j2pxXajgzYvhNH8h81wrUc4C9')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-900/40 to-transparent"></div>
+<div class="absolute inset-0 p-8 md:p-16 flex flex-col justify-center gap-4 max-w-2xl">
+<div class="flex items-center gap-2 bg-primary text-white px-3 py-1 rounded-full w-fit text-xs font-bold uppercase tracking-widest">
+<span class="material-symbols-outlined text-sm">stars</span> Featured
+                    </div>
+<h1 class="text-4xl md:text-6xl font-black text-white leading-tight">Beyond the Neural Network</h1>
+<p class="text-lg text-slate-200 max-w-lg">A deep dive into the future of decentralized AI systems and the impact on digital creative rights.</p>
+<div class="flex items-center gap-4 mt-4">
+<button class="bg-primary hover:bg-primary/90 text-white px-8 py-4 rounded-xl font-bold flex items-center gap-3 transition-transform active:scale-95">
+<span class="material-symbols-outlined fill-1">play_arrow</span> Watch Now
+                        </button>
+<button class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-4 rounded-xl font-bold border border-white/30 transition-all">
+                            Unlock for $14.99
+                        </button>
+</div>
+</div>
+</section>
+<!-- Trending Now Row -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">trending_up</span>
+<h3 class="text-xl font-bold">Trending Now</h3>
+</div>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">See all</a>
+</div>
+<div class="flex gap-6 overflow-x-auto no-scrollbar pb-4 -mx-2 px-2">
+<!-- Video Card 1 -->
+<div class="flex-shrink-0 w-80 group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Futuristic car racing in a neon city" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuA2BbPyChoi6K11C6fFBqQFxsA6Mv20ekCTL17DvSmFpQD1mvWI88hOuvL-bSvpA9hY97uNj-v4HdOyPAfXxLeLXvxh2O00mTHFgUU7UXAeh4myEki-uLWWE5ChoOibdMtUU0ODpOolI1VNx8TWLIeqATHzvc69AQAd1IyUJxjVkwC30BmI32RXwEtY3pbYz39An1970D1WHKY-9vqDtw6iQLTWeYicjT6n5Hxm__8zFYS8_2aMdA0bkihijvZk5ZSsJjolHVK7Dk4H')"></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-xs font-bold">12:45</div>
+<div class="absolute bottom-3 left-3 flex items-center gap-2">
+<span class="bg-primary px-2 py-0.5 rounded text-[10px] font-black text-white uppercase italic">Hot</span>
+</div>
+</div>
+<div class="flex gap-3">
+<div class="size-10 rounded-full bg-slate-200 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Creator profile picture thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTUjdkZ_rGjPYBHKJSPCojGassD_KmSRw9wrC-Sk8TclE0I-bRdbiQTlB-CYMf_HxzdfVaoA7owRh4g1HKxThDRdHxe_87ssCSl0nhc28JJDgjzzyVtom_N6evznHYzm2O-DAWeHy6dooT_dxvc0TGNDRECJZ5KdVTDvQo1CJLkhC2SBuaiyKYvW_0gpOb4dI_P0-fzncYmNrY6v-IarBLU7dH3fbVdZ0Rg7YKul4ITB0s-tpByLfgTeqaMuKsBhagWE4_mzLm2XfL"/>
+</div>
+<div class="flex flex-col">
+<h4 class="font-bold line-clamp-2 group-hover:text-primary transition-colors">Cyberpunk 2077: Phantom Liberty Visual Breakdown</h4>
+<p class="text-sm text-slate-500 mt-1 flex items-center gap-1">Visual Effects Pro <span class="material-symbols-outlined text-[14px] text-blue-400">verified</span></p>
+<p class="text-xs text-slate-400 mt-0.5">1.2M views • 2 days ago</p>
+</div>
+</div>
+</div>
+<!-- Video Card 2 -->
+<div class="flex-shrink-0 w-80 group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Macro shot of a high-end chef plating a dish" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB4BMUpnAWmYz70N-LezQ6oe-Mz6cKaYBQ6pOue3yxNFwkkunYMEQ8KSA3Yvh0aKnKhjr3KmENAACVSeo2GXLwutRFKfualTh96MUKitKwf00acUkqlMcP3f1e-TEZmlA4uTGIr00zTBi6GLDJ1NEk5W-Q_yV9DIalbvwewRCN19BMpDkg3o3ZsG0GER-18gwyoBPXOOJoLth3awx8nSoUMdxbkrsCRlUxzOUkE3ig8MIOqsGnnmSabvL1fciFUaHeSXb9yqZnGHCrS')"></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-xs font-bold">08:20</div>
+</div>
+<div class="flex gap-3">
+<div class="size-10 rounded-full bg-slate-200 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Chef avatar circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2_BjeDXMfSETcsywoXkhzF012hw55L_mdyg-S4R-K6J6JKViFxnW3jtesVAPKRbd-h5ro47rqPf00Lg4syQBJn5ah0T55bxP6n9q3_iT3lxFhMtVJT6OKIO1Eg3e7t-feXtZILrfq3_LdrN--yDnrdbh0N70yiW565vkLnDgIQ7kS80huYKmq-5jW-v2CTWVuRTP7qxcTeC0AGVumcvjiYVh4QAuGsSPcnlYa-OEFSqUOwZDHl_3g-CmfWBc6IHhAgjr3LXBszA83"/>
+</div>
+<div class="flex flex-col">
+<h4 class="font-bold line-clamp-2 group-hover:text-primary transition-colors">Mastering the Art of Modern French Cuisine</h4>
+<p class="text-sm text-slate-500 mt-1 flex items-center gap-1">Culinary Institute</p>
+<p class="text-xs text-slate-400 mt-0.5">850K views • 5 days ago</p>
+</div>
+</div>
+</div>
+<!-- Video Card 3 -->
+<div class="flex-shrink-0 w-80 group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Space shuttle launch in high definition" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAshUFjtGJRDLzPdVZ57Oh9_j-N5SX5zUE1MtqqA7ZEFJKp1rzF07dGJiF2iqKrOmRPJuM-S0VzQ55mqY_F47rzbLFSIvzK9sJ0MDMVc_WPIgKEXGFABXKycLm2OcZRZInptlJObXY3asMjXhODuZFRBdjHGDDxPguByu5zFpQ6CqaZDd_nBYc6hpxtR55-8zNsnOG6IxAv9KN7CidSzQ1n1ylBCnpS5XQUyyHUYtYt2ci8XkIJXgIEkIE9pzxE-xIeWNDGh_zq9Tnl')"></div>
+<div class="absolute top-3 right-3 bg-black/60 backdrop-blur-md text-white px-2 py-1 rounded-lg text-xs font-bold">24:10</div>
+</div>
+<div class="flex gap-3">
+<div class="size-10 rounded-full bg-slate-200 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Science channel avatar circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA9fwMPdOqGlUQBpR6h63gHdyi8udk9Yt3WwRtjpXrXMhe1LLnsbjECkfcRL0bGSVRHng3m9qR4qzDmy90zoVGFaAtjt9k6jZEXe7HVT23pyf8vfHgWxvAMGbWxHaN8Ml7r2S2isP7tPMEUiHiwos7mM_eCRqz98-96vU-jYtGgZMinWaerw54sKK29Hw5WVsegog9mL_u5CHjUTRL1PwDvJVgg-lBivWfl-3VP4GyctYRbhS6CUykkHVWP7MhjnlX9917BdPdNU3Hk"/>
+</div>
+<div class="flex flex-col">
+<h4 class="font-bold line-clamp-2 group-hover:text-primary transition-colors">Beyond the Moon: Mars Mission 2025 Deep Dive</h4>
+<p class="text-sm text-slate-500 mt-1 flex items-center gap-1">Astro Explorer</p>
+<p class="text-xs text-slate-400 mt-0.5">420K views • 1 week ago</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Uploads Row -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between px-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary">new_releases</span>
+<h3 class="text-xl font-bold">Latest Additions</h3>
+</div>
+<a class="text-sm font-semibold text-primary hover:underline" href="#">See all</a>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- New Upload 1 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Abstract code appearing on a monitor screen" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvpOMSVrYtDe-mX4wpJj_g_qF_SHKisaI7gMWxqJI1CDfI2AfimH55aOhG5Zdi7UX-qgbb7KtxnW0FDdCsTj2ZzCTJSwbIIgTIJOYuXZeos6CxQJI9ZhrYySDWYc1W468fleHhto7_YmuOnlvDV-Vzidn63SK_-5ThYKH2RWHHYXmqa6dwPsBLDCsMr9PRSyC7J3f1KwyGGLtgxcBsSfF2gHgB7PWArRpfCTfjYCXnmH_JcfUvKkofnMsHefaDwn9ThH4blafcBNId')"></div>
+<div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-5xl">play_circle</span>
+</div>
+<div class="absolute bottom-2 right-2 bg-primary px-2 py-1 rounded-md text-[10px] text-white font-bold">$4.99</div>
+</div>
+<h4 class="font-semibold text-sm line-clamp-1 group-hover:text-primary transition-colors">Intro to Web3 with Rust</h4>
+<div class="flex items-center justify-between mt-2">
+<p class="text-xs text-slate-500 italic">4 hours ago</p>
+<span class="text-xs font-bold text-slate-900 dark:text-slate-100">Tech</span>
+</div>
+</div>
+<!-- New Upload 2 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Extreme drone footage of a snowy mountain range" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAKg2GIC-BX4oT0xy4cOy-zq84vhrcCGbsXrIFqUtCFmW3Cnoi3vxV6BYGrfKgqzuBYlOhBvJwX-pZHv0RmxebM0Puk17OadIvtQ-kBMIP5MBc-G6oPlhKMqa15frUWxGf7f2_PaX-mWAvzcYmyYqFEmAg5U8W1ko0rtT960GVOI2t2GmOnUahuLas6gy1Ie5Db8EbmkjU9wytZwJwta0TddvBOTkHrOWQOU_8K1Rxjo-J4QdwRcDETzlfteTogLOI8wTYR7Pe7Wbs-')"></div>
+<div class="absolute bottom-2 right-2 bg-primary px-2 py-1 rounded-md text-[10px] text-white font-bold">FREE</div>
+</div>
+<h4 class="font-semibold text-sm line-clamp-1 group-hover:text-primary transition-colors">Alpine Descent: Drone Masters</h4>
+<div class="flex items-center justify-between mt-2">
+<p class="text-xs text-slate-500 italic">6 hours ago</p>
+<span class="text-xs font-bold text-slate-900 dark:text-slate-100">Action</span>
+</div>
+</div>
+<!-- New Upload 3 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Portrait of a jazz musician playing saxophone" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAryK5DFm7IydAM-ppAVmXrW0TpOEeU6d2zpDLAcr2hwJZJeOU9Az4vrhkk1gn5IzsKwfCNQimH5k9fzHJISzO1Vm9wlUNfdedr0v2D3Jpacs3MVcqLi-53yFbdJbz-tRfkLkKe7k-6VO_VlEUYAp5SVaOcIHPw5URPOhuXWtQyBiS3w1mKrzBbpINbWNO1o-jOljGEBybhePgdmyPCe-G5BOHq22_AK2bsxK9gObAKjlK3qyB0e_jQvebRnjZAfbkqlIMC281FwxQN')"></div>
+<div class="absolute bottom-2 right-2 bg-primary px-2 py-1 rounded-md text-[10px] text-white font-bold">$9.99</div>
+</div>
+<h4 class="font-semibold text-sm line-clamp-1 group-hover:text-primary transition-colors">The Jazz History Project: EP 1</h4>
+<div class="flex items-center justify-between mt-2">
+<p class="text-xs text-slate-500 italic">10 hours ago</p>
+<span class="text-xs font-bold text-slate-900 dark:text-slate-100">Drama</span>
+</div>
+</div>
+<!-- New Upload 4 -->
+<div class="group cursor-pointer">
+<div class="relative aspect-video rounded-2xl overflow-hidden mb-3">
+<div class="absolute inset-0 bg-cover bg-center group-hover:scale-110 transition-transform duration-500" data-alt="Minimalist desk setup with premium computer hardware" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAckU6wbHlMNakSxgDfKtg0xwEsonRiWGd8DdFVNBSKIS7X24tl5v3L4NKtZ8iHrQ55JPfp7GbWhvWaKUYj2r1ExLiDlZt0QyTArg9_nk918Di_UmtN2a0m2YeEzBVVJ_YrVnWujeju0D2YCGebwN0j3TRveIDUhAxZWG3zwfYrY_ujss-PDhgPiHqkU2Y9kpc87xelyFnHG3jMgGXMgCScVPJmwR4y5AkeetZ9gV2lzpgeqLSCjBVXqtR9hqUU76CEUzNSTtCluPZS')"></div>
+<div class="absolute bottom-2 right-2 bg-primary px-2 py-1 rounded-md text-[10px] text-white font-bold">$2.50</div>
+</div>
+<h4 class="font-semibold text-sm line-clamp-1 group-hover:text-primary transition-colors">Desk Setup Guide for Creatives</h4>
+<div class="flex items-center justify-between mt-2">
+<p class="text-xs text-slate-500 italic">12 hours ago</p>
+<span class="text-xs font-bold text-slate-900 dark:text-slate-100">Tech</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</body></html>

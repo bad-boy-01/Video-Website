@@ -1,0 +1,23 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      // Enforces role-based access control by linking Storage to the Firestore users collection
+      return request.auth != null && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == "admin";
+    }
+
+    match /videos/{allPaths=**} {
+      // 🔒 Strictly block direct URL access to raw video files
+      allow read: if false; 
+      // Only admins can upload video content
+      allow write: if isAdmin();
+    }
+
+    match /thumbnails/{allPaths=**} {
+      // ✅ Publicly readable for the storefront catalog
+      allow read: if true; 
+      allow write: if isAdmin();
+    }
+  }
+}

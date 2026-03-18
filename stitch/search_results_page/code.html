@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                        "surface-dark": "#2a1b3d",
+                        "border-dark": "#3d2b56",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-dark px-6 py-3 bg-background-dark/80 backdrop-blur-md sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center bg-primary rounded-lg text-white">
+<span class="material-symbols-outlined">play_circle</span>
+</div>
+<h2 class="text-slate-100 text-xl font-bold leading-tight tracking-tight">VideoStream</h2>
+</div>
+<label class="flex flex-col min-w-64 !h-10 max-w-md">
+<div class="flex w-full flex-1 items-stretch rounded-lg h-full bg-surface-dark border border-border-dark overflow-hidden focus-within:border-primary transition-colors">
+<div class="text-slate-400 flex items-center justify-center pl-4">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 border-none bg-transparent text-slate-100 focus:ring-0 placeholder:text-slate-500 px-3 text-sm" placeholder="Search cinematic videos..." value="Cinematic"/>
+</div>
+</label>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex gap-2">
+<button class="flex min-w-[100px] items-center justify-center rounded-lg h-10 px-4 bg-primary hover:bg-primary/90 text-white text-sm font-bold transition-all shadow-lg shadow-primary/20">
+<span>500 Coins</span>
+</button>
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-surface-dark border border-border-dark text-slate-100 hover:bg-border-dark transition-colors">
+<span class="material-symbols-outlined text-[20px]">notifications</span>
+</button>
+</div>
+<div class="h-10 w-10 rounded-full bg-primary/20 border-2 border-primary overflow-hidden">
+<img alt="User Profile Avatar" class="h-full w-full object-cover" data-alt="Stylized user avatar profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBeGEWgrK9yMrqr2211CIGW8OV_mMVf52yK3Nhp_iNtwBYJXlors8MQeN_wjhm6pRQ4bPv17e1jExzGDe00dJAMoU0d7GII7ESyvFMBlNZvl1-3gkorXqVJ9QWAOsAi2sDwgPaMBnH5HqbAf1HJFY3QWJ-M8e9RFv9MCvV5tw4JzraV0mj9no_sBq1XXoZkBBrMjLplm9ekQ6HR1hA492Ha750n5bbRHGLtseWWBmDYR6SUDRaqRY19sbKIKK7EG3-TV5Xs1erHewwZ"/>
+</div>
+</div>
+</header>
+<main class="flex flex-1 pt-4">
+<aside class="w-72 hidden md:flex flex-col gap-6 px-6 py-4 border-r border-border-dark sticky top-20 h-[calc(100vh-80px)] overflow-y-auto">
+<div>
+<h3 class="text-slate-100 text-sm font-bold uppercase tracking-widest mb-4 opacity-70">Navigation</h3>
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-surface-dark hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-sm font-medium">Home</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-primary/10 text-primary border border-primary/20" href="#">
+<span class="material-symbols-outlined">explore</span>
+<span class="text-sm font-bold">Explore</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-slate-400 hover:bg-surface-dark hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined">video_library</span>
+<span class="text-sm font-medium">My Library</span>
+</a>
+</nav>
+</div>
+<div class="h-px bg-border-dark"></div>
+<div>
+<h3 class="text-slate-100 text-sm font-bold uppercase tracking-widest mb-4 opacity-70">Category</h3>
+<div class="space-y-2">
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-border-dark bg-surface-dark text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-sm text-slate-300 group-hover:text-white transition-colors">Action</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input checked="" class="rounded border-border-dark bg-surface-dark text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-sm text-slate-100 font-medium">Documentary</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-border-dark bg-surface-dark text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-sm text-slate-300 group-hover:text-white transition-colors">Sci-Fi</span>
+</label>
+<label class="flex items-center gap-3 cursor-pointer group">
+<input class="rounded border-border-dark bg-surface-dark text-primary focus:ring-primary focus:ring-offset-background-dark" type="checkbox"/>
+<span class="text-sm text-slate-300 group-hover:text-white transition-colors">Cinematography</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="text-slate-100 text-sm font-bold uppercase tracking-widest mb-4 opacity-70">Price Range (Coins)</h3>
+<input class="w-full h-2 bg-surface-dark rounded-lg appearance-none cursor-pointer accent-primary" max="1000" min="0" step="50" type="range"/>
+<div class="flex justify-between mt-2 text-xs text-slate-400">
+<span>Free</span>
+<span>1000 Coins</span>
+</div>
+</div>
+<div>
+<h3 class="text-slate-100 text-sm font-bold uppercase tracking-widest mb-4 opacity-70">Duration</h3>
+<div class="flex flex-wrap gap-2">
+<button class="px-3 py-1.5 rounded-full bg-surface-dark border border-border-dark text-xs text-slate-300 hover:border-primary transition-colors">Short (&lt; 10m)</button>
+<button class="px-3 py-1.5 rounded-full bg-primary/20 border border-primary text-xs text-primary font-bold">Medium (10-30m)</button>
+<button class="px-3 py-1.5 rounded-full bg-surface-dark border border-border-dark text-xs text-slate-300 hover:border-primary transition-colors">Long (30m+)</button>
+</div>
+</div>
+</aside>
+<section class="flex-1 px-8 pb-12 overflow-y-auto">
+<div class="flex flex-col gap-2 mb-8">
+<div class="flex items-center gap-2 text-slate-400 text-sm font-medium">
+<a class="hover:text-primary transition-colors" href="#">Search</a>
+<span>/</span>
+<span class="text-slate-100">"Cinematic"</span>
+</div>
+<div class="flex flex-wrap items-end justify-between gap-4">
+<div>
+<h1 class="text-white text-3xl font-bold tracking-tight">Results for 'Cinematic'</h1>
+<p class="text-slate-400 text-sm">Found 124 premium videos available now</p>
+</div>
+<div class="flex items-center gap-3 bg-surface-dark p-1 rounded-lg border border-border-dark">
+<button class="p-2 rounded bg-primary text-white">
+<span class="material-symbols-outlined block">grid_view</span>
+</button>
+<button class="p-2 rounded text-slate-400 hover:text-white">
+<span class="material-symbols-outlined block">view_list</span>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+<div class="group flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative aspect-video">
+<img class="w-full h-full object-cover" data-alt="Cinematic landscape mountain sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAH2tgW2x0SzWP-4hEIYjaXUMMj03tiDYgdWCfZ3SHILB1GBz5fN8rnZiKw-6Ug_dASxFY7kyCyC8uGaBiRc7RzFDe8V-ThtacCj___SFOwXgYZZgnRsapQfPDu2vbdSWp3ZZ63Mkr1X1QvPpgMdC-9d_lOopRAjMZnvgugMXDlOzVHGP8DiU1RbK-mod_ov2lBkSkuSidzn9Sqo6hnt6q14F9AcF_0qpdwTuuAZBxdYD5Q9S3U9XdpVkKJXsbyzeTlCzKlQRNrds1x"/>
+<div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 text-white text-[10px] font-bold rounded">12:45</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<h4 class="text-slate-100 font-bold text-base leading-snug line-clamp-1">Golden Hour Cinematography</h4>
+<p class="text-slate-400 text-xs">Arjun K. • 1.2M views</p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-border-dark/50">
+<span class="text-primary font-bold text-sm">50 Coins</span>
+<button class="text-xs bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded transition-colors font-bold">Preview</button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative aspect-video">
+<img class="w-full h-full object-cover" data-alt="Close up of a professional film camera lens" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARZA0FBARpgFIxEzNYgvw1GnEk6MB11OUZqmTNmiSnQHVGLogfH0YOkFDDrxwjkT_8CPI2Iw5cbVkMyCvF1AMeo2PAa9hEMw_jrQ7aQwuXh2N4ZLPNpZVD9iyaID8aVDd72HoocDWn2GsYWQgjcayvwr0ZKqB1yvFyCmT_i9RjVT0elEWrENZagbxmDcZ8uoS1NBXj-gNqvTkzcN1L9EpXr7xqwLgDPQ-A40KwGpw77ec_cBsj8x3_L3lf669Obwtv6wZxWfOd0WPV"/>
+<div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 text-white text-[10px] font-bold rounded">24:10</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<h4 class="text-slate-100 font-bold text-base leading-snug line-clamp-1">The Art of the Close-Up</h4>
+<p class="text-slate-400 text-xs">Film Masterclass • 800K views</p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-border-dark/50">
+<span class="text-primary font-bold text-sm">120 Coins</span>
+<button class="text-xs bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded transition-colors font-bold">Preview</button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative aspect-video">
+<img class="w-full h-full object-cover" data-alt="Neon city street at night with rain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdU0D9QAXqbPSHIlaQHOcSCoKZHgY7Pn5mfxQN9lUPzmxYcVOO5qwQgw8al2Sxv6I5JLKkilsr_UQFOR0NbxF7cmujG6M9uZi_VwhH9M3Rbu7GR8Jq4gPjnR0JHGRT6QfJ3JbZQtkdjOnfTZjr5E2_sPxmwpNUzPBPITctOCFzA3ie7zdCcw_V5sXsF6ylcx8jPptm3BqD9EFPtDEyga6FG0MkWyspP5A4qwSPwa3W_Eyvv0cdeOrL6oiEffAxCUoOeBp89JSgfG2G"/>
+<div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 text-white text-[10px] font-bold rounded">08:22</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<h4 class="text-slate-100 font-bold text-base leading-snug line-clamp-1">Neo-Noir Urban Aesthetics</h4>
+<p class="text-slate-400 text-xs">Visual Storytelling • 2.5M views</p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-border-dark/50">
+<span class="text-primary font-bold text-sm">75 Coins</span>
+<button class="text-xs bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded transition-colors font-bold">Preview</button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative aspect-video">
+<img class="w-full h-full object-cover" data-alt="Classic film projector showing light beam" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCpE7WJyi9K75MLdLMnKDbUOFw97A-sAf-Od59S4Kn0Iy4Iy-YGE1phovWh-Y5ykJ99xO00BCChW5gewfVL7GM-cXxk-EOtdyFhWh5tbv9UyRkPDgJmKTiDXk32H8zNbTMlLcLMAOy60HRQYtfJpwF6eRjTZ0tfkY94GjmMPeEJX5gcqz7wxNE6NDUikgWvPWKjJL0srKX2Hhp-XYMC9PUuLoQBdTFg9e-U8YGUmHSurB2OJgRbaSiep9ZaMFWFLgmBP0fFMNu57O_U"/>
+<div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 text-white text-[10px] font-bold rounded">15:55</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<h4 class="text-slate-100 font-bold text-base leading-snug line-clamp-1">History of 35mm Film</h4>
+<p class="text-slate-400 text-xs">Cinema Archive • 150K views</p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-border-dark/50">
+<span class="text-primary font-bold text-sm">30 Coins</span>
+<button class="text-xs bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded transition-colors font-bold">Preview</button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative aspect-video">
+<img class="w-full h-full object-cover" data-alt="Abstract purple and blue light leaks" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDaSBUozbL32a14w3rYPLHftAKM3_mnD8LvVJauAUbPvTHzLidZTeiMTfyBgPgRxFkvmS-K8pKPpwzSTeomoata-pVgOOJCuYnjC66iguuvCyvnUfNpm6oEUn5LE4t5EGzG8TnBCSrA215y3ip3e3ruIEFhI8-jwlONEUBMqvsHQDHQx-Hyt2uH3skMy-5awJzc6_ipTtG39rJ23Dep2GKeFo_VrMxg1Q4wWGkwLTnuFTFqaxqpr2Z4fYQ1sS10gNZv841zzcqF4vOT"/>
+<div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 text-white text-[10px] font-bold rounded">05:40</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<h4 class="text-slate-100 font-bold text-base leading-snug line-clamp-1">Modern Color Grading Secrets</h4>
+<p class="text-slate-400 text-xs">The Grading Pro • 540K views</p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-border-dark/50">
+<span class="text-primary font-bold text-sm">200 Coins</span>
+<button class="text-xs bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded transition-colors font-bold">Preview</button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative aspect-video">
+<img class="w-full h-full object-cover" data-alt="Moody dark forest with mist" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD69dRncDYtJQt3n2omTOoqOs8quvP9Vwh2ONdF_tr0VGO_hFBN10iQJg4pzzzd5HQS4pph9tajH-BmGnY7haKtTC-3KEIMfiN4_psJk-5Vt-b1bQbruV4Odj8er1m2iY0M0HconQwafuZaQYviSzsHlbY5QuBGw_3nxXThi6zCsdsiX7hxEm_JVZOTdd6AzCnSx5e5Kf4u4JClhudcA2P1XFvIgWJXlZORTHqu5aft1B90mguU1De-aodXmHlym8ywuCl-iXeJxZQS"/>
+<div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 text-white text-[10px] font-bold rounded">11:05</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<h4 class="text-slate-100 font-bold text-base leading-snug line-clamp-1">Suspense: Lighting for Horror</h4>
+<p class="text-slate-400 text-xs">Grip &amp; Electric • 95K views</p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-border-dark/50">
+<span class="text-primary font-bold text-sm">85 Coins</span>
+<button class="text-xs bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded transition-colors font-bold">Preview</button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative aspect-video">
+<img class="w-full h-full object-cover" data-alt="Microphone on a stand with cinematic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdR3IxarN6YQR-zLtq6FJwsltawiuvHuJPzUKcbkUW3IEw8MyaDjq0f1MhXs1TRyihx8Yz8CG0VBendCmGEJKeQ9JR75lBzh6c4TPwhZ6nvzY4xb_YtpWOty5FbI_tDm3van0IQ3mQbW3qKbkBYOB1pydYmOdYBRXnZ8uL5x3pNA86dn3Lw5uSWPefY8CugmcZAnwKEYJkLu99uDZxKaD77wkDh6dwUfqrNqugEHOugoDedBwvVokuF9uqUa4Y-j4Ukw5uhtAcYM7V"/>
+<div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 text-white text-[10px] font-bold rounded">19:30</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<h4 class="text-slate-100 font-bold text-base leading-snug line-clamp-1">Sound Design for Cinema</h4>
+<p class="text-slate-400 text-xs">Audio Tech • 420K views</p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-border-dark/50">
+<span class="text-primary font-bold text-sm">150 Coins</span>
+<button class="text-xs bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded transition-colors font-bold">Preview</button>
+</div>
+</div>
+</div>
+<div class="group flex flex-col bg-surface-dark rounded-xl border border-border-dark overflow-hidden transition-all hover:scale-[1.02] hover:shadow-2xl hover:shadow-primary/10">
+<div class="relative aspect-video">
+<img class="w-full h-full object-cover" data-alt="Drone shot of winding road in mountains" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMdrpa_kDr-eomTkV9IJ9wEsJCSol1rpPijorpAMbNDlKV0o7pjVYzNCTeeDqRmsWrZ8uEFYXC-PDazmnQg4YtraVaD8xy9XB8Uv8WDHAaSnKclJgMDNzTAu5t9PpWWt3IAh_mKo-4eVYrpEdl9ugYNa1s3FXnD1GXV-FU_k5XZGMJp1GII5GHw6cW_ZBRQXcsqdyuigdfjQepGjH24n-9kpUQSGQ3SKw14DkpFGXnX0I1O_Aa4MbjdIevXraRtWCGtURoV3rsZNkm"/>
+<div class="absolute bottom-2 right-2 px-2 py-1 bg-black/70 text-white text-[10px] font-bold rounded">06:50</div>
+<div class="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity">
+<div class="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white shadow-lg">
+<span class="material-symbols-outlined">play_arrow</span>
+</div>
+</div>
+</div>
+<div class="p-4 flex flex-col gap-2">
+<h4 class="text-slate-100 font-bold text-base leading-snug line-clamp-1">Cinematic Drone Techniques</h4>
+<p class="text-slate-400 text-xs">Sky High Films • 1.8M views</p>
+<div class="flex items-center justify-between mt-2 pt-2 border-t border-border-dark/50">
+<span class="text-primary font-bold text-sm">Free</span>
+<button class="text-xs bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded transition-colors font-bold">Watch Now</button>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-center">
+<nav class="flex items-center gap-2">
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-dark text-slate-400 hover:text-white hover:border-primary transition-colors">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center bg-primary text-white font-bold">1</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-dark text-slate-400 hover:text-white hover:border-primary transition-colors font-bold">2</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-dark text-slate-400 hover:text-white hover:border-primary transition-colors font-bold">3</button>
+<span class="text-slate-600 mx-1">...</span>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-dark text-slate-400 hover:text-white hover:border-primary transition-colors font-bold">12</button>
+<button class="w-10 h-10 rounded-lg flex items-center justify-center border border-border-dark text-slate-400 hover:text-white hover:border-primary transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</nav>
+</div>
+</section>
+</main>
+</div>
+</body></html>

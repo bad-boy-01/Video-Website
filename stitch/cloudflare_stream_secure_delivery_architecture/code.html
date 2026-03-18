@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VideoStream Admin - Cloudflare Integration Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cf: {
+              purple: '#8a4fff',
+              cyan: '#00f2fe',
+              dark: '#0a0a14',
+              panel: '#161625',
+              border: '#2d2d44'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-animations">
+    @keyframes pulse-glow {
+      0%, 100% { opacity: 0.6; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .status-pulse {
+      animation: pulse-glow 2s infinite ease-in-out;
+    }
+    .flow-line {
+      background: linear-gradient(90deg, #8a4fff 0%, #00f2fe 100%);
+      height: 2px;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0a0a14;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #2d2d44;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="bg-cf-dark text-slate-200 font-sans antialiased min-h-screen custom-scrollbar">
+<!-- BEGIN: MainHeader -->
+<header class="border-b border-cf-border bg-cf-panel/50 backdrop-blur-md sticky top-0 z-50">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-gradient-to-br from-cf-purple to-cf-cyan rounded-lg flex items-center justify-center">
+<svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<h1 class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-400">VideoStream <span class="text-cf-cyan">CloudStream</span></h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-green-500/10 border border-green-500/20 px-3 py-1 rounded-full text-xs text-green-400 font-medium">
+<span class="w-2 h-2 bg-green-500 rounded-full status-pulse"></span>
+          System Operational
+        </div>
+<button class="bg-cf-purple hover:bg-cf-purple/80 transition-colors px-4 py-2 rounded-md text-sm font-semibold">Deploy Config</button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="max-w-7xl mx-auto p-6 space-y-8">
+<!-- BEGIN: FlowVisualization -->
+<section class="grid grid-cols-1 lg:grid-cols-4 gap-6" data-purpose="pipeline-overview">
+<!-- Step 1: Upload -->
+<div class="bg-cf-panel p-5 rounded-xl border border-cf-border relative group hover:border-cf-purple/50 transition-all">
+<div class="text-xs font-bold text-cf-purple uppercase tracking-widest mb-4">Step 01: Ingestion</div>
+<h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+          Secure API Upload
+          <svg class="w-4 h-4 text-cf-purple" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p class="text-sm text-slate-400 mb-4">Admin uploads raw assets via TUS protocol to Cloudflare Stream.</p>
+<div class="bg-cf-dark/50 rounded p-3 font-mono text-[10px] text-slate-500 border border-white/5">
+          POST /v4/accounts/{id}/stream<br/>
+          Authorization: Bearer ●●●●
+        </div>
+</div>
+<!-- Step 2: Processing -->
+<div class="bg-cf-panel p-5 rounded-xl border border-cf-border relative group hover:border-cf-cyan/50 transition-all">
+<div class="text-xs font-bold text-cf-cyan uppercase tracking-widest mb-4">Step 02: Processing</div>
+<h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+          HLS Encoding
+          <svg class="w-4 h-4 text-cf-cyan" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.642.316a6 6 0 01-3.86.517l-2.388-.477a2 2 0 00-1.022.547l-1.168 1.168a2 2 0 001.61 3.412h13.419a2 2 0 001.61-3.412l-1.168-1.168z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<div class="space-y-2">
+<div class="flex justify-between text-[10px] text-slate-500 uppercase"><span>Progress</span> <span>100%</span></div>
+<div class="w-full bg-cf-dark rounded-full h-1.5 overflow-hidden">
+<div class="bg-gradient-to-r from-cf-purple to-cf-cyan h-full w-full"></div>
+</div>
+<p class="text-sm text-slate-400">Adaptive bitrate manifest generated (.m3u8)</p>
+</div>
+</div>
+<!-- Step 3: Security -->
+<div class="bg-cf-panel p-5 rounded-xl border border-cf-border relative group hover:border-cf-purple/50 transition-all">
+<div class="text-xs font-bold text-cf-purple uppercase tracking-widest mb-4">Step 03: Auth</div>
+<h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+          Signed URL Gen
+          <svg class="w-4 h-4 text-cf-purple" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p class="text-sm text-slate-400 mb-3">Cloud Function generates time-limited JWT tokens.</p>
+<div class="flex items-center gap-2 text-xs font-mono bg-cf-dark/50 p-2 rounded border border-white/5 text-purple-300">
+<span class="text-slate-500">exp:</span> 1715634000
+          <span class="text-slate-500 ml-auto">(2m)</span>
+</div>
+</div>
+<!-- Step 4: Playback -->
+<div class="bg-cf-panel p-5 rounded-xl border border-cf-border relative group hover:border-cf-cyan/50 transition-all">
+<div class="text-xs font-bold text-cf-cyan uppercase tracking-widest mb-4">Step 04: Edge</div>
+<h3 class="text-lg font-semibold mb-2 flex items-center gap-2">
+          Global Playback
+          <svg class="w-4 h-4 text-cf-cyan" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</h3>
+<p class="text-sm text-slate-400">Streamed from 300+ edge locations worldwide.</p>
+<div class="mt-4 flex -space-x-2">
+<div class="w-6 h-6 rounded-full border border-cf-dark bg-slate-700 flex items-center justify-center text-[10px]">US</div>
+<div class="w-6 h-6 rounded-full border border-cf-dark bg-slate-700 flex items-center justify-center text-[10px]">EU</div>
+<div class="w-6 h-6 rounded-full border border-cf-dark bg-slate-700 flex items-center justify-center text-[10px]">AS</div>
+</div>
+</div>
+</section>
+<!-- END: FlowVisualization -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- BEGIN: PlayerSection -->
+<section class="lg:col-span-2 space-y-4" data-purpose="video-player-preview">
+<div class="bg-cf-panel rounded-2xl border border-cf-border overflow-hidden shadow-2xl">
+<div class="p-4 border-b border-cf-border flex justify-between items-center bg-cf-dark/20">
+<h2 class="font-semibold text-sm">Active Stream Preview: <span class="text-slate-500 font-mono">vid_7718290x</span></h2>
+<div class="flex gap-2">
+<span class="px-2 py-0.5 rounded bg-cf-cyan/10 text-cf-cyan text-[10px] font-bold border border-cf-cyan/20">HLS / 4K</span>
+<span class="px-2 py-0.5 rounded bg-cf-purple/10 text-cf-purple text-[10px] font-bold border border-cf-purple/20">SIGNED URL</span>
+</div>
+</div>
+<!-- Mock Video Player Area -->
+<div class="aspect-video bg-black relative flex items-center justify-center group cursor-pointer">
+<img alt="Stream Preview" class="w-full h-full object-cover opacity-60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgf0nQQroVgfmypgoeaR-8BXZvnYOt2Th_esR7lBCyuZwphrBYK8RasVNv2fPPY6U_wqaYZOiVe2VAMJJiNhe66Y5fbzjvNyVQmPQpusjwH9UvYRxkelezHsjfP7551MmI1n4ghM4q6O8zNkp1JgBaznxY3OXjZb4g_7T9c3WgBT2IF1SmMD1dls0oBQw0QhBpdn-NqP1EpTqApa3dk0kffJSydPNXRIVskUlKSJQFZH8q9_pzqicBrSHNceLFAV4u0EQP--ruq2OB"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<!-- Watermark Overlay Mock -->
+<div class="absolute top-4 left-4 opacity-30 select-none text-[10px] font-mono pointer-events-none">
+              ID: USER_7712 | IP: 192.168.1.1
+            </div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="w-16 h-16 bg-cf-purple/20 border border-cf-purple rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
+<svg class="w-8 h-8 text-cf-purple" fill="currentColor" viewbox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+</div>
+</div>
+<!-- Player Controls Mock -->
+<div class="absolute bottom-0 left-0 right-0 p-4 space-y-3">
+<div class="w-full h-1 bg-slate-800 rounded-full">
+<div class="w-1/3 h-full bg-cf-cyan rounded-full shadow-[0_0_10px_#00f2fe]"></div>
+</div>
+<div class="flex items-center justify-between text-xs">
+<div class="flex items-center gap-4">
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M10 9v6m4-6v6"></path></svg>
+<span>02:14 / 15:40</span>
+</div>
+<div class="flex items-center gap-4">
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path></svg>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Token Information -->
+<div class="bg-cf-panel/50 border border-cf-border rounded-xl p-4">
+<div class="flex items-start gap-4">
+<div class="p-3 bg-cf-purple/10 rounded-lg text-cf-purple">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+<div class="flex-1">
+<h4 class="text-sm font-semibold text-slate-200 mb-1">Authenticated Endpoint</h4>
+<p class="text-xs text-slate-500 font-mono break-all bg-cf-dark p-2 rounded border border-white/5">
+                https://videostream.app/watch/vid_7718290x?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+              </p>
+</div>
+</div>
+</div>
+</section>
+<!-- END: PlayerSection -->
+<!-- BEGIN: SecurityStatus -->
+<section class="space-y-6" data-purpose="security-dashboard">
+<div class="bg-cf-panel rounded-2xl border border-cf-border p-6 shadow-xl relative overflow-hidden">
+<div class="absolute top-0 right-0 p-2">
+<div class="w-20 h-20 bg-cf-cyan/5 blur-3xl rounded-full"></div>
+</div>
+<h2 class="text-lg font-bold mb-6 flex items-center gap-2">
+<span class="w-2 h-6 bg-cf-cyan rounded-full"></span>
+            Security Status
+          </h2>
+<div class="space-y-5">
+<!-- Security Item 1 -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-cf-dark/40 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-cf-cyan/10 flex items-center justify-center text-cf-cyan">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+</div>
+<div>
+<div class="text-sm font-medium">Watermarking</div>
+<div class="text-[10px] text-slate-500">Dynamic User ID Overlay</div>
+</div>
+</div>
+<span class="text-[10px] font-bold text-cf-cyan bg-cf-cyan/10 px-2 py-1 rounded">ENABLED</span>
+</div>
+<!-- Security Item 2 -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-cf-dark/40 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-cf-purple/10 flex items-center justify-center text-cf-purple">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064"></path></svg>
+</div>
+<div>
+<div class="text-sm font-medium">Geoblocking</div>
+<div class="text-[10px] text-slate-500">Global Exclusion Active</div>
+</div>
+</div>
+<span class="text-[10px] font-bold text-cf-purple bg-cf-purple/10 px-2 py-1 rounded">ACTIVE</span>
+</div>
+<!-- Security Item 3 -->
+<div class="flex items-center justify-between p-3 rounded-lg bg-cf-dark/40 border border-white/5">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-red-500/10 flex items-center justify-center text-red-500">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+</div>
+<div>
+<div class="text-sm font-medium">Download Blocked</div>
+<div class="text-[10px] text-slate-500">Direct Source Protection</div>
+</div>
+</div>
+<span class="text-[10px] font-bold text-red-500 bg-red-500/10 px-2 py-1 rounded">ENFORCED</span>
+</div>
+</div>
+<!-- Network Map Mock -->
+<div class="mt-8">
+<div class="text-xs text-slate-500 mb-2 font-mono">Edge Node Distribution</div>
+<div class="h-32 bg-cf-dark rounded-lg border border-white/5 relative overflow-hidden flex items-center justify-center">
+<svg class="w-full h-full text-slate-800" viewbox="0 0 200 100">
+<path d="M30 50 Q 50 20, 70 50 T 110 50 T 150 50" fill="none" stroke="currentColor" stroke-width="0.5"></path>
+<circle class="status-pulse" cx="30" cy="50" fill="#8a4fff" r="2"></circle>
+<circle class="status-pulse" cx="70" cy="50" fill="#00f2fe" r="2"></circle>
+<circle class="status-pulse" cx="110" cy="50" fill="#8a4fff" r="2"></circle>
+<circle class="status-pulse" cx="150" cy="50" fill="#00f2fe" r="2"></circle>
+</svg>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<span class="text-[10px] text-slate-600 uppercase tracking-widest">Global Edge Mesh Active</span>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-br from-cf-purple/20 to-cf-cyan/20 rounded-2xl border border-cf-border p-4 text-center">
+<p class="text-xs text-slate-300">Requires manual configuration for new domains.</p>
+<button class="mt-3 text-xs font-bold text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors border border-white/10">
+            Open Firewall Settings
+          </button>
+</div>
+</section>
+<!-- END: SecurityStatus -->
+</div>
+</main>
+<!-- BEGIN: FooterStatus -->
+<footer class="mt-12 border-t border-cf-border bg-cf-panel/30 p-6">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-6 text-[11px] font-mono text-slate-500">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-cf-cyan rounded-full"></span> API: v2.4.0-stable
+        </div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-cf-purple rounded-full"></span> LATENCY: 42ms
+        </div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> CDN: Cloudflare
+        </div>
+</div>
+<div class="text-[11px] text-slate-600">
+        © 2024 VideoStream Platform. All rights reserved. Professional Video Infrastructure.
+      </div>
+</div>
+</footer>
+<!-- END: FooterStatus -->
+</body></html>

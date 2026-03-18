@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Notification Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Main Content Area -->
+<div class="px-4 md:px-20 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1">
+<!-- Header Component -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-4 md:px-10 py-6">
+<div class="flex items-center gap-4">
+<div class="text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl">notifications_active</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-[-0.015em]">Notification Center</h2>
+</div>
+<button class="flex min-w-[120px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary hover:bg-primary/90 text-white text-sm font-bold transition-colors">
+<span class="truncate">Mark all as read</span>
+</button>
+</header>
+<div class="flex h-full min-h-[700px] flex-col bg-background-light dark:bg-background-dark py-4">
+<!-- Profile Snippet -->
+<div class="flex flex-col gap-6 px-4 mb-8">
+<div class="flex gap-4 items-center">
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 border-2 border-primary" data-alt="User profile picture of Alex Doe" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBYjSI7OLgdqP_dtvweg_skjo-reZzCrKGekBNgyBMZPJ6wCBcrXpdnKMX1zlyaThByLLWZO3Ng-CR5sjFxhiz3RwstAKb-eoJC2HRXYIqLTNkiS1DRwb-Ql2gkKZZWID0X2HsRnjgdXH8H56_XrxaXzKGrZDZZHmAM9jGo3exc9rsfVn8L3n0VlSIGuDiOjxJUpt9V_8mvENJj7k07K98vhLNn3UKsapyaNzfPReMkPsgtLfecR2VAzn1gTCbF-cHeZ7LCL8Xo5V-b");'></div>
+<div class="flex flex-col">
+<h1 class="text-lg font-bold leading-none">Alex Doe</h1>
+<p class="text-primary text-sm font-medium">Premium Member</p>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex border-b border-primary/10 gap-8">
+<a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-primary pb-3 pt-2 px-2" href="#">
+<span class="text-sm font-bold tracking-[0.015em]">All Notifications</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 hover:text-primary pb-3 pt-2 px-2 transition-colors" href="#">
+<span class="text-sm font-bold tracking-[0.015em]">Unread</span>
+</a>
+<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-slate-500 hover:text-primary pb-3 pt-2 px-2 transition-colors" href="#">
+<span class="text-sm font-bold tracking-[0.015em]">Archived</span>
+</a>
+</div>
+</div>
+<!-- Notification List -->
+<div class="flex flex-col gap-1">
+<!-- New Video Release -->
+<div class="flex items-start gap-4 bg-primary/5 hover:bg-primary/10 transition-colors px-4 py-4 cursor-pointer border-l-4 border-primary">
+<div class="text-white flex items-center justify-center rounded-xl bg-primary shrink-0 size-12 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">play_circle</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<div class="flex justify-between items-start">
+<p class="text-base font-bold leading-normal">New Video Release</p>
+<span class="text-primary text-xs font-semibold uppercase tracking-wider">New</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed mt-1">Your favorite creator just uploaded "10 Productivity Hacks for Designers". Check it out now!</p>
+<p class="text-slate-400 text-xs mt-2">2 minutes ago</p>
+</div>
+</div>
+<!-- Coin Purchase Successful -->
+<div class="flex items-start gap-4 hover:bg-primary/5 transition-colors px-4 py-4 cursor-pointer border-l-4 border-transparent">
+<div class="text-primary flex items-center justify-center rounded-xl bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<div class="flex justify-between items-start">
+<p class="text-base font-bold leading-normal">Coin Purchase Successful</p>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed mt-1">Great news! 500 gold coins have been added to your wallet. You're ready to unlock new content.</p>
+<p class="text-slate-400 text-xs mt-2">1 hour ago</p>
+</div>
+</div>
+<!-- Video Unlocked -->
+<div class="flex items-start gap-4 hover:bg-primary/5 transition-colors px-4 py-4 cursor-pointer border-l-4 border-transparent">
+<div class="text-primary flex items-center justify-center rounded-xl bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined">lock_open</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<div class="flex justify-between items-start">
+<p class="text-base font-bold leading-normal">Video Unlocked</p>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed mt-1">You have successfully unlocked "Advanced UI Design Workshop". Happy learning!</p>
+<p class="text-slate-400 text-xs mt-2">5 hours ago</p>
+</div>
+</div>
+<!-- System Update -->
+<div class="flex items-start gap-4 hover:bg-primary/5 transition-colors px-4 py-4 cursor-pointer border-l-4 border-transparent">
+<div class="text-primary flex items-center justify-center rounded-xl bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined">settings_suggest</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<div class="flex justify-between items-start">
+<p class="text-base font-bold leading-normal">System Update</p>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed mt-1">Version 2.4.0 is now live. We've improved performance and added support for high-resolution thumbnails.</p>
+<p class="text-slate-400 text-xs mt-2">Yesterday</p>
+</div>
+</div>
+<!-- Past Notification (Read) -->
+<div class="flex items-start gap-4 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all px-4 py-4 cursor-pointer border-l-4 border-transparent">
+<div class="text-primary flex items-center justify-center rounded-xl bg-primary/20 shrink-0 size-12">
+<span class="material-symbols-outlined">person_add</span>
+</div>
+<div class="flex flex-col flex-1 justify-center">
+<div class="flex justify-between items-start">
+<p class="text-base font-bold leading-normal">New Follower</p>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm font-normal leading-relaxed mt-1">Sarah Jenkins followed you. Follow them back to see their latest designs!</p>
+<p class="text-slate-400 text-xs mt-2">2 days ago</p>
+</div>
+</div>
+</div>
+<!-- Footer / Load More -->
+<div class="flex justify-center py-10">
+<button class="flex items-center gap-2 text-primary font-bold hover:underline">
+<span>View older notifications</span>
+<span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Sidebar / Floating Menu -->
+<div class="fixed left-0 top-0 bottom-0 w-20 hidden lg:flex flex-col items-center py-10 gap-8 bg-background-light dark:bg-background-dark border-r border-primary/10">
+<div class="text-primary mb-6">
+<span class="material-symbols-outlined text-3xl">terminal</span>
+</div>
+<div class="flex flex-col gap-6">
+<div class="text-slate-400 hover:text-primary cursor-pointer transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined">home</span>
+</div>
+<div class="text-slate-400 hover:text-primary cursor-pointer transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined">explore</span>
+</div>
+<div class="text-white bg-primary cursor-pointer p-2 rounded-lg shadow-lg shadow-primary/30">
+<span class="material-symbols-outlined">notifications</span>
+</div>
+<div class="text-slate-400 hover:text-primary cursor-pointer transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined">account_circle</span>
+</div>
+<div class="text-slate-400 hover:text-primary cursor-pointer transition-colors p-2 rounded-lg">
+<span class="material-symbols-outlined">wallet</span>
+</div>
+</div>
+<div class="mt-auto text-slate-400 hover:text-red-500 cursor-pointer p-2 rounded-lg transition-colors">
+<span class="material-symbols-outlined">logout</span>
+</div>
+</div>
+</div>
+</div>
+</body></html>

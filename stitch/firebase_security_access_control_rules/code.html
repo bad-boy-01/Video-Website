@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                        "accent-purple": "#6b2e50",
+                        "accent-purple-light": "#ce8db1",
+                        "editor-bg": "#1a0b13",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Public Sans', sans-serif; }
+        .rules-syntax-keyword { color: #ff63b9; }
+        .rules-syntax-string { color: #ce8db1; }
+        .rules-syntax-comment { color: #6b2e50; }
+        .rules-syntax-bracket { color: #ffffff; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-accent-purple px-10 py-3 bg-white dark:bg-editor-bg">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8 flex items-center justify-center rounded-lg bg-primary/10">
+<span class="material-symbols-outlined">database</span>
+</div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">VideoStream Admin</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Rules</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Data</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Storage</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Usage</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden lg:flex flex-col min-w-40 h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full border border-slate-200 dark:border-accent-purple overflow-hidden">
+<div class="text-slate-400 dark:text-accent-purple-light flex bg-slate-50 dark:bg-accent-purple/30 items-center justify-center px-3">
+<span class="material-symbols-outlined text-[20px]">search</span>
+</div>
+<input class="form-input flex w-full border-none bg-slate-50 dark:bg-accent-purple/30 text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-accent-purple-light px-2 text-sm focus:ring-0" placeholder="Search resources..."/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-accent-purple/40 text-slate-600 dark:text-white hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-xl bg-slate-100 dark:bg-accent-purple/40 text-slate-600 dark:text-white hover:bg-primary/20 transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+<div class="bg-primary/20 p-0.5 rounded-full border border-primary/30">
+<div class="aspect-square bg-cover rounded-full size-8" data-alt="User avatar placeholder with abstract pattern" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDvnYXftLXKFb3mftUokQyHDm7s9_6RkFkC_ikyhgc8Dtl4NCdRkXEmRvhN9Oa075fnaoMk9e0X1_ep2KnZNaU5VcESFFFqXQUdTAYKwp2WTwsQGpE4IgnPQPr3glDY_Cd8E9bc4aBY8IWI8iBadfqQMwrjac__YhumuR72tJNaqIZBsRCK8rsLJwVZDpzsUvn13RWe4nVlZM0iKcIN2LrMNmKKYT9fu28f3myOGJrZwdhwfJYJgNRb7K9sJEr_y6O20kg676H6WU1Q");'></div>
+</div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- Sidebar -->
+<aside class="hidden md:flex w-64 flex-col border-r border-slate-200 dark:border-accent-purple bg-white dark:bg-editor-bg p-4 gap-6">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-3 px-3 py-2 rounded-xl bg-primary/10 text-primary">
+<span class="material-symbols-outlined">shield</span>
+<p class="text-sm font-bold">Security Rules</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-accent-purple/20 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">history</span>
+<p class="text-sm font-medium">Releases</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-accent-purple/20 rounded-xl cursor-pointer">
+<span class="material-symbols-outlined">science</span>
+<p class="text-sm font-medium">Rules Playground</p>
+</div>
+</div>
+<div class="mt-auto">
+<div class="p-4 rounded-xl bg-slate-50 dark:bg-accent-purple/10 border border-slate-200 dark:border-accent-purple/30">
+<p class="text-xs font-bold text-slate-400 dark:text-accent-purple-light uppercase tracking-widest mb-2">Environment</p>
+<div class="flex items-center gap-2 text-primary">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+</span>
+<span class="text-sm font-bold">Production</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col bg-background-light dark:bg-background-dark min-w-0">
+<!-- Breadcrumbs & Actions -->
+<div class="flex flex-wrap items-center justify-between p-6 gap-4">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 dark:text-accent-purple-light font-medium">Firestore</span>
+<span class="material-symbols-outlined text-slate-400 dark:text-accent-purple-light text-sm">chevron_right</span>
+<span class="text-slate-900 dark:text-white font-bold">Security Rules</span>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-300 dark:border-accent-purple text-slate-600 dark:text-white text-sm font-bold hover:bg-slate-50 dark:hover:bg-accent-purple/20">
+<span class="material-symbols-outlined text-sm">history</span> History
+                        </button>
+<button class="bg-primary text-white px-6 py-2 rounded-lg text-sm font-bold hover:opacity-90 transition-opacity flex items-center gap-2 shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-sm">publish</span> Publish Rules
+                        </button>
+</div>
+</div>
+<div class="px-6 pb-6 grid grid-cols-12 gap-6 flex-1">
+<!-- Code Editor Section -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-6">
+<!-- Rules Status Panel -->
+<div class="flex flex-col md:flex-row items-center justify-between gap-4 p-5 rounded-xl border border-primary/30 bg-primary/5 dark:bg-primary/10">
+<div class="flex items-center gap-4">
+<div class="size-10 flex items-center justify-center rounded-full bg-primary/20 text-primary">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div class="flex flex-col">
+<p class="text-slate-900 dark:text-white text-base font-bold leading-tight">Rules are Active</p>
+<p class="text-slate-600 dark:text-accent-purple-light text-sm">Last deployed: Oct 24, 2023 at 14:32 UTC-7</p>
+</div>
+</div>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary/20 text-primary text-xs font-bold rounded-full border border-primary/30 uppercase">v4.2.0-stable</span>
+</div>
+</div>
+<!-- Editor -->
+<div class="flex-1 flex flex-col rounded-xl border border-slate-200 dark:border-accent-purple bg-white dark:bg-editor-bg overflow-hidden shadow-sm">
+<div class="flex items-center justify-between px-4 py-2 border-b border-slate-200 dark:border-accent-purple bg-slate-50 dark:bg-accent-purple/20">
+<div class="flex gap-2">
+<div class="size-3 rounded-full bg-red-400"></div>
+<div class="size-3 rounded-full bg-yellow-400"></div>
+<div class="size-3 rounded-full bg-green-400"></div>
+</div>
+<span class="text-xs font-mono text-slate-400 dark:text-accent-purple-light uppercase tracking-widest">firestore.rules</span>
+<div class="w-12"></div>
+</div>
+<div class="flex-1 p-6 font-mono text-sm overflow-auto leading-relaxed">
+<div class="flex gap-4">
+<div class="text-slate-300 dark:text-accent-purple/50 text-right select-none pr-2 border-r border-accent-purple/20">
+                                        1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17
+                                    </div>
+<div class="text-slate-700 dark:text-slate-300">
+<p><span class="rules-syntax-keyword">rules_version</span> = <span class="rules-syntax-string">'2'</span>;</p>
+<p><span class="rules-syntax-keyword">service</span> cloud.firestore <span class="rules-syntax-bracket">{</span></p>
+<p class="pl-4"><span class="rules-syntax-keyword">match</span> /databases/{database}/documents <span class="rules-syntax-bracket">{</span></p>
+<p class="pl-8 rules-syntax-comment">// Block direct access to core collections</p>
+<p class="pl-8"><span class="rules-syntax-keyword">match</span> /videos/{videoId} <span class="rules-syntax-bracket">{</span></p>
+<p class="pl-12"><span class="rules-syntax-keyword">allow</span> <span class="rules-syntax-string">read</span>: <span class="rules-syntax-keyword">if</span> request.auth != <span class="rules-syntax-keyword">null</span>;</p>
+<p class="pl-12"><span class="rules-syntax-keyword">allow</span> <span class="rules-syntax-string">write</span>: <span class="rules-syntax-keyword">if false</span>; <span class="rules-syntax-comment">// Admin SDK only</span></p>
+<p class="pl-8"><span class="rules-syntax-bracket">}</span></p>
+<p class="pl-8 mt-2"><span class="rules-syntax-keyword">match</span> /transactions/{orderId} <span class="rules-syntax-bracket">{</span></p>
+<p class="pl-12 rules-syntax-comment">// Strictly prohibit direct client interaction</p>
+<p class="pl-12"><span class="rules-syntax-keyword">allow</span> <span class="rules-syntax-string">read</span>, <span class="rules-syntax-string">write</span>: <span class="rules-syntax-keyword">if false</span>;</p>
+<p class="pl-8"><span class="rules-syntax-bracket">}</span></p>
+<p class="pl-8 mt-2"><span class="rules-syntax-keyword">match</span> /users/{userId} <span class="rules-syntax-bracket">{</span></p>
+<p class="pl-12"><span class="rules-syntax-keyword">allow</span> <span class="rules-syntax-string">read</span>, <span class="rules-syntax-string">write</span>: <span class="rules-syntax-keyword">if</span> request.auth.uid == userId;</p>
+<p class="pl-8"><span class="rules-syntax-bracket">}</span></p>
+<p class="pl-4"><span class="rules-syntax-bracket">}</span></p>
+<p><span class="rules-syntax-bracket">}</span></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Side Panels (Test Lab) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-6">
+<!-- Test Lab Section -->
+<div class="rounded-xl border border-slate-200 dark:border-accent-purple bg-white dark:bg-editor-bg flex flex-col shadow-sm">
+<div class="p-4 border-b border-slate-200 dark:border-accent-purple">
+<h3 class="text-slate-900 dark:text-white font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">science</span>
+                                    Rules Test Lab
+                                </h3>
+</div>
+<div class="p-4 flex flex-col gap-4">
+<div class="space-y-3">
+<div>
+<label class="text-xs font-bold text-slate-500 dark:text-accent-purple-light uppercase mb-1 block">Simulation Type</label>
+<select class="w-full bg-slate-50 dark:bg-accent-purple/20 border-slate-200 dark:border-accent-purple rounded-lg text-sm text-slate-700 dark:text-white focus:ring-primary">
+<option>Get (Read)</option>
+<option>Create (Write)</option>
+<option>Update (Write)</option>
+<option>Delete (Write)</option>
+</select>
+</div>
+<div>
+<label class="text-xs font-bold text-slate-500 dark:text-accent-purple-light uppercase mb-1 block">Location</label>
+<input class="w-full bg-slate-50 dark:bg-accent-purple/20 border-slate-200 dark:border-accent-purple rounded-lg text-sm font-mono text-slate-700 dark:text-white focus:ring-primary" type="text" value="/videos/vid_9921"/>
+</div>
+<div class="flex items-center gap-2 py-2">
+<input checked="" class="rounded text-primary focus:ring-primary border-slate-300 dark:border-accent-purple bg-slate-50 dark:bg-accent-purple/20" type="checkbox"/>
+<span class="text-sm text-slate-700 dark:text-slate-300">Authenticated as User</span>
+</div>
+</div>
+<button class="w-full py-2.5 bg-accent-purple/10 dark:bg-accent-purple/40 text-accent-purple-light dark:text-white border border-accent-purple/30 rounded-lg text-sm font-bold hover:bg-accent-purple/20 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">play_arrow</span> Run Simulation
+                                </button>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-accent-purple/10 border-t border-slate-200 dark:border-accent-purple rounded-b-xl">
+<div class="flex items-center justify-between mb-3">
+<p class="text-xs font-bold text-slate-500 dark:text-accent-purple-light uppercase">Simulation Results</p>
+<span class="text-[10px] text-slate-400 dark:text-accent-purple/50">Just now</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex items-start gap-3 p-3 rounded-lg bg-green-500/10 border border-green-500/20">
+<span class="material-symbols-outlined text-green-500">check_circle</span>
+<div class="flex-1">
+<p class="text-green-500 text-xs font-bold uppercase">Success</p>
+<p class="text-slate-700 dark:text-slate-300 text-xs mt-1">Access to /videos/vid_9921 allowed by line 6.</p>
+</div>
+</div>
+<div class="flex items-start gap-3 p-3 rounded-lg bg-red-500/10 border border-red-500/20">
+<span class="material-symbols-outlined text-red-500">cancel</span>
+<div class="flex-1">
+<p class="text-red-500 text-xs font-bold uppercase">Denied</p>
+<p class="text-slate-700 dark:text-slate-300 text-xs mt-1">Access to /transactions/tx_441 denied by line 11.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Usage Stats -->
+<div class="rounded-xl border border-slate-200 dark:border-accent-purple bg-white dark:bg-editor-bg p-5 flex flex-col shadow-sm">
+<h3 class="text-slate-900 dark:text-white font-bold mb-4 text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">analytics</span>
+                                Rules Performance
+                            </h3>
+<div class="space-y-4">
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-500 dark:text-accent-purple-light">Mean Eval Time</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">12.4ms</span>
+</div>
+<div class="w-full bg-slate-100 dark:bg-accent-purple/20 rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full" style="width: 45%"></div>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-500 dark:text-accent-purple-light">Rules Denied (24h)</span>
+<span class="text-sm font-bold text-red-500">1,204</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-500 dark:text-accent-purple-light">Rules Allowed (24h)</span>
+<span class="text-sm font-bold text-green-500">842.1k</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</body></html>

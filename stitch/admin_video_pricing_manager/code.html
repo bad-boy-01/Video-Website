@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Content &amp; Transaction Manager</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3a2a4d;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between border-b border-primary/20 px-8 py-4 bg-background-light dark:bg-background-dark sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3 text-primary">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined">shield_person</span>
+</div>
+<h2 class="text-xl font-bold leading-tight tracking-tight">Admin Manager</h2>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Dashboard</a>
+<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Content</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Transactions</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary text-sm font-medium transition-colors" href="#">Users</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-lg">search</span>
+<input class="bg-slate-200/50 dark:bg-primary/10 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary w-64" placeholder="Search resources..." type="text"/>
+</div>
+<button class="p-2 rounded-lg bg-slate-200 dark:bg-primary/10 text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-primary/20 border border-primary/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Admin user profile avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbsdXUL1hN9R1BwxFggAjG7ncBTdVV5ASqZqv9VhgbvYLwwUGIPRruZAO-aj8TVVkxFWjlFpn4JdEXwazNSXf4_XEX4d5oam4ZAMJ1tg5FMeE8wan31W5vAuC7PPxAoQ_V_A_i4xZoqnzia_wK3uPyu5c_BDb91K1elJSC-VsCQNP3AFZpzC3_8NjaeEYq8mwmb6zxQsa8FpMWubpLof44U1n8wvxW1eaxH09glmttV_8wvXtZn3aM7fAY15rarBkDqSdtlIsgpMBn"/>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto p-6 lg:p-10">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h1 class="text-3xl font-bold tracking-tight mb-1">Content &amp; Transactions</h1>
+<p class="text-slate-500 dark:text-slate-400">Manage your video library and monitor platform financial flow.</p>
+</div>
+<button class="flex items-center gap-2 bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-lg font-bold transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">add_circle</span>
+            Upload New Video
+        </button>
+</div>
+<!-- Dashboard Stats Quick View -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 p-5 rounded-xl">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Total Content</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold">1,284</span>
+<span class="text-emerald-500 text-xs font-bold mb-1">+12 this week</span>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 p-5 rounded-xl">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Weekly Transactions</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold">42,900</span>
+<span class="text-primary text-xs font-bold mb-1">Coins</span>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 p-5 rounded-xl">
+<p class="text-slate-500 dark:text-slate-400 text-sm font-medium mb-1">Revenue Estimate</p>
+<div class="flex items-end gap-2">
+<span class="text-2xl font-bold">$12,450</span>
+<span class="text-slate-400 text-xs font-bold mb-1">USD</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Video Management Table (2/3 width) -->
+<div class="lg:col-span-2 space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold">Video Library</h3>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-slate-200 dark:border-primary/20 hover:bg-slate-100 dark:hover:bg-primary/10">
+<span class="material-symbols-outlined text-lg leading-none">filter_list</span>
+</button>
+<button class="p-2 rounded-lg border border-slate-200 dark:border-primary/20 hover:bg-slate-100 dark:hover:bg-primary/10">
+<span class="material-symbols-outlined text-lg leading-none">sort</span>
+</button>
+</div>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl overflow-hidden overflow-x-auto">
+<table class="w-full text-left text-sm border-collapse min-w-[700px]">
+<thead>
+<tr class="bg-slate-50 dark:bg-primary/10 border-b border-slate-200 dark:border-primary/20">
+<th class="px-4 py-4 font-bold text-slate-600 dark:text-slate-300">Title</th>
+<th class="px-4 py-4 font-bold text-slate-600 dark:text-slate-300">Category</th>
+<th class="px-4 py-4 font-bold text-slate-600 dark:text-slate-300">Price (Coins)</th>
+<th class="px-4 py-4 font-bold text-slate-600 dark:text-slate-300">Total Sales (Coins)</th>
+<th class="px-4 py-4 font-bold text-slate-600 dark:text-slate-300 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-primary/10">
+<!-- Video Row 1 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-200 dark:bg-primary/20 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Video thumbnail placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDKeOnoyBlQtp_10dU0nzg4VtCcPUB7fe3uhlnRqdmKJ39pQYpoSAQwlbNtbNx2AIqu7D-f3hM9nefCAyKLGzhuGQye0_X6Z5NPnYitdZDHbEDQW15ArVUoPwK-KoNEspDRidRa1RFPdeBSgmoGCKJxn6fuBjXxZVXUhRGyzY0YVc97oeIAVPnJAyb0diXp4fbDCM4VnbvFOsyBUoOXB-qNI7kkZlJZNv5XwYrv_n66Kc7w4fpUMjrP7mdf5W66uQZuvcPHRbAM3tHA"/>
+</div>
+<span class="font-medium truncate max-w-[150px]">Advanced UI Motion Design</span>
+</div>
+</td>
+<td class="px-4 py-4 text-slate-500 dark:text-slate-400">Design</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2 group">
+<span class="inline-flex items-center gap-1 font-bold text-primary">
+<span class="material-symbols-outlined text-sm">toll</span> 250
+                                    </span>
+<button class="p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary" title="Edit Price">
+<span class="material-symbols-outlined text-xs">edit</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="font-bold">12,500</span>
+</td>
+<td class="px-4 py-4 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-1.5 hover:text-primary transition-colors" title="Edit Video"><span class="material-symbols-outlined text-lg">edit_note</span></button>
+<button class="p-1.5 hover:text-red-500 transition-colors" title="Delete Video"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Video Row 2 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-200 dark:bg-primary/20 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Video thumbnail placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB2KIsAoDcRtBSp-9_W2PoW3fYqbSzag6uM3hUnDfOgmvHX5WJhJ9tUU1Jf9655aC_OeUV6t3xpA4Lv7dA_GFdoHWs5qWySVQ2DZis1X6ZI2oQyXpHwOqJ7sxMqkrxjdEQR6e3vq4yZ-8lsQixXCwNXXTH4VGQ3Gkl3-OFbtTHPkhwMW_3SqFdyWZKk0MOzf8xD4HtNKKnypounIsFwkAjHWfTGat5oAouyFxHH9LwH9etrloO15ii6QONVZQX-381aeM8wZiXFjx03"/>
+</div>
+<span class="font-medium truncate max-w-[150px]">Productivity Mastery 101</span>
+</div>
+</td>
+<td class="px-4 py-4 text-slate-500 dark:text-slate-400">Education</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2 group">
+<span class="inline-flex items-center gap-1 font-bold text-primary">
+<span class="material-symbols-outlined text-sm">toll</span> 180
+                                    </span>
+<button class="p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary" title="Edit Price">
+<span class="material-symbols-outlined text-xs">edit</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="font-bold">8,460</span>
+</td>
+<td class="px-4 py-4 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-1.5 hover:text-primary transition-colors" title="Edit Video"><span class="material-symbols-outlined text-lg">edit_note</span></button>
+<button class="p-1.5 hover:text-red-500 transition-colors" title="Delete Video"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Video Row 3 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-200 dark:bg-primary/20 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Video thumbnail placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDejKoFGbyXvW668H16YFB2qYjAeQv7b5m3nuB5Tt0EuHRxuXH93aQ4MSgCtVOyuvGC3h7f-P50WZwidkjFCiIB6KabwY4mZprdD_gsOnCLZQLUErudp0kuCNewbDzD8VsENl1sZoKIfUi2I34CVgHQuIcMQlwwPSYWey0tSRFZQ8GTgzy9Qgmem1tCk5Oxt2ZQcJPHK-649B263HbhbjfVL_Mwj9ni4R7nmVPuClynWO-jvZ8D6AasiZD5DB8hh5Csb3H6jA_pGAwf"/>
+</div>
+<span class="font-medium truncate max-w-[150px]">Hardware Review: Pro Max</span>
+</div>
+</td>
+<td class="px-4 py-4 text-slate-500 dark:text-slate-400">Tech</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2 group">
+<span class="inline-flex items-center gap-1 font-bold text-primary">
+<span class="material-symbols-outlined text-sm">toll</span> 500
+                                    </span>
+<button class="p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary" title="Edit Price">
+<span class="material-symbols-outlined text-xs">edit</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="font-bold">4,500</span>
+</td>
+<td class="px-4 py-4 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-1.5 hover:text-primary transition-colors" title="Edit Video"><span class="material-symbols-outlined text-lg">edit_note</span></button>
+<button class="p-1.5 hover:text-red-500 transition-colors" title="Delete Video"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+<!-- Video Row 4 -->
+<tr class="hover:bg-slate-50 dark:hover:bg-primary/5 transition-colors">
+<td class="px-4 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded bg-slate-200 dark:bg-primary/20 flex-shrink-0 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Video thumbnail placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAEXd-W44KBVKT-x-NBu-g6JIpL2ppwAk4hUyoRS2yGd5jlcSsqms6xztc-09WvlrvRTK4tPRSumnePhq5vIh0Ykj8F2DGysbi7QDOF8JdysoNLLune-afmnD5H3wnvM1TrGwYkvDTgs3u44JS9XzjNtl_GnoSnZsE62R4UkA2LKKrgvXnrPhd1z6-wEJ-XSjQBW-L8-nPc1I43RsJ7CayX9soFHgE-kyJvhk-N5rQ7e1S7SbYYTgUNFneu-JSqOGNLBjN8lqhRjrB"/>
+</div>
+<span class="font-medium truncate max-w-[150px]">Deep Learning Foundations</span>
+</div>
+</td>
+<td class="px-4 py-4 text-slate-500 dark:text-slate-400">AI</td>
+<td class="px-4 py-4">
+<div class="flex items-center gap-2 group">
+<span class="inline-flex items-center gap-1 font-bold text-primary">
+<span class="material-symbols-outlined text-sm">toll</span> 1200
+                                    </span>
+<button class="p-1 opacity-0 group-hover:opacity-100 transition-opacity hover:text-primary" title="Edit Price">
+<span class="material-symbols-outlined text-xs">edit</span>
+</button>
+</div>
+</td>
+<td class="px-4 py-4">
+<span class="font-bold">17,400</span>
+</td>
+<td class="px-4 py-4 text-right">
+<div class="flex justify-end gap-1">
+<button class="p-1.5 hover:text-primary transition-colors" title="Edit Video"><span class="material-symbols-outlined text-lg">edit_note</span></button>
+<button class="p-1.5 hover:text-red-500 transition-colors" title="Delete Video"><span class="material-symbols-outlined text-lg">delete</span></button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="p-4 border-t border-slate-200 dark:border-primary/10 flex items-center justify-between text-xs text-slate-500">
+<span>Showing 1-4 of 1,284 videos</span>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded border border-slate-200 dark:border-primary/20 disabled:opacity-50" disabled="">Prev</button>
+<button class="px-3 py-1 rounded bg-primary text-white">1</button>
+<button class="px-3 py-1 rounded border border-slate-200 dark:border-primary/20">2</button>
+<button class="px-3 py-1 rounded border border-slate-200 dark:border-primary/20">3</button>
+<button class="px-3 py-1 rounded border border-slate-200 dark:border-primary/20">Next</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Transaction Log (1/3 width) -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="text-xl font-bold">Transaction Log</h3>
+<a class="text-xs text-primary font-bold hover:underline" href="#">View All</a>
+</div>
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/10 rounded-xl overflow-hidden flex flex-col h-[600px]">
+<div class="overflow-y-auto custom-scrollbar flex-1">
+<!-- Transaction Items -->
+<div class="p-4 border-b border-slate-100 dark:border-primary/10 hover:bg-slate-50 dark:hover:bg-primary/10 cursor-pointer transition-colors group">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">add</span>
+</div>
+<div>
+<p class="text-sm font-bold">Coin Purchase</p>
+<p class="text-[10px] text-slate-500">TXN-9023412-B</p>
+</div>
+</div>
+<span class="text-emerald-500 font-bold text-sm">+$49.99</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-500">User: alex_design_22</span>
+<span class="text-xs text-slate-500 italic">2 mins ago</span>
+</div>
+</div>
+<div class="p-4 border-b border-slate-100 dark:border-primary/10 hover:bg-slate-50 dark:hover:bg-primary/10 cursor-pointer transition-colors bg-primary/5 border-l-4 border-l-primary">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-primary/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+</div>
+<div>
+<p class="text-sm font-bold">Content Access</p>
+<p class="text-[10px] text-slate-500">TXN-9023413-C</p>
+</div>
+</div>
+<span class="text-primary font-bold text-sm">-250 Coins</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-500">User: sarah_k</span>
+<span class="text-xs text-slate-500 italic">15 mins ago</span>
+</div>
+<!-- Transaction Details Inline (Highlighted) -->
+<div class="mt-3 p-3 bg-white dark:bg-background-dark/50 rounded-lg text-xs border border-primary/20">
+<p class="text-slate-400 mb-1">Items Purchased:</p>
+<p class="font-medium text-slate-100 mb-2">"Advanced UI Motion Design"</p>
+<div class="flex justify-between border-t border-primary/10 pt-2 text-[10px]">
+<span>Payment Method: Platform Wallet</span>
+<span>Status: Success</span>
+</div>
+</div>
+</div>
+<div class="p-4 border-b border-slate-100 dark:border-primary/10 hover:bg-slate-50 dark:hover:bg-primary/10 cursor-pointer transition-colors group">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-primary/20 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">shopping_bag</span>
+</div>
+<div>
+<p class="text-sm font-bold">Content Access</p>
+<p class="text-[10px] text-slate-500">TXN-9023414-D</p>
+</div>
+</div>
+<span class="text-primary font-bold text-sm">-180 Coins</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-500">User: mike_raw</span>
+<span class="text-xs text-slate-500 italic">1 hour ago</span>
+</div>
+</div>
+<div class="p-4 border-b border-slate-100 dark:border-primary/10 hover:bg-slate-50 dark:hover:bg-primary/10 cursor-pointer transition-colors group">
+<div class="flex items-start justify-between mb-2">
+<div class="flex items-center gap-3">
+<div class="size-8 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">add</span>
+</div>
+<div>
+<p class="text-sm font-bold">Coin Purchase</p>
+<p class="text-[10px] text-slate-500">TXN-9023415-E</p>
+</div>
+</div>
+<span class="text-emerald-500 font-bold text-sm">+$10.00</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-xs text-slate-500">User: liam.tech</span>
+<span class="text-xs text-slate-500 italic">2 hours ago</span>
+</div>
+</div>
+</div>
+<div class="p-4 bg-slate-50 dark:bg-primary/10 border-t border-slate-200 dark:border-primary/20">
+<button class="w-full py-2 bg-primary/20 text-primary font-bold rounded hover:bg-primary/30 text-xs transition-all">
+                        Export Log (.CSV)
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Upload New Video Modal -->
+<div class="fixed inset-0 z-[100] bg-black/60 flex items-center justify-center p-4 backdrop-blur-sm">
+<div class="bg-background-light dark:bg-background-dark border border-primary/30 w-full max-w-xl rounded-2xl overflow-hidden shadow-2xl">
+<div class="px-6 py-4 border-b border-primary/20 flex items-center justify-between">
+<h3 class="text-xl font-bold">Upload New Content</h3>
+<button class="text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="p-6 space-y-5">
+<!-- Dropzone Area -->
+<div class="border-2 border-dashed border-primary/30 rounded-xl p-6 flex flex-col items-center justify-center bg-primary/5 hover:bg-primary/10 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-primary mb-2 group-hover:scale-110 transition-transform">cloud_upload</span>
+<p class="font-medium text-slate-300">Click to upload or drag and drop</p>
+<p class="text-[10px] text-slate-500 mt-1">MP4, MOV (max. 2GB)</p>
+</div>
+<div class="grid grid-cols-2 gap-x-4 gap-y-5">
+<div class="col-span-2">
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Video Title</label>
+<input class="w-full bg-slate-100 dark:bg-primary/10 border border-slate-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary px-4 py-2 text-sm" placeholder="Enter content title" type="text"/>
+</div>
+<div class="col-span-1">
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Category</label>
+<div class="relative">
+<select class="w-full appearance-none bg-slate-100 dark:bg-primary/10 border border-slate-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary px-4 py-2 text-sm">
+<option>Design</option>
+<option>Education</option>
+<option>Technology</option>
+<option>Entertainment</option>
+<option>AI</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none text-sm">expand_more</span>
+</div>
+</div>
+<div class="col-span-1">
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Price in Coins</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-primary text-base">toll</span>
+<input class="w-full bg-slate-100 dark:bg-primary/10 border border-slate-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary pl-10 pr-4 py-2 text-sm font-bold" placeholder="0" type="number"/>
+</div>
+</div>
+<div class="col-span-2">
+<label class="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5">Description</label>
+<textarea class="w-full bg-slate-100 dark:bg-primary/10 border border-slate-200 dark:border-primary/20 rounded-lg focus:ring-2 focus:ring-primary px-4 py-2 text-sm min-h-[100px]" placeholder="Provide a detailed overview of the content..."></textarea>
+</div>
+</div>
+<div class="flex items-center justify-end gap-3 pt-2">
+<button class="px-6 py-2 rounded-lg font-bold text-slate-400 hover:bg-slate-100 dark:hover:bg-primary/10 transition-all text-sm">Cancel</button>
+<button class="px-8 py-2 rounded-lg font-bold bg-primary text-white hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 text-sm">Publish Video</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

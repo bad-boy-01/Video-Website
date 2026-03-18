@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>VideoStream - Cinematic Player</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .video-gradient-overlay {
+            background: linear-gradient(0deg, rgba(25, 16, 34, 0.8) 0%, rgba(25, 16, 34, 0) 50%);
+        }
+        .paywall-blur {
+            backdrop-filter: blur(12px);
+            background: rgba(25, 16, 34, 0.85);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<header class="sticky top-0 z-50 flex items-center justify-between border-b border-primary/10 bg-background-light/80 dark:bg-background-dark/80 px-6 py-4 backdrop-blur-md lg:px-20">
+<div class="flex items-center gap-3">
+<div class="flex size-10 items-center justify-center rounded-xl bg-primary text-white">
+<span class="material-symbols-outlined text-2xl">movie_filter</span>
+</div>
+<h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-white">VideoStream</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden sm:flex items-center gap-2 rounded-full bg-primary/10 border border-primary/20 px-4 py-1.5">
+<span class="material-symbols-outlined text-primary text-lg">database</span>
+<span class="text-sm font-bold text-primary">Balance: 450</span>
+</div>
+<button class="flex items-center justify-center rounded-full bg-slate-200 dark:bg-primary/20 p-2 text-slate-700 dark:text-slate-100 transition-colors hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="size-10 rounded-full border-2 border-primary/30 bg-cover bg-center" data-alt="User profile avatar with neon accent" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAS4299zPyjiG97UBVzpRsGL8JjI4CwsOWbJZotwrkGD3Gt7NWONjCBTfrOClGRBZ4X6LyuRNR5Us_7kA1oP4mqM7mID3M64kxA2DPMKlmNvcSj7xNW8BpUGbtsmV28p1U-3_cpIM1sLZJKEuaJmgkaSyrxAchz6wbPUMxSN3KqpSvWtmXT8yi0JJqvPv0C0_zW0IWlCoOC-ocDpwbbMcBp0EuxX2zxqLbTXR0S4huHgvffHYYdl6uvADuglp5Xp6Kmu8qSgPxrpHbD');">
+</div>
+</div>
+</header>
+<main class="mx-auto flex w-full max-w-[1440px] flex-1 flex-col gap-8 px-4 py-8 lg:px-20 lg:flex-row">
+<div class="flex flex-1 flex-col gap-6">
+<!-- Video Player Container with Paywall Overlay -->
+<div class="group relative aspect-video w-full overflow-hidden rounded-2xl bg-slate-900 shadow-2xl ring-1 ring-white/10">
+<!-- Blurred Background Thumbnail (No Video Element Present) -->
+<div class="absolute inset-0 bg-cover bg-center blur-[4px]" data-alt="Cinematic frame of a city at night with neon lights" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCcNN16yN3HRAqYdZ086n9XXh0fIUvmZcqzAfAs1L41CRrPCmCF2GTC44_ruFC0I-Js8CEMNWTtrEmfnzMtJpIL87wPslIedEICgK5spUBVgOglocqqrXah5-ehJ20NWaYOlcU1KEnBogD7GHdgamfIBw-1NrpXvn3WbrrJ-77UzdLR1ZP_L3QZWj6QbdRaadWxmRO8S-cM2PMCNV2COnTUR_nOPIflqenygaAtNhqLAiQjUlczwd5s3aNCfwA6vqGcNNZoum9xBzNK');">
+</div>
+<!-- Paywall Overlay -->
+<div class="paywall-blur absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+<div class="mb-6 flex size-24 items-center justify-center rounded-full bg-white/10 text-white ring-4 ring-white/5">
+<span class="material-symbols-outlined text-5xl" style="font-variation-settings: 'FILL' 1;">lock</span>
+</div>
+<h3 class="mb-2 text-2xl font-bold text-white">This content is protected.</h3>
+<p class="mb-8 max-w-sm text-slate-300">This premium masterclass is available for individual purchase or with a pro subscription.</p>
+<div class="flex flex-col items-center gap-4">
+<button class="group flex items-center gap-3 rounded-xl bg-primary px-10 py-4 text-lg font-bold text-white shadow-xl shadow-primary/30 transition-all hover:scale-105 active:scale-95">
+<span class="material-symbols-outlined">database</span>
+<span>Unlock for 50 Coins</span>
+</button>
+<div class="flex items-center gap-3">
+<button class="rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/10">
+                    Buy with PayPal
+                </button>
+<button class="rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/10">
+                    Buy with Card
+                </button>
+</div>
+</div>
+<div class="absolute bottom-6 flex items-center gap-2 rounded-full bg-emerald-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-emerald-500 ring-1 ring-emerald-500/20">
+<span class="material-symbols-outlined text-sm">verified_user</span>
+<span>Secure Transaction</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-4">
+<div class="flex flex-wrap items-start justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-3">
+<h2 class="text-3xl font-bold tracking-tight dark:text-white">The Art of Cinematic Lighting</h2>
+<div class="flex items-center gap-2"><span class="rounded-lg bg-slate-200 dark:bg-white/10 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 ring-1 ring-slate-400/30"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">lock</span>Locked</span></span><span class="flex items-center gap-1 rounded-lg bg-emerald-500/10 px-2 py-1 text-[10px] font-bold uppercase text-emerald-500 ring-1 ring-emerald-500/20"><span class="material-symbols-outlined text-sm">verified_user</span>Secure</span></div>
+</div>
+<p class="max-w-2xl text-slate-600 dark:text-slate-400">
+                                Master the fundamentals of lighting for film and video in this comprehensive 45-minute masterclass. Learn how to create mood, depth, and character using professional techniques.
+                            </p>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 rounded-xl bg-slate-200 dark:bg-primary/10 px-4 py-2 text-sm font-semibold transition-all hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-xl">thumb_up</span>
+<span>12.4k</span>
+</button>
+<button class="flex items-center gap-2 rounded-xl bg-slate-200 dark:bg-primary/10 px-4 py-2 text-sm font-semibold transition-all hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-xl">share</span>
+<span>Share</span>
+</button>
+<button class="flex items-center gap-2 rounded-xl bg-slate-200 dark:bg-primary/10 px-4 py-2 text-sm font-semibold transition-all hover:bg-primary hover:text-white">
+<span class="material-symbols-outlined text-xl">download</span>
+<span>Save</span>
+</button>
+</div>
+</div>
+</div>
+<div class="h-px w-full bg-primary/10"></div>
+<div class="flex items-center gap-4">
+<div class="size-12 rounded-full bg-cover bg-center" data-alt="Instructor portrait with artistic lighting" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAggaiWzE5cRC_wxtVKDP1aASXUlYfPeZg9hxSlUCw15JNPSQXZG9kG8ShKoh0tqLKuM292pKZDZLIFQNnnDB9U3_lbak2uK4cvMPwf9WdHJ1OBFJoZ7gA8b8GeP-qlRdJ5SX8goSo9dM7Fd_SQBhvzHrVXWF-J-oacRO_7hGBkMUX3FBZNCEyfTy271oOaCmYzIIhxVzQTqjSo9aHQe1fBUbF1jllpP2ClyBfC2E0AHWtHPTlgZS2C1uwH_zZO6fCCAfJzU56I_UYm');"></div>
+<div class="flex flex-col">
+<p class="font-bold dark:text-white">Elena Vance</p>
+<p class="text-xs text-slate-500">Director of Photography • 1.2M followers</p>
+</div>
+<button class="ml-auto rounded-lg bg-primary px-6 py-2 text-sm font-bold text-white transition-opacity hover:opacity-90">Follow</button>
+</div>
+</div>
+<aside class="flex w-full flex-col gap-6 lg:w-[380px]">
+<div class="flex items-center justify-between">
+<h3 class="text-lg font-bold dark:text-white">More Like This</h3>
+<button class="text-sm font-semibold text-primary">View All</button>
+</div>
+<div class="flex flex-col gap-4">
+<div class="group flex cursor-pointer gap-4 rounded-xl p-2 transition-colors hover:bg-primary/5">
+<div class="relative aspect-video w-32 shrink-0 overflow-hidden rounded-lg bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Modern camera gear layout on dark surface" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDYEp8kNVeC3NnzSBA3DiTc0xcfmiBZf4IQjKZeL3yymcVvuJg-Kl8ciyUIFQ5WCEOZNnJVjcSdhFPG7PyXCcykqGXW6KyLOGS6shQywtzXMeO-yvYqUWcJ2a4Qf-EOLT8GpaRatFOAZPE4XCLK1H1BFfyoxB8rpw7LuqQupvCDODdPpXlE9uR6njHJa15hbU0kKh8F47y3XQnCLzaWkfkbnWWQ9WmTHD_0PlOuPrU7f4ZXxzVSmqwuziXbd70j6_a-YFNVr-75NoNS');"></div>
+<span class="absolute bottom-1 right-1 rounded bg-black/60 px-1 text-[10px] text-white">12:04</span>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<h4 class="line-clamp-2 text-sm font-bold leading-snug group-hover:text-primary">Modern Camera Gear for 2024</h4>
+<p class="text-xs text-slate-500">Alex Rivera • 45k views</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="text-xs font-bold text-primary">15 Coins</span>
+</div>
+</div>
+</div>
+<div class="group flex cursor-pointer gap-4 rounded-xl p-2 transition-colors hover:bg-primary/5">
+<div class="relative aspect-video w-32 shrink-0 overflow-hidden rounded-lg bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Color grading software interface screenshot" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5K2UgT_UGJDrpjbMHqZKlc00yoBlRSbT4LvZ_tmG5K0ITvoLbX0AKStyX2EFHxxITzLUqs-FmbJBW4MI6E9hK-Nic3TDc4jM-UQbWdWrgelN0soaAi5KHm6PpNz4rUm-XIT5r_goNVjEvc309qhHNAC9UZ61WfN4R_wnQtAqNpYbg641GYhGJwe5uXkbExHqCBU4E1_JVOJDGIK4xq4AHePTn1PbLyeqMVmRi-cBUu2AsWIPGooDOG2G0DURBtdM1ncXdxbpDMMAH');"></div>
+<span class="absolute bottom-1 right-1 rounded bg-black/60 px-1 text-[10px] text-white">28:15</span>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<h4 class="line-clamp-2 text-sm font-bold leading-snug group-hover:text-primary">Advanced Color Grading Basics</h4>
+<p class="text-xs text-slate-500">Elena Vance • 89k views</p>
+<div class="flex items-center gap-2">
+<span class="rounded bg-slate-700 px-2 py-0.5 text-[10px] font-bold text-white uppercase">Owned</span>
+</div>
+</div>
+</div>
+<div class="group flex cursor-pointer gap-4 rounded-xl p-2 transition-colors hover:bg-primary/5">
+<div class="relative aspect-video w-32 shrink-0 overflow-hidden rounded-lg bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Sound booth with professional microphone" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCtjWjf4WgY6KFpCA8n9rkUBFjDvJk93yXz8g2Z991TqIdSRzY05nTIDZC2QxrrVcyD7L9G3W9aKBA7u58xGhL_D5LKfDlmUUWH5G4kFBXqOa8dVVsfwliyg3e5GP5llsiB67twDAtDRlJGPGN08EjmRNdnPXDIuQJRbikLY6n_EntMqpCUQIo-tfcNhCzIQcRvfoOo2T8o2esPldTnx7LCkCY4yOzvSNfKy6TY5GAeL_08IahZzFnH74tDaNeazk4wpQjPmjaInUOA');"></div>
+<span class="absolute bottom-1 right-1 rounded bg-black/60 px-1 text-[10px] text-white">15:45</span>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<h4 class="line-clamp-2 text-sm font-bold leading-snug group-hover:text-primary">Sound Design for Documentaries</h4>
+<p class="text-xs text-slate-500">Maria Chen • 12k views</p>
+<button class="flex items-center gap-1 mt-1">
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="text-xs font-bold text-primary">Buy for 30 Coins</span>
+</button>
+</div>
+</div>
+<div class="group flex cursor-pointer gap-4 rounded-xl p-2 transition-colors hover:bg-primary/5">
+<div class="relative aspect-video w-32 shrink-0 overflow-hidden rounded-lg bg-slate-800">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="Film set with actors and director" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDn8lEutsikwr-uu2EbGL095WJ8CBQHEVcwjC3DmdV1zYJD6NaEalgNuWFE96D7ZnM7UeqamzjlYLUr67qIxZ4_rx7aimWrHACZmy6jtOHUP2Ft8A1fT6F6eakL5SU0txjBIazJwlRrH_uf9caTplEiB-JLAANBTJAETiD6F64f7iovkm5zh7zEMj7CEcc283_C-p_cpEJixUoAUCvQAl1VMzM3bETLAbdZ5Jmggd1CG8wsTt57mhbqGnEH17UL2WalMSnuXR_ikvHo');"></div>
+<span class="absolute bottom-1 right-1 rounded bg-black/60 px-1 text-[10px] text-white">52:20</span>
+</div>
+<div class="flex flex-col justify-center gap-1">
+<h4 class="line-clamp-2 text-sm font-bold leading-snug group-hover:text-primary">Directing 101: Scene Blocks</h4>
+<p class="text-xs text-slate-500">Jordan Smith • 5k views</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary" style="font-variation-settings: 'FILL' 1;">database</span>
+<span class="text-xs font-bold text-primary">45 Coins</span>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-4 flex flex-col items-center justify-center rounded-2xl bg-primary/10 border border-primary/20 p-6 text-center">
+<span class="material-symbols-outlined text-4xl text-primary mb-2">stars</span>
+<h4 class="font-bold text-slate-900 dark:text-white">Get Unlimited Access</h4>
+<p class="text-sm text-slate-500 mb-4">Subscribe to unlock all premium masterclasses for one monthly fee.</p>
+<button class="w-full rounded-xl bg-primary py-3 text-sm font-bold text-white shadow-lg shadow-primary/20">Upgrade Now</button>
+</div>
+</aside>
+</main>
+<footer class="border-t border-primary/10 px-6 py-8 lg:px-20">
+<div class="mx-auto flex max-w-[1440px] flex-col items-center justify-between gap-4 sm:flex-row">
+<p class="text-sm text-slate-500">© 2024 VideoStream. All rights reserved.</p>
+<div class="flex items-center gap-6">
+<a class="text-sm text-slate-500 hover:text-primary" href="#">Help Center</a>
+<a class="text-sm text-slate-500 hover:text-primary" href="#">Terms</a>
+<a class="text-sm text-slate-500 hover:text-primary" href="#">Privacy</a>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

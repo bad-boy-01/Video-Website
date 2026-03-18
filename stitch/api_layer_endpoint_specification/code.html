@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>API Layer Architecture &amp; Monitoring Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<style data-purpose="custom-animations">
+    @keyframes pulse-subtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .animate-pulse-subtle {
+      animation: pulse-subtle 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    .glow-green { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); }
+    .glow-blue { box-shadow: 0 0 15px rgba(59, 130, 246, 0.2); }
+  </style>
+</head>
+<body class="bg-[#0a0a0c] text-slate-300 font-sans min-h-screen">
+<!-- BEGIN: MainHeader -->
+<header class="border-b border-slate-800 bg-[#0f1115] px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center">
+<svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M13 10V3L4 14h7v7l9-11h-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h1 class="text-lg font-bold text-white tracking-tight">V-STREAM API GATEWAY</h1>
+<p class="text-xs text-slate-500 font-mono">INTERNAL ARCHITECTURE &amp; REAL-TIME MONITORING</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right">
+<div class="text-[10px] uppercase text-slate-500 font-bold">Global System Status</div>
+<div class="flex items-center justify-end gap-2">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+</span>
+<span class="text-green-500 text-sm font-medium">99.98% Operational</span>
+</div>
+</div>
+<div class="h-8 w-[1px] bg-slate-800"></div>
+<div class="text-xs font-mono text-slate-400">
+        REFRESH: <span id="timestamp">14:22:05 UTC</span>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="p-6 max-w-[1600px] mx-auto space-y-8">
+<!-- BEGIN: SystemOverviewCards -->
+<section class="grid grid-cols-1 md:grid-cols-4 gap-4" data-purpose="kpi-dashboard">
+<div class="bg-[#12141a] border border-slate-800 p-4 rounded-xl">
+<div class="text-xs text-slate-500 mb-1 uppercase font-semibold">Total Requests (24h)</div>
+<div class="text-2xl font-bold text-white tracking-tight">42.8M</div>
+<div class="mt-2 text-[10px] text-green-400 font-mono flex items-center gap-1">
+<svg class="h-3 w-3" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+<path clip-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" fill-rule="evenodd"></path>
+</svg>
+          +12.4% vs prev. period
+        </div>
+</div>
+<div class="bg-[#12141a] border border-slate-800 p-4 rounded-xl">
+<div class="text-xs text-slate-500 mb-1 uppercase font-semibold">Avg. Latency (P95)</div>
+<div class="text-2xl font-bold text-white tracking-tight">112ms</div>
+<div class="mt-2 text-[10px] text-slate-400 font-mono italic">Region: Global-Edge</div>
+</div>
+<div class="bg-[#12141a] border border-slate-800 p-4 rounded-xl">
+<div class="text-xs text-slate-500 mb-1 uppercase font-semibold">Error Rate</div>
+<div class="text-2xl font-bold text-white tracking-tight text-green-500">0.02%</div>
+<div class="mt-2 text-[10px] text-slate-400 font-mono">Excluding 404 Client Errors</div>
+</div>
+<div class="bg-[#12141a] border border-slate-800 p-4 rounded-xl">
+<div class="text-xs text-slate-500 mb-1 uppercase font-semibold">Throughput</div>
+<div class="text-2xl font-bold text-white tracking-tight">4.2k <span class="text-sm font-normal text-slate-500">req/s</span></div>
+<div class="mt-2 text-[10px] text-indigo-400 font-mono">Autoscale: Active (Cluster A)</div>
+</div>
+</section>
+<!-- END: SystemOverviewCards -->
+<!-- BEGIN: ArchitectureDiagram -->
+<section class="bg-[#12141a] border border-slate-800 rounded-2xl overflow-hidden shadow-2xl">
+<div class="bg-slate-900/50 px-6 py-3 border-b border-slate-800 flex justify-between items-center">
+<h2 class="text-sm font-bold text-slate-200 flex items-center gap-2 uppercase tracking-widest">
+<svg class="h-4 w-4 text-indigo-500" fill="none" stroke="currentColor" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+          API Layer Architecture
+        </h2>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-green-500 rounded-full"></div>
+<span class="text-[10px] font-mono uppercase">Healthy</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+<span class="text-[10px] font-mono uppercase">High Latency</span>
+</div>
+</div>
+</div>
+<div class="p-8 lg:p-12">
+<div class="grid grid-cols-1 md:grid-cols-7 gap-6 relative">
+<!-- Architecture Connectors (Conceptual Background Lines) -->
+<div class="absolute inset-x-0 top-1/2 h-[2px] bg-slate-800 -translate-y-1/2 z-0 hidden md:block"></div>
+<!-- ENDPOINT: /auth -->
+<div class="relative z-10 flex flex-col items-center group" data-purpose="endpoint-card">
+<div class="w-full bg-[#1a1d24] border border-slate-700 p-5 rounded-xl transition-all duration-300 group-hover:border-indigo-500/50 glow-blue">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-mono text-indigo-400 font-bold bg-indigo-500/10 px-2 py-0.5 rounded">POST</span>
+<div class="h-2 w-2 rounded-full bg-green-500"></div>
+</div>
+<h3 class="text-white font-mono font-bold text-sm mb-2">/auth</h3>
+<p class="text-[11px] text-slate-400 leading-relaxed mb-4">JWT session orchestration &amp; identity verification.</p>
+<div class="pt-3 border-t border-slate-800 space-y-2">
+<div class="flex justify-between text-[10px] font-mono">
+<span class="text-slate-500">Lat:</span>
+<span class="text-white">42ms</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-indigo-500 h-full w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ENDPOINT: /videos -->
+<div class="relative z-10 flex flex-col items-center group" data-purpose="endpoint-card">
+<div class="w-full bg-[#1a1d24] border border-slate-700 p-5 rounded-xl transition-all duration-300 group-hover:border-indigo-500/50">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">GET/PUT</span>
+<div class="h-2 w-2 rounded-full bg-green-500"></div>
+</div>
+<h3 class="text-white font-mono font-bold text-sm mb-2">/videos</h3>
+<p class="text-[11px] text-slate-400 leading-relaxed mb-4">Metadata storage &amp; CDN signed URL generation.</p>
+<div class="pt-3 border-t border-slate-800 space-y-2">
+<div class="flex justify-between text-[10px] font-mono">
+<span class="text-slate-500">Lat:</span>
+<span class="text-white">105ms</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full w-[40%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ENDPOINT: /purchase -->
+<div class="relative z-10 flex flex-col items-center group" data-purpose="endpoint-card">
+<div class="w-full bg-[#1a1d24] border border-slate-700 p-5 rounded-xl transition-all duration-300 group-hover:border-indigo-500/50">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-mono text-indigo-400 font-bold bg-indigo-500/10 px-2 py-0.5 rounded">POST</span>
+<div class="h-2 w-2 rounded-full bg-green-500"></div>
+</div>
+<h3 class="text-white font-mono font-bold text-sm mb-2">/purchase</h3>
+<p class="text-[11px] text-slate-400 leading-relaxed mb-4">Atomic transaction layer for one-off content buys.</p>
+<div class="pt-3 border-t border-slate-800 space-y-2">
+<div class="flex justify-between text-[10px] font-mono">
+<span class="text-slate-500">Lat:</span>
+<span class="text-white">312ms</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-indigo-500 h-full w-[95%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ENDPOINT: /wallet -->
+<div class="relative z-10 flex flex-col items-center group" data-purpose="endpoint-card">
+<div class="w-full bg-[#1a1d24] border border-slate-700 p-5 rounded-xl transition-all duration-300 group-hover:border-indigo-500/50 glow-green">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-mono text-slate-400 font-bold bg-slate-500/10 px-2 py-0.5 rounded">GET</span>
+<div class="h-2 w-2 rounded-full bg-green-500"></div>
+</div>
+<h3 class="text-white font-mono font-bold text-sm mb-2">/wallet</h3>
+<p class="text-[11px] text-slate-400 leading-relaxed mb-4">Balance inquiries and virtual currency ledgers.</p>
+<div class="pt-3 border-t border-slate-800 space-y-2">
+<div class="flex justify-between text-[10px] font-mono">
+<span class="text-slate-500">Lat:</span>
+<span class="text-white">65ms</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-emerald-500 h-full w-[25%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ENDPOINT: /subscription -->
+<div class="relative z-10 flex flex-col items-center group" data-purpose="endpoint-card">
+<div class="w-full bg-[#1a1d24] border border-slate-700 p-5 rounded-xl transition-all duration-300 group-hover:border-indigo-500/50">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-mono text-indigo-400 font-bold bg-indigo-500/10 px-2 py-0.5 rounded">PATCH</span>
+<div class="h-2 w-2 rounded-full bg-yellow-500 animate-pulse"></div>
+</div>
+<h3 class="text-white font-mono font-bold text-sm mb-2">/subscription</h3>
+<p class="text-[11px] text-slate-400 leading-relaxed mb-4">Tiered access control &amp; recurring billing hooks.</p>
+<div class="pt-3 border-t border-slate-800 space-y-2">
+<div class="flex justify-between text-[10px] font-mono text-yellow-500">
+<span>Lat:</span>
+<span>450ms</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-yellow-500 h-full w-[98%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ENDPOINT: /creator -->
+<div class="relative z-10 flex flex-col items-center group" data-purpose="endpoint-card">
+<div class="w-full bg-[#1a1d24] border border-slate-700 p-5 rounded-xl transition-all duration-300 group-hover:border-indigo-500/50">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-mono text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">CRUD</span>
+<div class="h-2 w-2 rounded-full bg-green-500"></div>
+</div>
+<h3 class="text-white font-mono font-bold text-sm mb-2">/creator</h3>
+<p class="text-[11px] text-slate-400 leading-relaxed mb-4">Analytics dashboards and content management.</p>
+<div class="pt-3 border-t border-slate-800 space-y-2">
+<div class="flex justify-between text-[10px] font-mono">
+<span class="text-slate-500">Lat:</span>
+<span class="text-white">128ms</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-indigo-500 h-full w-[60%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- ENDPOINT: /admin -->
+<div class="relative z-10 flex flex-col items-center group" data-purpose="endpoint-card">
+<div class="w-full bg-[#1a1d24] border-2 border-slate-700 p-5 rounded-xl transition-all duration-300 group-hover:border-red-500/50">
+<div class="flex justify-between items-start mb-4">
+<span class="text-[10px] font-mono text-red-400 font-bold bg-red-500/10 px-2 py-0.5 rounded">ROOT</span>
+<div class="h-2 w-2 rounded-full bg-green-500"></div>
+</div>
+<h3 class="text-white font-mono font-bold text-sm mb-2">/admin</h3>
+<p class="text-[11px] text-slate-400 leading-relaxed mb-4">High-privilege system config &amp; global moderation.</p>
+<div class="pt-3 border-t border-slate-800 space-y-2">
+<div class="flex justify-between text-[10px] font-mono text-slate-500">
+<span>Lat:</span>
+<span class="text-white">35ms</span>
+</div>
+<div class="w-full bg-slate-800 h-1 rounded-full overflow-hidden">
+<div class="bg-red-500 h-full w-[15%]"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ArchitectureDiagram -->
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- BEGIN: LatencyAnalysis -->
+<div class="bg-[#12141a] border border-slate-800 rounded-xl overflow-hidden p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-sm font-bold text-white uppercase tracking-widest">Latency Distribution (ms)</h2>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-slate-800 text-[10px] rounded text-slate-400">P50</span>
+<span class="px-2 py-1 bg-slate-800 text-[10px] rounded text-slate-400">P90</span>
+<span class="px-2 py-1 bg-indigo-500/20 text-[10px] rounded text-indigo-400 font-bold">P99</span>
+</div>
+</div>
+<div class="space-y-6">
+<div class="space-y-2">
+<div class="flex justify-between text-xs">
+<span class="font-mono">North America (AWS-US-EAST)</span>
+<span class="text-white">48ms</span>
+</div>
+<div class="w-full h-2 bg-slate-800 rounded-full">
+<div class="bg-indigo-500 h-full w-[45%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs">
+<span class="font-mono">Europe (AWS-EU-CENTRAL)</span>
+<span class="text-white">62ms</span>
+</div>
+<div class="w-full h-2 bg-slate-800 rounded-full">
+<div class="bg-indigo-500 h-full w-[55%] rounded-full"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between text-xs text-yellow-500">
+<span class="font-mono">Asia Pacific (AWS-AP-SOUTHEAST)</span>
+<span class="font-bold">245ms</span>
+</div>
+<div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+<div class="bg-yellow-500 h-full w-[90%] rounded-full"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-slate-800 text-[11px] text-slate-500 italic">
+          * Metrics collected via Prometheus exporter every 60s. High latency in AP-SOUTHEAST attributed to regional peering issues.
+        </div>
+</div>
+<!-- END: LatencyAnalysis -->
+<!-- BEGIN: RecentErrors -->
+<div class="bg-[#12141a] border border-slate-800 rounded-xl overflow-hidden p-6">
+<div class="flex justify-between items-center mb-6">
+<h2 class="text-sm font-bold text-white uppercase tracking-widest">Recent Anomalies</h2>
+<button class="text-[10px] text-indigo-400 hover:text-indigo-300 font-mono">VIEW ALL LOGS →</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead class="text-slate-500 font-mono border-b border-slate-800">
+<tr>
+<th class="pb-3 font-normal uppercase">Timestamp</th>
+<th class="pb-3 font-normal uppercase">Endpoint</th>
+<th class="pb-3 font-normal uppercase">Status</th>
+<th class="pb-3 font-normal uppercase">Trace ID</th>
+</tr>
+</thead>
+<tbody class="font-mono divide-y divide-slate-800/50">
+<tr>
+<td class="py-3 text-slate-400">14:21:44</td>
+<td class="py-3 text-indigo-400">/subscription</td>
+<td class="py-3"><span class="text-red-400 bg-red-400/10 px-1.5 py-0.5 rounded">504</span></td>
+<td class="py-3 text-slate-500 text-[10px]">tx_f78a22...</td>
+</tr>
+<tr>
+<td class="py-3 text-slate-400">14:20:12</td>
+<td class="py-3 text-indigo-400">/purchase</td>
+<td class="py-3"><span class="text-yellow-400 bg-yellow-400/10 px-1.5 py-0.5 rounded">402</span></td>
+<td class="py-3 text-slate-500 text-[10px]">tx_a1c3d9...</td>
+</tr>
+<tr>
+<td class="py-3 text-slate-400">14:18:55</td>
+<td class="py-3 text-indigo-400">/auth</td>
+<td class="py-3"><span class="text-red-400 bg-red-400/10 px-1.5 py-0.5 rounded">401</span></td>
+<td class="py-3 text-slate-500 text-[10px]">tx_e220b4...</td>
+</tr>
+<tr>
+<td class="py-3 text-slate-400">14:15:30</td>
+<td class="py-3 text-indigo-400">/videos</td>
+<td class="py-3"><span class="text-red-400 bg-red-400/10 px-1.5 py-0.5 rounded">500</span></td>
+<td class="py-3 text-slate-500 text-[10px]">tx_0921fb...</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- END: RecentErrors -->
+</section>
+</main>
+<!-- BEGIN: BottomToolbar -->
+<footer class="fixed bottom-0 w-full bg-[#0f1115]/80 backdrop-blur-md border-t border-slate-800 px-6 py-2 flex items-center justify-between z-50">
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></div>
+<span class="text-[10px] font-mono text-slate-400">REDIS CACHE: HIT (92%)</span>
+</div>
+<div class="flex items-center gap-2 border-l border-slate-800 pl-4">
+<div class="w-2 h-2 bg-emerald-500 rounded-full"></div>
+<span class="text-[10px] font-mono text-slate-400">POSTGRES: OPTIMAL</span>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="text-[10px] bg-slate-800 text-slate-300 px-3 py-1 rounded border border-slate-700 hover:bg-slate-700 transition-colors uppercase font-bold">Export Architecture</button>
+<button class="text-[10px] bg-indigo-600 text-white px-3 py-1 rounded hover:bg-indigo-500 transition-colors uppercase font-bold">Terminal Access</button>
+</div>
+</footer>
+<!-- END: BottomToolbar -->
+<script data-purpose="dashboard-logic">
+    // Simple script to update timestamp for "real-time" feel
+    function updateTimestamp() {
+      const now = new Date();
+      const timeString = now.toISOString().split('T')[1].split('.')[0] + ' UTC';
+      document.getElementById('timestamp').textContent = timeString;
+    }
+    setInterval(updateTimestamp, 1000);
+    updateTimestamp();
+  </script>
+</body></html>

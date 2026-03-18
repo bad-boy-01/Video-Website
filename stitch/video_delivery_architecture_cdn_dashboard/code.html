@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Video Delivery Infrastructure Dashboard</title>
+<!-- Tailwind CSS CDN with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Custom Tailwind Config for Theme -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'tech-dark': '#0a0a0c',
+            'tech-surface': '#16161a',
+            'tech-border': '#2d2d33',
+            'tech-accent': '#3b82f6',
+            'tech-success': '#10b981',
+            'tech-warning': '#f59e0b',
+            'tech-error': '#ef4444',
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for UI Enhancements -->
+<style data-purpose="custom-styling">
+    body {
+      background-color: #0a0a0c;
+      color: #e2e8f0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    .flow-line {
+      position: relative;
+    }
+    .flow-line::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 100%;
+      width: 2rem;
+      height: 2px;
+      background: linear-gradient(90deg, #3b82f6, transparent);
+      transform: translateY(-50%);
+    }
+    .glow-accent {
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+    }
+    .status-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: .5; }
+    }
+  </style>
+</head>
+<body class="p-6">
+<!-- BEGIN: Main Dashboard Container -->
+<main class="max-w-7xl mx-auto space-y-8" data-purpose="dashboard-root">
+<!-- BEGIN: Header -->
+<header class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-tech-border pb-6">
+<div>
+<h1 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+<span class="p-2 bg-tech-accent/10 rounded-lg">
+<svg class="w-6 h-6 text-tech-accent" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+          Video Delivery Infrastructure
+        </h1>
+<p class="text-slate-400 mt-1">Architecture &amp; Real-time Network Operations</p>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1 bg-tech-success/10 border border-tech-success/20 rounded-full">
+<span class="w-2 h-2 bg-tech-success rounded-full status-pulse"></span>
+<span class="text-xs font-mono text-tech-success">SYSTEMS NOMINAL</span>
+</div>
+<button class="bg-tech-surface border border-tech-border px-4 py-2 rounded-md text-sm hover:bg-tech-border transition-colors">
+          Download Logs
+        </button>
+</div>
+</header>
+<!-- END: Header -->
+<!-- BEGIN: Architectural Flow Diagram -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-8" data-purpose="flow-diagram">
+<!-- Step 1: Secure Storage -->
+<div class="bg-tech-surface border border-tech-border p-6 rounded-xl relative group hover:border-tech-accent/50 transition-all">
+<div class="absolute -top-3 left-4 px-2 bg-tech-dark text-xs font-bold text-slate-500 uppercase tracking-widest">Input Tier</div>
+<div class="flex items-start justify-between mb-4">
+<h3 class="font-semibold text-lg">Secure Storage</h3>
+<div class="flex gap-1">
+<span class="text-[10px] px-2 py-0.5 bg-slate-800 rounded">Cloudflare Stream</span>
+<span class="text-[10px] px-2 py-0.5 bg-slate-800 rounded">AWS S3</span>
+</div>
+</div>
+<div class="space-y-3">
+<div class="bg-tech-dark p-3 rounded border border-tech-border flex items-center gap-3">
+<svg class="w-5 h-5 text-tech-error" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-sm font-mono text-slate-300">No Direct MP4 Access</span>
+</div>
+<p class="text-xs text-slate-500 leading-relaxed">Files stored as raw fragments behind VPC. Direct object URL access is restricted via Bucket Policies.</p>
+</div>
+<!-- Flow Arrow -->
+<div class="hidden lg:block absolute top-1/2 -right-4 translate-x-full text-tech-accent z-10">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Step 2: Edge Authentication -->
+<div class="bg-tech-surface border border-tech-accent/30 p-6 rounded-xl relative glow-accent">
+<div class="absolute -top-3 left-4 px-2 bg-tech-dark text-xs font-bold text-tech-accent uppercase tracking-widest">Auth Tier</div>
+<div class="flex items-start justify-between mb-4">
+<h3 class="font-semibold text-lg text-white">Signed URL Generator</h3>
+<span class="text-[10px] px-2 py-0.5 bg-tech-accent/20 text-tech-accent rounded">Edge Function</span>
+</div>
+<div class="space-y-3">
+<div class="bg-tech-dark/50 p-3 rounded border border-tech-accent/20">
+<div class="flex justify-between items-center mb-1">
+<span class="text-[10px] font-mono text-tech-accent">JWT VERIFICATION</span>
+<span class="text-[10px] text-tech-success">ACTIVE</span>
+</div>
+<code class="text-[10px] block text-slate-400 overflow-hidden whitespace-nowrap">?sig=3b82f6...&amp;exp=1700432</code>
+</div>
+<div class="bg-tech-accent/10 p-3 rounded border border-tech-accent/20 flex items-center gap-3">
+<svg class="w-5 h-5 text-tech-accent" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-sm font-semibold text-tech-accent">Short-lived: 5 mins validity</span>
+</div>
+</div>
+<!-- Flow Arrow -->
+<div class="hidden lg:block absolute top-1/2 -right-4 translate-x-full text-tech-accent z-10">
+<svg class="w-8 h-8" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<!-- Step 3: Stream Delivery -->
+<div class="bg-tech-surface border border-tech-border p-6 rounded-xl relative group hover:border-tech-accent/50 transition-all">
+<div class="absolute -top-3 left-4 px-2 bg-tech-dark text-xs font-bold text-slate-500 uppercase tracking-widest">Delivery Tier</div>
+<div class="flex items-start justify-between mb-4">
+<h3 class="font-semibold text-lg">HLS Stream Delivery</h3>
+<span class="text-[10px] px-2 py-0.5 bg-slate-800 rounded">Global CDN</span>
+</div>
+<div class="space-y-3">
+<div class="bg-tech-dark p-3 rounded border border-tech-border flex items-center gap-3">
+<svg class="w-5 h-5 text-tech-success" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+<span class="text-sm font-mono text-slate-300">HLS (m3u8) Streaming</span>
+</div>
+<div class="flex flex-col gap-1">
+<div class="flex justify-between text-[10px] text-slate-500">
+<span>Adaptive Bitrate (ABR)</span>
+<span>Enabled</span>
+</div>
+<div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+<div class="bg-tech-success h-full w-[85%]"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- END: Architectural Flow Diagram -->
+<!-- BEGIN: Dashboard Stats & Logs -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8" data-purpose="metrics-and-logs">
+<!-- Metrics Column (LHS) -->
+<section class="lg:col-span-1 space-y-6" data-purpose="active-metrics">
+<!-- Active Streams Card -->
+<div class="bg-tech-surface border border-tech-border p-5 rounded-xl">
+<h4 class="text-xs font-bold text-slate-500 uppercase mb-4 tracking-wider">Active Stream Analytics</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<span class="block text-3xl font-bold text-white">1,402</span>
+<span class="text-[10px] text-tech-success">↑ 12% vs last hour</span>
+</div>
+<div class="h-10 w-24 flex items-end gap-1">
+<div class="bg-tech-accent w-2 h-1/2 rounded-t"></div>
+<div class="bg-tech-accent w-2 h-2/3 rounded-t"></div>
+<div class="bg-tech-accent w-2 h-full rounded-t"></div>
+<div class="bg-tech-accent w-2 h-4/5 rounded-t"></div>
+</div>
+</div>
+<div class="pt-4 border-t border-tech-border/50">
+<div class="flex justify-between text-xs mb-1">
+<span class="text-slate-400">Average Bitrate</span>
+<span class="text-white">4.8 Mbps</span>
+</div>
+<div class="flex justify-between text-xs">
+<span class="text-slate-400">P95 Buffer Time</span>
+<span class="text-white">142ms</span>
+</div>
+</div>
+</div>
+</div>
+<!-- CDN Health Card -->
+<div class="bg-tech-surface border border-tech-border p-5 rounded-xl">
+<h4 class="text-xs font-bold text-slate-500 uppercase mb-4 tracking-wider">CDN Node Health</h4>
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-300">US-East-1 (Global)</span>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-500">22ms</span>
+<div class="w-2 h-2 rounded-full bg-tech-success"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-300">EU-West-1 (Frankfurt)</span>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-500">45ms</span>
+<div class="w-2 h-2 rounded-full bg-tech-success"></div>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-xs text-slate-300">AP-Southeast-1 (Singapore)</span>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-slate-500">118ms</span>
+<div class="w-2 h-2 rounded-full bg-tech-warning"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Security Logs Column (RHS) -->
+<section class="lg:col-span-2" data-purpose="security-logs">
+<div class="bg-tech-surface border border-tech-border rounded-xl h-full flex flex-col overflow-hidden">
+<div class="p-5 border-b border-tech-border flex justify-between items-center bg-tech-surface">
+<h4 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Signed URL Security Log</h4>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-tech-accent px-2 py-1 bg-tech-accent/10 rounded">Live Update</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-sm" id="security-log-table">
+<thead class="bg-tech-dark/50 text-slate-500 text-[10px] uppercase font-bold">
+<tr>
+<th class="px-6 py-3 border-b border-tech-border">Timestamp</th>
+<th class="px-6 py-3 border-b border-tech-border">Resource ID</th>
+<th class="px-6 py-3 border-b border-tech-border">Action</th>
+<th class="px-6 py-3 border-b border-tech-border">Status</th>
+<th class="px-6 py-3 border-b border-tech-border text-right">TTL Remaining</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-tech-border">
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-[11px] text-slate-400">2023-11-20 14:32:01</td>
+<td class="px-6 py-4 font-mono text-xs">vid_771x_99</td>
+<td class="px-6 py-4 text-xs">URL_GENERATE</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-tech-success/10 text-tech-success">AUTHORIZED</span>
+</td>
+<td class="px-6 py-4 text-right font-mono text-[11px] text-slate-400">04:59s</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-[11px] text-slate-400">2023-11-20 14:31:55</td>
+<td class="px-6 py-4 font-mono text-xs">vid_224b_02</td>
+<td class="px-6 py-4 text-xs">URL_GENERATE</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-tech-success/10 text-tech-success">AUTHORIZED</span>
+</td>
+<td class="px-6 py-4 text-right font-mono text-[11px] text-slate-400">04:54s</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-[11px] text-slate-400">2023-11-20 14:31:42</td>
+<td class="px-6 py-4 font-mono text-xs">vid_x_unauth</td>
+<td class="px-6 py-4 text-xs">DIRECT_MP4_BLOCK</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-tech-error/10 text-tech-error">REJECTED</span>
+</td>
+<td class="px-6 py-4 text-right font-mono text-[11px] text-slate-400">--:--</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-[11px] text-slate-400">2023-11-20 14:30:12</td>
+<td class="px-6 py-4 font-mono text-xs">vid_998k_15</td>
+<td class="px-6 py-4 text-xs">URL_EXPIRE</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-slate-800 text-slate-400">EXPIRED</span>
+</td>
+<td class="px-6 py-4 text-right font-mono text-[11px] text-slate-400">00:00s</td>
+</tr>
+<tr class="hover:bg-white/5 transition-colors">
+<td class="px-6 py-4 font-mono text-[11px] text-slate-400">2023-11-20 14:29:50</td>
+<td class="px-6 py-4 font-mono text-xs">vid_771x_99</td>
+<td class="px-6 py-4 text-xs">URL_GENERATE</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-tech-success/10 text-tech-success">AUTHORIZED</span>
+</td>
+<td class="px-6 py-4 text-right font-mono text-[11px] text-slate-400">02:49s</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 bg-tech-dark/20 mt-auto text-center border-t border-tech-border">
+<button class="text-[10px] text-slate-500 hover:text-tech-accent uppercase font-bold tracking-widest transition-colors">Load More Security Events</button>
+</div>
+</div>
+</section>
+</div>
+<!-- END: Dashboard Stats & Logs -->
+</main>
+<!-- END: Main Dashboard Container -->
+<!-- BEGIN: Footer -->
+<footer class="max-w-7xl mx-auto mt-12 pt-8 border-t border-tech-border text-center pb-12">
+<div class="flex flex-col items-center gap-2">
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tech-accent"></span>
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">TLS 1.3 Active</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tech-accent"></span>
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">AES-256 Storage</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-1.5 h-1.5 rounded-full bg-tech-accent"></span>
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">HLS-AES Encryption</span>
+</div>
+</div>
+<p class="text-xs text-slate-600 mt-4">© 2023 VideoInfrastructure Core. Proprietary System Monitoring Tool.</p>
+</div>
+</footer>
+<!-- END: Footer -->
+</body></html>

@@ -1,0 +1,171 @@
+<html class="dark"><head>
+<meta charset="utf-8"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#8c25f4",
+                        "background-light": "#f7f5f8",
+                        "background-dark": "#191022",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Top Navigation Bar -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 px-6 py-4 lg:px-20">
+<div class="flex items-center gap-4">
+<div class="size-8 text-primary">
+<span class="material-symbols-outlined text-4xl">account_balance_wallet</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-xl font-bold leading-tight tracking-tight">Atomic Wallet</h2>
+</div>
+<div class="flex flex-1 justify-end gap-4">
+<div class="flex gap-2">
+<button class="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+<div class="bg-primary/20 aspect-square rounded-full size-10 flex items-center justify-center border border-primary/30" data-alt="User avatar placeholder with primary color gradient">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+</div>
+</header>
+<main class="flex flex-1 flex-col lg:flex-row">
+<!-- Sidebar -->
+<aside class="w-full lg:w-64 border-r border-primary/10 p-4 flex flex-col gap-2">
+<div class="flex items-center gap-3 px-3 py-3 rounded-xl bg-primary text-white shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined">dashboard</span>
+<p class="text-sm font-semibold">Dashboard</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-primary/10 text-slate-600 dark:text-slate-400 cursor-pointer transition-colors">
+<span class="material-symbols-outlined">account_balance_wallet</span>
+<p class="text-sm font-medium">Wallet</p>
+</div>
+<div class="flex items-center gap-3 px-3 py-3 rounded-xl hover:bg-primary/10 text-slate-600 dark:text-slate-400 cursor-pointer transition-colors">
+<span class="material-symbols-outlined">video_library</span>
+<p class="text-sm font-medium">Library</p>
+</div>
+<div class="mt-auto p-4 bg-primary/5 rounded-xl border border-primary/10">
+<p class="text-xs text-primary font-bold uppercase tracking-wider">Balance</p>
+<p class="text-2xl font-bold text-slate-900 dark:text-slate-100">1,250 <span class="text-xs font-normal opacity-60 uppercase">Credits</span></p>
+</div>
+</aside>
+<!-- Transaction Content -->
+<section class="flex-1 p-6 lg:p-10">
+<div class="max-w-4xl mx-auto">
+<div class="mb-8">
+<h1 class="text-4xl font-black leading-tight tracking-tight text-slate-900 dark:text-slate-100">Transaction Flow: Buy Video</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg mt-2">Real-time atomic update sequence visualization</p>
+</div>
+<!-- Main Action Button -->
+<div class="mb-12 flex justify-center">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-purple-400 rounded-xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+<button class="relative flex items-center justify-center gap-3 bg-primary text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl active:scale-95 transition-all">
+<span class="material-symbols-outlined">shopping_cart</span>
+<span>Buy Video (50 Credits)</span>
+<span class="ml-2 flex h-2 w-2 rounded-full bg-white animate-ping"></span>
+</button>
+</div>
+</div>
+<!-- Pipeline Steps -->
+<div class="space-y-6">
+<h2 class="text-xl font-bold text-slate-900 dark:text-slate-100 border-l-4 border-primary pl-4 mb-6">Execution Pipeline</h2>
+<!-- Step 1 -->
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-6 relative overflow-hidden">
+<div class="flex items-start gap-4">
+<div class="flex size-10 items-center justify-center rounded-full bg-green-500/20 text-green-500 shrink-0">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-center mb-2">
+<h3 class="font-bold text-lg">1. Cloud Function Trigger</h3>
+<span class="text-xs font-mono bg-primary/20 text-primary px-2 py-1 rounded">onCall:purchaseVideo</span>
+</div>
+<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Validating session authenticity and payload integrity.</p>
+<div class="bg-slate-900 dark:bg-black/40 rounded-lg p-4 font-mono text-xs text-slate-300 border border-slate-700">
+<span class="text-purple-400">const</span> { videoId } = data;<br/>
+<span class="text-purple-400">const</span> uid = context.auth.uid;
+                                        </div>
+</div>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-6 relative overflow-hidden ring-2 ring-primary/50">
+<div class="absolute top-0 right-0 p-2">
+<span class="bg-primary text-white text-[10px] font-bold px-2 py-0.5 rounded-full uppercase">Atomic Operation</span>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex size-10 items-center justify-center rounded-full bg-green-500/20 text-green-500 shrink-0">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-lg mb-2">2. Firestore Transaction</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Executing ACID-compliant database updates.</p>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
+<div class="bg-slate-100 dark:bg-primary/10 p-3 rounded-lg border border-primary/20">
+<p class="text-[10px] text-primary font-bold uppercase mb-1">Deduction</p>
+<p class="text-sm font-semibold">user.balance - 50</p>
+</div>
+<div class="bg-slate-100 dark:bg-primary/10 p-3 rounded-lg border border-primary/20">
+<p class="text-[10px] text-primary font-bold uppercase mb-1">Analytics</p>
+<p class="text-sm font-semibold">video.sales + 1</p>
+</div>
+<div class="bg-slate-100 dark:bg-primary/10 p-3 rounded-lg border border-primary/20">
+<p class="text-[10px] text-primary font-bold uppercase mb-1">Grant Access</p>
+<p class="text-sm font-semibold">user.access.add(id)</p>
+</div>
+</div>
+<div class="bg-slate-900 dark:bg-black/40 rounded-lg p-4 font-mono text-xs text-slate-300 border border-slate-700">
+                                            await <span class="text-blue-400">db</span>.<span class="text-yellow-400">runTransaction</span>(async (t) =&gt; {<br/>
+                                              t.<span class="text-yellow-400">update</span>(userRef, { balance: <span class="text-blue-400">increment</span>(-50) });<br/>
+                                              t.<span class="text-yellow-400">set</span>(accessRef, { purchasedAt: <span class="text-blue-400">serverTimestamp</span>() });<br/>
+                                            });
+                                        </div>
+</div>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="bg-white dark:bg-primary/5 border border-slate-200 dark:border-primary/20 rounded-xl p-6 relative overflow-hidden">
+<div class="flex items-start gap-4">
+<div class="flex size-10 items-center justify-center rounded-full bg-green-500/20 text-green-500 shrink-0">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<div class="flex-1">
+<h3 class="font-bold text-lg mb-2">3. Success Callback</h3>
+<p class="text-slate-600 dark:text-slate-400 text-sm mb-4">Returning execution metadata to the frontend observer.</p>
+<div class="bg-green-500/5 border border-green-500/20 p-4 rounded-lg flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-green-500">cloud_done</span>
+<span class="text-sm font-medium text-green-600 dark:text-green-400">Status 200: Transaction Committed</span>
+</div>
+<span class="text-xs text-slate-500 font-mono">142ms latency</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
+</body></html>

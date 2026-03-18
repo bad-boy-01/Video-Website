@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#ec5b13",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221610",
+                    },
+                    fontFamily: {
+                        "display": ["Public Sans"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>Firebase Auth &amp; Firestore Profile Sync</title>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-primary/20 bg-background-light dark:bg-background-dark px-10 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<span class="material-symbols-outlined text-3xl">account_tree</span>
+</div>
+<h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em]">Firebase Sync Dashboard</h2>
+</div>
+<nav class="hidden md:flex items-center gap-9">
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Authentication</a>
+<a class="text-primary text-sm font-bold leading-normal border-b-2 border-primary" href="#">Firestore</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Storage</a>
+<a class="text-slate-600 dark:text-slate-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal transition-colors" href="#">Functions</a>
+</nav>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<label class="hidden lg:flex flex-col min-w-40 !h-10 max-w-64">
+<div class="flex w-full flex-1 items-stretch rounded-xl h-full border border-primary/20">
+<div class="text-primary flex bg-primary/5 items-center justify-center pl-4 rounded-l-xl">
+<span class="material-symbols-outlined">search</span>
+</div>
+<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-r-xl text-slate-900 dark:text-slate-100 focus:outline-0 focus:ring-0 border-none bg-primary/5 placeholder:text-slate-400 px-4 text-sm font-normal" placeholder="Search project assets" value=""/>
+</div>
+</label>
+<div class="flex gap-2">
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex items-center justify-center rounded-xl h-10 w-10 bg-primary/10 text-primary hover:bg-primary/20 transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</div>
+<div class="bg-primary/20 rounded-full size-10 border border-primary/40 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+</div>
+</header>
+<main class="flex flex-col flex-1 px-4 lg:px-10 py-8">
+<div class="max-w-7xl mx-auto w-full">
+<div class="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div class="flex flex-col gap-2">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+<span class="text-xs font-bold uppercase tracking-widest">Production Environment</span>
+</div>
+<h1 class="text-slate-900 dark:text-slate-100 text-4xl font-black leading-tight tracking-[-0.033em]">Firebase Auth &amp; Firestore Profile Sync</h1>
+<p class="text-slate-600 dark:text-slate-400 text-lg max-w-2xl">Visualizing the real-time bidirectional link between identity providers and document storage.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-primary text-white px-5 py-2.5 rounded-xl font-bold text-sm flex items-center gap-2 hover:brightness-110 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">sync</span>
+                                Trigger Manual Sync
+                            </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 relative items-start">
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-12 z-0">
+<div class="w-24 h-0.5 bg-gradient-to-r from-primary to-primary/40 relative">
+<div class="absolute -right-1 -top-1 size-2 rounded-full bg-primary animate-pulse"></div>
+</div>
+<div class="w-24 h-0.5 bg-gradient-to-r from-primary to-primary/40 relative">
+<div class="absolute -right-1 -top-1 size-2 rounded-full bg-primary"></div>
+</div>
+<div class="w-24 h-0.5 bg-gradient-to-r from-primary to-primary/40 relative">
+<div class="absolute -right-1 -top-1 size-2 rounded-full bg-primary animate-pulse"></div>
+</div>
+</div>
+<div class="flex flex-col gap-6 bg-slate-100/50 dark:bg-slate-800/20 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-sm relative z-10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+<span class="material-symbols-outlined text-orange-600 dark:text-orange-400">shield_person</span>
+</div>
+<h3 class="font-bold text-lg">Firebase Auth Console</h3>
+</div>
+<span class="text-xs bg-green-500/10 text-green-600 dark:text-green-400 px-2 py-1 rounded-full font-semibold border border-green-500/20 flex items-center gap-1">
+<span class="size-1.5 rounded-full bg-green-500"></span> Online
+                                </span>
+</div>
+<div class="bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="grid grid-cols-3 bg-slate-50 dark:bg-slate-900/50 px-4 py-3 border-b border-slate-200 dark:border-slate-800 text-xs font-bold text-slate-500">
+<span>Identifier</span>
+<span>Provider</span>
+<span>Created</span>
+</div>
+<div class="p-4 space-y-4">
+<div class="flex flex-col gap-1">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm text-slate-400">mail</span>
+<span class="text-sm font-semibold text-primary">alex.rivera@example.com</span>
+</div>
+<div class="flex items-center gap-2 ml-6">
+<span class="text-[10px] text-slate-500 uppercase font-mono">UID:</span>
+<span class="text-xs font-mono text-slate-400 bg-slate-100 dark:bg-slate-800 px-1 rounded">x7K9_vB2_mPq_R42</span>
+</div>
+</div>
+<div class="flex items-center gap-4 text-xs text-slate-500 border-t border-slate-100 dark:border-slate-800 pt-4">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">google</span>
+                                            Google
+                                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">calendar_today</span>
+                                            Oct 12, 2023
+                                        </div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">history</span>
+                                            Last sign-in: 2h ago
+                                        </div>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-3">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Auth Claims</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded border border-primary/20">role: subscriber</span>
+<span class="bg-primary/10 text-primary text-[10px] font-bold px-2 py-1 rounded border border-primary/20">email_verified: true</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col gap-6 bg-slate-100/50 dark:bg-slate-800/20 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 backdrop-blur-sm relative z-10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="p-2 bg-primary/10 rounded-lg">
+<span class="material-symbols-outlined text-primary">database</span>
+</div>
+<h3 class="font-bold text-lg">Firestore Database</h3>
+</div>
+<span class="text-[10px] text-slate-500 font-mono">Region: us-central1</span>
+</div>
+<div class="bg-white dark:bg-background-dark rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="bg-slate-50 dark:bg-slate-900/50 px-4 py-3 border-b border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2 text-xs font-mono">
+<span class="text-primary">users</span>
+<span class="text-slate-400">/</span>
+<span class="text-primary">x7K9_vB2_mPq_R42</span>
+</div>
+</div>
+<div class="p-4 space-y-3">
+<div class="flex items-center justify-between text-sm group">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 font-mono text-xs">wallet_balance:</span>
+<span class="font-bold text-slate-900 dark:text-slate-100">1250.00</span>
+</div>
+<span class="text-[10px] font-mono text-slate-400">number</span>
+</div>
+<div class="flex items-center justify-between text-sm group">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 font-mono text-xs">subscription_status:</span>
+<span class="bg-primary/20 text-primary px-2 py-0.5 rounded-full text-xs font-bold">'active'</span>
+</div>
+<span class="text-[10px] font-mono text-slate-400">string</span>
+</div>
+<div class="flex items-center justify-between text-sm group">
+<div class="flex items-center gap-2">
+<span class="text-slate-400 font-mono text-xs">display_name:</span>
+<span class="font-medium text-slate-900 dark:text-slate-100">'Alex Rivera'</span>
+</div>
+<span class="text-[10px] font-mono text-slate-400">string</span>
+</div>
+<div class="mt-6">
+<div class="flex items-center gap-2 mb-3">
+<span class="material-symbols-outlined text-sm text-primary">folder_open</span>
+<span class="text-xs font-bold uppercase tracking-wider text-slate-500">Sub-collections</span>
+</div>
+<div class="ml-4 pl-4 border-l-2 border-slate-100 dark:border-slate-800 space-y-2">
+<div class="flex items-center justify-between p-2 rounded-lg bg-slate-50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-lg text-primary">video_library</span>
+<span class="text-xs font-bold">purchased_videos</span>
+</div>
+<span class="text-[10px] bg-slate-200 dark:bg-slate-800 px-2 py-0.5 rounded text-slate-500">12 documents</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<h4 class="font-bold">Sync Latency</h4>
+</div>
+<div class="text-3xl font-black mb-1 text-slate-900 dark:text-slate-100">42ms</div>
+<p class="text-sm text-slate-500">Average propagation delay between Auth and Firestore triggers.</p>
+</div>
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg text-green-600 dark:text-green-400">
+<span class="material-symbols-outlined">check_circle</span>
+</div>
+<h4 class="font-bold">Integrity Status</h4>
+</div>
+<div class="text-3xl font-black mb-1 text-slate-900 dark:text-slate-100">100%</div>
+<p class="text-sm text-slate-500">Consistency check passed for all 4.2k active user profiles.</p>
+</div>
+<div class="bg-white dark:bg-slate-900/50 p-6 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+<div class="flex items-center gap-3 mb-4">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<h4 class="font-bold">Active Listeners</h4>
+</div>
+<div class="text-3xl font-black mb-1 text-slate-900 dark:text-slate-100">892</div>
+<p class="text-sm text-slate-500">Real-time snapshots currently streaming to client applications.</p>
+</div>
+</div>
+</div>
+</main>
+<footer class="border-t border-primary/10 bg-background-light dark:bg-background-dark py-6 px-10">
+<div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2 text-slate-500 text-sm">
+<span class="material-symbols-outlined text-primary text-sm">verified</span>
+                        Powered by Google Cloud Platform &amp; Firebase Identity
+                    </div>
+<div class="flex gap-6 text-xs font-bold text-slate-400 uppercase tracking-widest">
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">Security Rules</a>
+<a class="hover:text-primary transition-colors" href="#">API Keys</a>
+</div>
+</div>
+</footer>
+</div>
+</div>
+</body></html>
