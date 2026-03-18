@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
-import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { getAdminAuth, getAdminDb } from '@/lib/firebase/admin';
 import * as admin from 'firebase-admin';
 import Razorpay from 'razorpay';
 import crypto from 'crypto';
+
+export const dynamic = 'force-dynamic';
 
 export async function POST(req: Request) {
   try {
@@ -15,6 +17,9 @@ export async function POST(req: Request) {
     if (!amount_inr || amount_inr <= 0) {
       return NextResponse.json({ error: 'Invalid amount' }, { status: 400 });
     }
+
+    const adminAuth = getAdminAuth();
+    const adminDb = getAdminDb();
 
     const idToken = authHeader.split('Bearer ')[1];
     const decodedToken = await adminAuth.verifyIdToken(idToken);

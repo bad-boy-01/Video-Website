@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
-import { adminDb } from '@/lib/firebase/admin';
+import { getAdminDb } from '@/lib/firebase/admin';
 
 export async function GET(req: Request) {
   try {
+    const adminDb = getAdminDb();
     const { searchParams } = new URL(req.url);
     const q = (searchParams.get('q') || '').toLowerCase().trim();
     const tags = searchParams.getAll('tags').slice(0, 10); // Hard cap at 10 for array-contains-any

@@ -1,8 +1,10 @@
 import { NextResponse } from 'next/server';
-import { adminAuth, adminDb } from '@/lib/firebase/admin';
+import { getAdminAuth, getAdminDb } from '@/lib/firebase/admin';
 
 export async function GET(req: Request) {
   try {
+    const adminAuth = getAdminAuth();
+    const adminDb = getAdminDb();
     const authHeader = req.headers.get('Authorization');
     let uid: string | null = null;
     let userDocData: any = null;
