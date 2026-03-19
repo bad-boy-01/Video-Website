@@ -11,13 +11,14 @@ import { auth, db } from './config';
 
 const googleProvider = new GoogleAuthProvider();
 
-async function createUserDocument(uid: string, email: string) {
+async function createUserDocument(uid: string, email: string, name?: string) {
   const userRef = doc(db, 'users', uid);
   const snap = await getDoc(userRef);
   if (!snap.exists()) {
     await setDoc(userRef, {
       uid,
       email,
+      name: name || '',
       role: 'user',
       wallet_balance: 0,
       subscription_status: 'none',
@@ -27,10 +28,10 @@ async function createUserDocument(uid: string, email: string) {
   }
 }
 
-export async function signUpWithEmail(email: string, password: string): Promise<{ user?: UserCredential['user']; error?: string }> {
+export async function signUpWithEmail(email: string, password: string, name?: string): Promise<{ user?: UserCredential['user']; error?: string }> {
   try {
     const result = await createUserWithEmailAndPassword(auth, email, password);
-    await createUserDocument(result.user.uid, result.user.email || email);
+    await createUserDocument(result.user.uid, result.user.email || email, name);
     return { user: result.user };
   } catch (e: any) {
     return { error: e.message };

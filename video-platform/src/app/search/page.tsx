@@ -3,6 +3,7 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 const ACCESS_TYPE_OPTIONS = [
   { label: "All", value: "" },
@@ -79,33 +80,6 @@ function SearchResults() {
   return (
     <div className="min-h-screen bg-gray-950 text-white selection:bg-indigo-500/30">
 
-      {/* Sticky Search Header */}
-      <header className="sticky top-0 z-50 border-b border-gray-800/60 bg-gray-950/90 backdrop-blur-xl">
-        <div className="mx-auto max-w-7xl px-6 py-5 flex items-center gap-4">
-          <Link href="/" className="text-xl font-black shrink-0">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Vault</span>Stream
-          </Link>
-          <form className="flex flex-1 gap-3" onSubmit={e => { e.preventDefault(); runSearch(); }}>
-            <div className="relative flex-1">
-              <svg className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-500 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-              </svg>
-              <input
-                type="text"
-                id="search-input"
-                value={query}
-                onChange={e => setQuery(e.target.value)}
-                placeholder="Search videos, tags, creators..."
-                className="w-full rounded-xl border border-gray-700 bg-gray-900 py-3 pl-12 pr-4 text-white placeholder-gray-500 outline-none ring-0 transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20"
-                autoComplete="off"
-              />
-            </div>
-            <button type="submit" id="search-submit" className="rounded-xl bg-indigo-600 px-7 py-3 font-bold text-white transition hover:bg-indigo-500 shadow-lg shadow-indigo-500/20">
-              Search
-            </button>
-          </form>
-        </div>
-      </header>
 
       <div className="mx-auto max-w-7xl px-6 py-10 flex gap-8">
 
@@ -190,7 +164,7 @@ function SearchResults() {
                   className="group rounded-2xl border border-gray-800 bg-gray-900 overflow-hidden shadow-lg hover:-translate-y-1.5 transition-all duration-300 hover:border-indigo-500/40 hover:shadow-[0_0_25px_rgba(99,102,241,0.1)] flex flex-col">
                   <div className="aspect-video relative overflow-hidden bg-black">
                     {video.thumbnailUrl && (
-                      <img src={video.thumbnailUrl} alt={video.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
+                      <Image src={video.thumbnailUrl} alt={video.title} fill className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" />
                     )}
                     <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-transparent to-transparent"></div>
                     <span className={`absolute top-3 right-3 px-2.5 py-1 rounded-full text-xs font-bold backdrop-blur-md border ${

@@ -1,23 +1,19 @@
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-
-    function isAdmin() {
-      // Enforces role-based access control by linking Storage to the Firestore users collection
-      return request.auth != null && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == "admin";
+    // Default rule: reject all
+    match /{allPaths=**} {
+      allow read, write: if false;
     }
 
-    match /videos/{allPaths=**} {
-      // 🔒 Strictly block direct URL access to raw video files
-      allow read: if false; 
-      // Only admins can upload video content
-      allow write: if isAdmin();
-    }
-
-    match /thumbnails/{allPaths=**} {
-      // ✅ Publicly readable for the storefront catalog
+    match /videos/{videoId}/{allPaths=**} {
       allow read: if true; 
-      allow write: if isAdmin();
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+
+    match /thumbnails/{videoId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
     }
   }
 }

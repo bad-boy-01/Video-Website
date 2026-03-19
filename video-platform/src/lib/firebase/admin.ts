@@ -18,6 +18,8 @@ export function getFirebaseAdmin() {
         clientEmail,
         privateKey,
       }),
+      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET ||
+        `${process.env.FIREBASE_ADMIN_PROJECT_ID}.appspot.com`,
     });
   } else {
     app = admin.app();

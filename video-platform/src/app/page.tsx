@@ -4,6 +4,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Home() {
   const { user, userData, loading } = useAuth();
@@ -52,7 +53,7 @@ export default function Home() {
     <Link href={`/watch/${video.id || video.videoId}`} key={video.id || video.videoId} 
           className="group relative flex-shrink-0 w-80 rounded-2xl border border-gray-800 bg-gray-900 overflow-hidden shadow-lg transition-all duration-300 hover:-translate-y-2 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] flex flex-col">
       <div className="aspect-video bg-black relative overflow-hidden">
-        {video.thumbnailUrl && <img src={video.thumbnailUrl} alt={video.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-transform duration-700 group-hover:scale-105" />}
+        {video.thumbnailUrl && <Image src={video.thumbnailUrl} alt={video.title} fill className="object-cover opacity-80 group-hover:opacity-100 transition-transform duration-700 group-hover:scale-105" />}
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 via-transparent to-transparent"></div>
         
         {/* Progress Bar natively mapping to watch_history logic */}
@@ -90,39 +91,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-950 text-white overflow-x-hidden selection:bg-indigo-500/30">
       
-      {/* Top Navbar Header */}
-      <nav className="border-b border-gray-800/50 bg-gray-950/80 backdrop-blur-xl sticky top-0 z-50">
-         <div className="max-w-7xl mx-auto px-8 h-20 flex items-center gap-4">
-            <h1 className="text-2xl font-black tracking-tight shrink-0"><span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-emerald-400">Vault</span>Stream</h1>
-
-            {/* Search Bar */}
-            <form onSubmit={e => { e.preventDefault(); const q = (e.currentTarget.elements.namedItem('q') as HTMLInputElement).value.trim(); if (q) router.push(`/search?q=${encodeURIComponent(q)}`); }} className="flex-1 max-w-xl">
-              <div className="relative">
-                <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                <input name="q" type="text" placeholder="Search videos..." autoComplete="off"
-                  className="w-full rounded-xl border border-gray-700 bg-gray-900/80 py-2.5 pl-10 pr-4 text-sm text-white placeholder-gray-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20" />
-              </div>
-            </form>
-
-            <div className="flex gap-4 items-center ml-auto shrink-0">
-              {user ? (
-                <>
-                   {userData?.role === 'admin' && (
-                     <button onClick={() => router.push('/admin/upload')} className="text-sm font-semibold text-gray-400 hover:text-white transition-colors">Admin Hub</button>
-                   )}
-                   <button onClick={() => router.push('/coins')} className="flex items-center gap-2 bg-gray-900 border border-gray-800 px-4 py-2 rounded-full hover:border-gray-700 transition-colors">
-                     <span className="text-yellow-500 text-lg">●</span>
-                     <span className="font-bold text-sm">{userData?.wallet_balance || 0}</span>
-                   </button>
-                </>
-              ) : (
-                <button onClick={() => router.push('/login')} className="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg shadow-indigo-500/20 transition-all hover:-translate-y-0.5">Sign In</button>
-              )}
-            </div>
-         </div>
-      </nav>
 
       <main className="mx-auto max-w-7xl px-8 py-12 space-y-16">
         
