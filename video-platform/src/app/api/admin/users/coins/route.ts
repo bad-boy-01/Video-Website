@@ -1,47 +1,25 @@
 import { NextResponse } from 'next/server';
-import { getAdminAuth, getAdminDb } from '@/lib/firebase/admin';
-import * as admin from 'firebase-admin';
-
-async function verifyAdmin(req: Request) {
-  const authHeader = req.headers.get('Authorization');
-  if (!authHeader?.startsWith('Bearer ')) throw new Error('Unauthorized');
-  const idToken = authHeader.split('Bearer ')[1];
-  const decodedToken = await getAdminAuth().verifyIdToken(idToken);
-  const adminDb = getAdminDb();
-  const userSnap = await adminDb.collection('users').doc(decodedToken.uid).get();
-  if (userSnap.data()?.role !== 'admin') throw new Error('Forbidden');
-  return adminDb;
-}
+import admin, { auth, db } from '@/lib/firebase-admin';
 
 export async function PATCH(req: Request) {
   try {
-    const adminDb = await verifyAdmin(req);
-    const { targetUserId, amount, reason } = await req.json();
-    if (!targetUserId || amount === undefined) {
-      return NextResponse.json({ error: 'targetUserId and amount required' }, { status: 400 });
-    }
+    const authHeader = req.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    const token = await auth.verifyIdToken(authHeader.split(' ')[1]);
 
-    await adminDb.runTransaction(async (t) => {
-      const userRef = adminDb.collection('users').doc(targetUserId);
-      t.update(userRef, {
-        wallet_balance: admin.firestore.FieldValue.increment(Number(amount)),
-      });
-      const txRef = adminDb.collection('transactions').doc();
-      t.set(txRef, {
-        id: txRef.id,
-        userId: targetUserId,
-        type: 'admin_adjustment',
-        amount_coins: Number(amount),
-        currency: 'COINS',
-        reason: reason || 'Admin adjustment',
-        status: 'completed',
-        createdAt: admin.firestore.FieldValue.serverTimestamp(),
-      });
+    const adminDoc = await db.collection('users').doc(token.uid).get();
+    if (!adminDoc.exists || adminDoc.data()?.role !== 'admin') return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
+
+    const body = await req.json();
+    const { targetUid, coins } = body;
+    if (!targetUid || coins === undefined) return NextResponse.json({ error: 'Missing fields' }, { status: 400 });
+
+    await db.collection('users').doc(targetUid).update({
+      wallet_balance: admin.firestore.FieldValue.increment(Number(coins))
     });
-
     return NextResponse.json({ success: true });
-  } catch (error: any) {
-    const status = error.message === 'Forbidden' ? 403 : error.message === 'Unauthorized' ? 401 : 500;
-    return NextResponse.json({ error: error.message }, { status });
+  } catch (error) {
+    console.error('Admin Grant Coins Error:', error);
+    return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }

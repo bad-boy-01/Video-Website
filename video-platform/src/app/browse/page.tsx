@@ -1,9 +1,9 @@
 'use client';
+/* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useState, useMemo } from 'react';
-import { collection, query, where, getDocs, orderBy } from 'firebase/firestore';
-import { db } from '@/lib/firebase';
 import { Search, PlayCircle } from 'lucide-react'; // Assuming you use lucide-react for icons
+import Link from 'next/link';
 
 export default function BrowsePage() {
   const [videos, setVideos] = useState<any[]>([]);
@@ -16,11 +16,10 @@ export default function BrowsePage() {
   useEffect(() => {
     const fetchVideos = async () => {
       try {
-        // Note: For massive scale, implement pagination with startAfter()
-        const q = query(collection(db, 'videos'), where('status', '==', 'published'), orderBy('createdAt', 'desc'));
-        const snapshot = await getDocs(q);
-        const videoData = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setVideos(videoData);
+        const res = await fetch('/api/videos');
+        if (!res.ok) throw new Error('Failed to fetch videos');
+        const data = await res.json();
+        setVideos(data.videos || []);
       } catch (error) {
         console.error('Error querying vault archives:', error);
       } finally {
@@ -88,7 +87,7 @@ export default function BrowsePage() {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {filteredVideos.map(video => (
-              <div key={video.id} className="group cursor-pointer bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-300 transform hover:-translate-y-1">
+              <Link key={video.id} href={`/watch/${video.id}`} className="group cursor-pointer bg-gray-900 rounded-2xl overflow-hidden border border-gray-800 hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-300 transform hover:-translate-y-1">
                 <div className="aspect-video bg-gray-800 relative overflow-hidden">
                   {video.thumbnailUrl && <img src={video.thumbnailUrl} alt={video.title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity" loading="lazy" />}
                   <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-transparent to-transparent opacity-80" />
@@ -98,7 +97,7 @@ export default function BrowsePage() {
                   <h3 className="font-bold text-lg mb-2 text-white group-hover:text-indigo-400 transition-colors line-clamp-1">{video.title}</h3>
                   <p className="text-sm text-gray-500 line-clamp-2">{video.description}</p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

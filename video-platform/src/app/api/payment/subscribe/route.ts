@@ -1,22 +1,18 @@
 import { NextResponse } from 'next/server';
-// Import Firebase Admin (Assuming you set this up in a utils folder)
-// import { adminAuth } from '@/lib/firebase-admin'; 
+import admin, { auth } from '@/lib/firebase-admin';
 
 export async function POST(req: Request) {
   try {
     const authHeader = req.headers.get('Authorization');
-    if (!authHeader) return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
+    if (!authHeader?.startsWith('Bearer ')) return NextResponse.json({ error: 'Unauthorized access' }, { status: 401 });
 
-    const token = authHeader.split('Bearer ')[1];
-    if (!token) return NextResponse.json({ error: 'Invalid token format' }, { status: 401 });
+    const token = authHeader.split(' ')[1];
 
-    // 1. Verify token securely on the server
-    // const decodedToken = await adminAuth.verifyIdToken(token);
-    // const userId = decodedToken.uid;
+    const decodedToken = await auth.verifyIdToken(token);
+    const userId = decodedToken.uid;
 
-    // 2. Fetch User from your DB to check if they already have an active sub
-
-    // 3. Create Stripe Checkout Session
+    // Placeholder: Since Razorpay/Stripe keys aren't verified yet, 
+    // route user securely to their wallet with a success simulation.
     // const session = await stripe.checkout.sessions.create({
     //   payment_method_types: ['card'],
     //   line_items: [{ price: 'price_xyz', quantity: 1 }],
@@ -26,7 +22,7 @@ export async function POST(req: Request) {
     //   metadata: { userId },
     // });
 
-    return NextResponse.json({ checkoutUrl: 'https://checkout.stripe.com/...' }); // Return session.url
+    return NextResponse.json({ checkoutUrl: '/wallet?simulated_success=true' });
   } catch (error) {
     console.error('Subscription API Error:', error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });

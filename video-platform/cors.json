@@ -1,17 +1,15 @@
 [
     {
         "origin": [
-            "https://video-platform-alpha.vercel.app",
-            "https://video-platform-sooty.vercel.app",
-            "https://video-platform-dun.vercel.app",
-            "http://localhost:3000"
+            "*"
         ],
         "method": [
             "GET",
             "POST",
             "PUT",
             "DELETE",
-            "HEAD"
+            "HEAD",
+            "OPTIONS"
         ],
         "maxAgeSeconds": 3600,
         "responseHeader": [
